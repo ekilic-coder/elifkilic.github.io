@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Animations | Elif Kilic</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="animations.html">Animations</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>✨ My Interactive Animations</h1>
+    <div class="grid">
+      <div class="card"><a href="animations/starfield.html">🌌 Starfield</a></div>
+      <div class="card"><a href="animations/bouncing-ball.html">🏀 Bouncing Ball</a></div>
+      <div class="card"><a href="animations/kaleidoscope.html">🌀 Kaleidoscope</a></div>
+    </div>
+  </main>
+</body>
+</html>
