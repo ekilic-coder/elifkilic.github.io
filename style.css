@@ -93,7 +93,7 @@ a:hover{ color:var(--link-hover); text-decoration:underline }
 .site-nav a:hover{ color:var(--ink); }
 .site-nav a:hover::after, .site-nav a.active::after{ width:100%; }
 
-/* ---- Rolling ticker ---- */
+/* ==== Rolling name ticker (double-track) ==== */
 .ticker{
   position: relative;
   height: 46px;
@@ -103,22 +103,38 @@ a:hover{ color:var(--link-hover); text-decoration:underline }
   background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
   backdrop-filter: blur(8px);
 }
+
 .ticker__track{
-  display: flex; align-items: center; gap: 2rem;
-  white-space: nowrap; will-change: transform;
-  animation: ticker-scroll 28s linear infinite;
-  transform: translateZ(0);
+  position: absolute; top:0; left:0; height:100%;
+  display: inline-flex; align-items: center; gap: 2rem;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ticker-slide 28s linear infinite;
+  padding-inline: 1rem; /* breathing room */
 }
+
+/* Track B starts immediately after Track A's width */
+.ticker__track:nth-of-type(2){
+  animation-delay: 14s; /* half the duration for seamless offset */
+}
+
+/* Make sure items don’t wrap and look bold/clean */
 .ticker__item{
-  font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
   color: var(--primary);
   text-shadow: 0 0 1px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.06);
   font-size: clamp(14px, 1.3vw, 18px);
 }
-@keyframes ticker-scroll{
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
+/* Slide each track left by its full width */
+@keyframes ticker-slide{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
+
+/* Edge fades for a classy look */
 .ticker__fade{
   position:absolute; top:0; bottom:0; width:70px; pointer-events:none; z-index: 2;
 }
@@ -128,11 +144,18 @@ a:hover{ color:var(--link-hover); text-decoration:underline }
 .ticker__fade--right{
   right:0; background: linear-gradient(270deg, var(--bg) 0%, rgba(255,255,255,0) 100%);
 }
+
+/* Pause on hover/focus */
 .ticker:hover .ticker__track,
-.ticker:focus-within .ticker__track{ animation-play-state: paused; }
+.ticker:focus-within .ticker__track{
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   .ticker__track{ animation: none; }
 }
+
 
 /* ---- Hero ---- */
 .hero{
