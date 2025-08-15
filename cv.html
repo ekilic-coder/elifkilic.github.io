@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elif Kılıç — CV</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Print-friendly CV (no nav, clean margins) */
+    @media print {
+      .site-header, .site-footer, .backlink { display:none !important; }
+      body { background:#fff; }
+      main { box-shadow:none; }
+    }
+    /* Compact CV styles */
+    main { max-width: 900px; margin: 2rem auto; padding: 1.5rem; background:#fff; }
+    h1 { margin-bottom: .25rem; }
+    .contact { margin:0 0 1rem 0; font-size: 0.95rem; line-height:1.4; }
+    .cv-section { margin: 1.25rem 0; }
+    .cv-section h2 { margin: 0 0 .5rem 0; border-bottom: 2px solid var(--color-accent, #ff8f00); padding-bottom: .25rem; }
+    .item { margin: .6rem 0; }
+    .role { font-weight:600; }
+    .orgline { display:flex; flex-wrap:wrap; gap:.5rem; font-size:.95rem; color:#444; }
+    .orgline .place { opacity:.9; }
+    ul.bullets { margin:.4rem 0 .2rem 1.2rem; }
+    .tag { font-size:.9rem; opacity:.8; }
+    .backlink { margin: 1rem auto; max-width:900px; text-align:right; }
+    .backlink a { text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">Elif Kılıç</h1>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="climacoder.html">ClimaCoder</a>
+        <a href="writing.html">Writing</a>
+        <a href="cv.html" class="active">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backlink"><a href="javascript:window.print()">🖨️ Print / Save as PDF</a></div>
+
+  <main role="main">
+    <h1>Elif Kılıç</h1>
+    <p class="contact">
+      Oakland, CA 94609 · <a href="mailto:eli2ilic@berkeley.edu">eli2ilic@berkeley.edu</a> ·
+      <a href="https://www.linkedin.com/in/elifakilic" target="_blank" rel="noopener">linkedin.com/in/elifakilic</a>
+    </p>
+
+    <section class="cv-section">
+      <h2>Education</h2>
+      <div class="item">
+        <div class="role">M.S., Environmental Engineering, GPA 3.7/4.0</div>
+        <div class="orgline"><span>University of California, Berkeley</span> · <span class="place">Berkeley, CA</span> · <span class="tag">May 2025</span></div>
+      </div>
+      <div class="item">
+        <div class="role">B.S., Environmental Engineering</div>
+        <div class="orgline"><span>Georgia Institute of Technology</span> · <span class="place">Atlanta, GA</span> · <span class="tag">Aug 2023</span></div>
+      </div>
+      <div class="item">
+        <div class="role">B.S., Spanish & Linguistics</div>
+        <div class="orgline"><span>Emory University</span> · <span class="place">Atlanta, GA</span> · <span class="tag">May 2021</span></div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Relevant Research Experience & Projects</h2>
+
+      <div class="item">
+        <div class="role">Graduate Research Assistant (Advisor: Prof. Ashok Gadgil)</div>
+        <div class="orgline"><span>Gadgil Lab for Energy & Water Research, UC Berkeley</span> · <span class="place">Berkeley, CA</span> · <span class="tag">Oct 2023 – Present</span></div>
+        <ul class="bullets">
+          <li>Applied the extended heat index to assess heat-stress risks and develop actionable adaptation guidance for India.</li>
+          <li>Used Python/Xarray/Numba workflows to compute EHI from meteorological inputs and evaluate policy-relevant thresholds.</li>
+          <li>Produced reports and presentations for academic, policy, and public-health audiences.</li>
+          <li>Completed Bay Area NSF I-Corps; developed stacked generalization and AI models for probabilistic forecasts of humid-heat extremes.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="role">GEM Fellow Summer Intern (Advisor: Dr. Todd Thorsen)</div>
+        <div class="orgline"><span>MIT Lincoln Laboratory, Chemical & Biological Technologies Group 23</span> · <span class="place">Lexington, MA</span> · <span class="tag">May 2023 – Aug 2023</span></div>
+        <ul class="bullets">
+          <li>Ran high-throughput microfluidic gut models to study countermeasures to chemical/biological exposures.</li>
+          <li>Co-led Intern Innovation Idea Challenge; pitched fungal-based plastic-replacement biomaterials; filed Technology Disclosure.</li>
+          <li>Obtained DoD Secret Clearance (valid 5 years).</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="role">Undergraduate Research Assistant (Advisor: Prof. Kostas Konstantinidis)</div>
+        <div class="orgline"><span>Kostas Microbial Genomics Lab, Georgia Tech</span> · <span class="place">Atlanta, GA</span> · <span class="tag">Jan 2022 – May 2023</span></div>
+        <ul class="bullets">
+          <li>NSF & Amazon-funded research on microplastic biodegradation using beetle-gut microbiomes and urban environmental samples.</li>
+          <li>Isolated candidate PTFE-degrading bacteria; won President’s Undergraduate Research Award.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="role">Undergraduate Research Assistant (Advisor: Prof. Gonzalo Vazquez-Prokopec)</div>
+        <div class="orgline"><span>Prokopec Lab of Disease Ecology, Emory University</span> · <span class="place">Atlanta, GA</span> · <span class="tag">Aug 2019 – Oct 2020</span></div>
+        <ul class="bullets">
+          <li>Investigated mosquito behaviour and vector control strategies for dengue, malaria, and Zika in low-income communities in West Africa and Mexico.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="role">High School Research Assistant (Advisor: Prof. Eric McLamore)</div>
+        <div class="orgline"><span>UF CPET SSTP, University of Florida</span> · <span class="place">Gainesville, FL</span> · <span class="tag">Jun 2017 – Jul 2017</span></div>
+        <ul class="bullets">
+          <li>Synthesized carbon quantum dots and analyzed local water sources in Bogotá, Colombia for contamination tracking.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Teaching</h2>
+      <div class="item">
+        <div class="role">Graduate Teaching Assistant</div>
+        <div class="orgline"><span>EPS 81: Extreme Weather & Climate (UC Berkeley)</span> · <span class="tag">Jan 2025 – Present</span></div>
+      </div>
+      <div class="item">
+        <div class="role">Graduate Teaching Assistant</div>
+        <div class="orgline"><span>EPS C20: Earthquakes in Your Backyard (UC Berkeley)</span> · <span class="tag">Aug 2024 – Dec 2024</span></div>
+      </div>
+      <div class="item">
+        <div class="role">Graduate Teaching Assistant</div>
+        <div class="orgline"><span>CIVENG 180: CEE Systems Design (UC Berkeley)</span> · <span class="tag">Jan 2024 – May 2024</span></div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Leadership & Outreach</h2>
+      <div class="item">
+        <div class="role">Graduate Research Mentor</div>
+        <div class="orgline"><span>SWE × GWE Mentoring Program, UC Berkeley</span> · <span class="tag">Oct 2023 – Present</span></div>
+      </div>
+      <div class="item">
+        <div class="role">Graduate Assembly Alternate</div>
+        <div class="orgline"><span>UC Berkeley</span> · <span class="tag">Sep 2023 – Present</span></div>
+      </div>
+      <div class="item">
+        <div class="role">Peer Research Mentor</div>
+        <div class="orgline"><span>LSAMP Peer-2-Peer, Georgia Tech</span> · <span class="tag">Aug 2021 – May 2023</span></div>
+      </div>
+      <!-- Add remaining roles similarly -->
+    </section>
+
+    <section class="cv-section">
+      <h2>Skills</h2>
+      <div class="item"><strong>Math & Automation:</strong> Python, MATLAB, ML</div>
+      <div class="item"><strong>Lab & Instruments:</strong> Electron microscopy, electrophoresis, spectrophotometer, PCR, FTIR, XPS, aerobic/anaerobic culture</div>
+      <div class="item"><strong>Professional:</strong> DoD Secret Clearance, technology disclosure, technical reports, grant writing</div>
+      <div class="item"><strong>Languages:</strong> English (Native), Spanish (Native), Italian (Proficient), Turkish (Beginner)</div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Selected Publications</h2>
+      <ul class="bullets">
+        <li>“Get the heat index right: An important first step to protect people from heatwaves.” <em>Down to Earth</em>, June 2024.</li>
+        <li>“Primer on heat stress: Causes, impacts, and solutions.” IECC, July 2024.</li>
+        <li>“Passive cooling strategies to enhance resilience design of a cooling shelter in India.” ASim2024 (with Wu et al.), Sept 2024.</li>
+      </ul>
+    </section>
+
+    <section class="cv-section">
+      <h2>Honors, Awards, Fellowships</h2>
+      <ul class="bullets">
+        <li>Berkeley Hope Scholar (May 2023)</li>
+        <li>MIT LL Intern Innovation Idea Challenge – First Place Pitch & “Most Altruistic Poster” (Jul 2023)</li>
+        <li>GEM Employer PhD Fellow (Nov 2022)</li>
+        <li>President’s Undergraduate Research Award, Georgia Tech (Aug 2022)</li>
+        <li>Emory College Grant Recipient (Aug 2018)</li>
+        <li>UF JESH Poster Presentation High Marks (Jan 2018)</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="y"></span> Elif Kılıç</div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
