@@ -1,31 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Elif Kilic</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>Elif Kilic</h1>
-    <p>Web Developer • Designer • Tech Enthusiast</p>
-  </header>
-  <section>
-    <h2>About Me</h2>
-    <p>This is where you'd introduce yourself. Background, interests, etc.</p>
-  </section>
-  <section>
-    <h2>Experience</h2>
-    <ul>
-      <li><strong>Job Title</strong> at Company – 2022–Present</li>
-      <!-- More items -->
-    </ul>
-  </section>
-  <section>
-    <h2>Contact</h2>
-    <p>Email: yourname@example.com</p>
-    <!-- Add social links -->
-  </section>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elif Kilic – Home</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="site-title">Elif Kilic</h1>
+        <nav class="site-nav">
+          <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="climacoder.html">ClimaCoder</a></li>
+            <li><a href="writing.html">Writing</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="about">
+        <h2>About Me</h2>
+        <div class="profile">
+          <!-- Replace the placeholder image with your own photo.
+               For example place a file named profile.jpg in the assets/images directory
+               and update the src below to "assets/images/profile.jpg". -->
+          <img src="assets/images/profile-placeholder.png" alt="Your photo" />
+          <div class="bio">
+            <p>
+              I am Elif Kilic, an atmospheric scientist and climate enthusiast based in
+              California. My research focuses on extreme heat, humidity and their impacts on
+              vulnerable communities. Outside of academia I enjoy hiking and exploring new
+              ways to communicate science through art and coding.
+            </p>
+            <p>
+              This website collects my work, collaborations and writing. Scroll through
+              the different pages to learn more about my research projects, our joint
+              climate blog <em>ClimaCoder</em>, and my writing on heat stress and
+              vulnerability across Central America and Mexico.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="cv">
+        <h2>Curriculum Vitae</h2>
+        <p>
+          Below is a link to my current CV. Please download it to learn more about my
+          experience and publications. To update your CV, replace the file in
+          <code>assets/docs/cv.pdf</code> with your latest PDF and push the change to
+          GitHub.
+        </p>
+        <p><a class="button" href="assets/docs/cv.pdf" target="_blank">Download CV</a></p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          Feel free to reach out via email at
+          <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a> or connect
+          with me through the links below.
+        </p>
+        <ul class="contact-list">
+          <li><a href="https://github.com/ekilic-coder">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/elifkilic">LinkedIn</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Update the copyright year dynamically
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>

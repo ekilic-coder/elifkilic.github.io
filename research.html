@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elif Kilic – Research</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="site-title">Elif Kilic</h1>
+        <nav class="site-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html" class="active">Research</a></li>
+            <li><a href="climacoder.html">ClimaCoder</a></li>
+            <li><a href="writing.html">Writing</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>Research Projects</h2>
+      <p>
+        I use observational data, remote sensing and climate models to study extreme
+        heat, humidity and their health impacts. Below are examples of my recent
+        research projects. To share new projects on this page, edit the HTML in
+        <code>research.html</code> and commit your changes.
+      </p>
+      <div class="project-list">
+        <article class="project">
+          <h3>Heat Stress Indices in Central America</h3>
+          <p>
+            Developed spatiotemporal maps of heat stress indices (Wet Bulb Globe
+            Temperature, Heat Index) across Central America to identify seasonal
+            hotspots and vulnerable communities. This work highlights how extreme
+            heat coincides with agricultural calendars and labor patterns.
+          </p>
+        </article>
+        <article class="project">
+          <h3>Humidity and Heat Wave Co-occurrence</h3>
+          <p>
+            Analyzed historical weather records to quantify how humidity
+            exacerbates heat waves. Results show that high dew points often
+            coincide with temperature extremes, increasing physiological strain on
+            outdoor workers and urban residents.
+          </p>
+        </article>
+        <article class="project">
+          <h3>Health Impacts of Extreme Heat</h3>
+          <p>
+            Collaborated with public health experts to examine emergency room
+            admissions during extreme heat events. We found a clear association
+            between heat waves and increased cases of dehydration, heat stroke
+            and kidney disease【95984291269869†L110-L118】.
+          </p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

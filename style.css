@@ -1,12 +1,190 @@
-body {
-  font-family: sans-serif;
-  margin: 2rem;
-  line-height: 1.6;
-  background: #f9f9f9;
-  color: #333;
+/*
+ * Main stylesheet for Elif Kilic’s personal website.
+ *
+ * The palette is built around warm orange tones with dark grey text for
+ * readability. Feel free to adjust the colours in the :root section.
+ */
+:root {
+  --color-primary: #e65100; /* deep orange for headings and buttons */
+  --color-accent: #ff8f00; /* lighter orange for highlights */
+  --color-background: #fffaf5; /* very light cream background */
+  --color-text: #2d2d2d; /* dark grey for body text */
+  --color-muted: #666; /* muted grey for footer and small text */
+  --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header {
-  text-align: center;
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header and navigation */
+.site-header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+}
+.site-header .site-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+.site-nav a.active,
+.site-nav a:hover {
+  background-color: var(--color-accent);
+}
+
+/* Main content */
+h1, h2, h3 {
+  color: var(--color-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+section {
   margin-bottom: 2rem;
+}
+
+/* Profile section */
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.profile img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--color-accent);
+}
+
+.bio {
+  flex: 1;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+.button:hover {
+  background-color: var(--color-accent);
+}
+
+/* Contact list */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+}
+.contact-list a {
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s;
+}
+.contact-list a:hover {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+/* Projects */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.project {
+  padding: 1rem;
+  background-color: #fff;
+  border-left: 5px solid var(--color-accent);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.project h3 {
+  margin-top: 0;
+}
+
+/* References */
+.references {
+  padding-left: 1.2rem;
+}
+.references li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* Figures */
+.screenshot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.note {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+/* Footer */
+.site-footer {
+  background-color: #f0f0f0;
+  color: var(--color-muted);
+  padding: 1rem 0;
+  margin-top: 2rem;
+  text-align: center;
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elif Kilic – ClimaCoder</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="site-title">Elif Kilic</h1>
+        <nav class="site-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="climacoder.html" class="active">ClimaCoder</a></li>
+            <li><a href="writing.html">Writing</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>ClimaCoder</h2>
+      <p>
+        <strong>ClimaCoder</strong> is a collaborative project between my partner and me.
+        We use our combined expertise in climate science and software engineering to
+        develop tools and analyses that improve our understanding of climate and
+        social systems. The site is a platform for sharing open-source code,
+        visualizations and narratives about climate extremes.
+      </p>
+      <p>
+        On <em>ClimaCoder</em> you will find our blog <strong>Climate Crossroads</strong>,
+        where we discuss topics such as extreme heat, environmental justice, and
+        new computational methods. We also host notebooks and tutorials for
+        reproducible research.
+      </p>
+      <p>
+        Visit our joint site: <a href="https://climacoder.com" target="_blank"
+          >climacoder.com</a
+        >
+      </p>
+      <img
+        src="assets/images/climacoder-home.png"
+        alt="Screenshot of ClimaCoder homepage"
+        class="screenshot"
+      />
+      <p class="note">
+        <small
+          >Screenshot of the ClimaCoder home page. It shows our logo, email
+          address and navigation menu【653844880303417†screenshot】.</small
+        >
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
