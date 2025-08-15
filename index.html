@@ -1,97 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>elif kılıç – Home</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="site-title">elif kılıç</h1>
-        <nav class="site-nav">
-          <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="cv.html">About elif</a><li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="climacoder.html">ClimaCoder</a></li>
-            <li><a href="writing.html">Writing</a></li>
-          </ul>
-        </nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elif Kılıç — Climate Scientist</title>
+  <meta name="description" content="Elif Kılıç — climate scientist focused on extreme heat & humidity, Latin jazz trumpet & euphonium, DIY, plants, and science communication."/>
+  <link rel="preload" as="image" href="assets/images/profile-placeholder.png">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sticky header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Elif Kılıç</a>
       </div>
-    </header>
+      <nav class="site-nav" aria-label="Main">
+        <a href="index.html" class="active">Home</a>
+        <a href="research.html">Research</a>
+        <a href="writing.html">Writing</a>
+        <a href="climacoder.html">ClimaCoder</a>
+        <a href="cv.html">CV</a>
+      </nav>
+    </div>
 
-    <main class="container">
-      <section id="about">
-        <h2>elif kılıç</h2>
-        <div class="profile">
-          <!-- Replace the placeholder image with your own photo.
-               For example place a file named profile.jpg in the assets/images directory
-               and update the src below to "assets/images/profile.jpg". -->
-          <img src="assets/images/profile-placeholder.png" alt="Your photo" />
-          <div class="bio">
-            <p>
-              Hi! I’m Elif — a climate scientist, heat-stress detective, and unapologetic weather nerd 🌦️
-              based in sunny California. I spend my days figuring out how extreme heat and humidity happen,
-              why they’re getting worse, and how they affect the people most at risk. My work blends coding 💻,
-              climate models 📊, and a lot of late-night coffee ☕ to turn messy data into tools and stories
-              that can help protect communities.
-            </p>
-            
-            <p>
-              Outside the lab, you’re more likely to find me behind a trumpet 🎺 or euphonium 🎶 playing
-              Latin jazz, or on a dance floor 💃 moving through salsa, bachata, or zouk. If I’m not making
-              music, I’m probably on my bike 🚲 headed to a hardware store 🛠️ for yet another “quick” DIY
-              supply run — whether it’s for a home project 🔧, a new plant 🪴 for my ever-growing indoor jungle,
-              or my ongoing battle to outsmart the ants 🐜 that think they pay rent.
-            </p>
-            
-            <p>
-              This site is where it all comes together: my research projects from grad school and beyond,
-              collaborations with my boyfriend ❤️ over at <em>ClimaCoder</em> 🌍, and deep-dive writing ✍️ on
-              heat stress and vulnerability across Central America and Mexico. Whether you’re here for the
-              science 🔬, the maps 🗺️, the code 🧩, or just to peek into the day-to-day life of a climate
-              scientist who occasionally swaps climate data for clave rhythms — welcome! I’m glad you stopped by.
-            </p>
-          </div>
+    <!-- Rolling ticker -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__fade ticker__fade--left"></div>
+      <div class="ticker__track">
+        <span class="ticker__item">ELIF KILIÇ • CLIMATE SCIENTIST • HEAT INDEX • LATIN JAZZ • TRUMPET & EUPHONIUM • DIY • PLANTS • SALSA • BACHATA • ZOUK • </span>
+        <span class="ticker__item">ELIF KILIÇ • CLIMATE SCIENTIST • HEAT INDEX • LATIN JAZZ • TRUMPET & EUPHONIUM • DIY • PLANTS • SALSA • BACHATA • ZOUK • </span>
+        <span class="ticker__item">ELIF KILIÇ • CLIMATE SCIENTIST • HEAT INDEX • LATIN JAZZ • TRUMPET & EUPHONIUM • DIY • PLANTS • SALSA • BACHATA • ZOUK • </span>
+        <span class="ticker__item">ELIF KILIÇ • CLIMATE SCIENTIST • HEAT INDEX • LATIN JAZZ • TRUMPET & EUPHONIUM • DIY • PLANTS • SALSA • BACHATA • ZOUK • </span>
+      </div>
+      <div class="ticker__fade ticker__fade--right"></div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <h1 class="m0">Hi, I’m Elif.</h1>
+        <p class="lede">
+          Climate scientist & heat-stress detective turning messy weather data into tools that protect people —
+          with a little Latin jazz, trumpet 🎺 & euphonium, DIY, and plants 🪴 sprinkled in.
+        </p>
+
+        <!-- fun, emoji-rich intro -->
+        <div class="lead">
+          <p>
+            I dig into extreme heat and humidity: when it happens, why it’s getting worse, and how it hits
+            the communities most at risk. My days are a mix of coding 💻, climate models 📊, and field-ready
+            metrics like extended heat index — all aimed at making heat risk easier to understand and act on.
+          </p>
+          <p>
+            Off the clock, I’m playing Latin jazz (trumpet & euphonium), hitting the dance floor 💃
+            (salsa, bachata, zouk), and making way too many “quick” trips to the hardware store 🛠️ for DIY fixes,
+            plant adoptions, or my ongoing battle with the ants 🐜 that think they pay rent.
+          </p>
+          <p>
+            This site brings it all together: my research projects, writing on heat stress and vulnerability
+            across Central America & Mexico, and collabs with my boyfriend over at <em>ClimaCoder</em> 🌍.
+            Dive in for science 🔬, maps 🗺️, code 🧩, and stories that make climate risk feel human and solvable.
+          </p>
         </div>
-      </section>
 
-      <section id="cv">
-        <h2>Curriculum Vitae</h2>
-        <p>
-          Below is a link to my current CV. Please download it to learn more about my
-          experience and publications. To update your CV, replace the file in
-          <code>assets/docs/cv.pdf</code> with your latest PDF and push the change to
-          GitHub.
-        </p>
-        <p><a class="button" href="assets/docs/cv.pdf" target="_blank">Download CV</a></p>
-      </section>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>
-          Feel free to reach out via email at
-          <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a> or connect
-          with me through the links below.
-        </p>
-        <ul class="contact-list">
-          <li><a href="https://github.com/ekilic-coder">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/elifkilic">LinkedIn</a></li>
-        </ul>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; <span id="year"></span> Elif Kılıç. All rights reserved.</p>
+        <div class="cta mt2">
+          <a class="btn btn-primary" href="research.html">See Research</a>
+          <a class="btn btn-ghost" href="writing.html">Read Writing</a>
+          <a class="btn btn-ghost" href="cv.html">View CV</a>
+        </div>
       </div>
-    </footer>
 
-    <script>
-      // Update the copyright year dynamically
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-  </body>
+      <div>
+        <img class="hero-photo" src="assets/images/profile-placeholder.png" alt="Elif playing trumpet among plants" />
+        <div class="badges mt2">
+          <span class="badge">Extended Heat Index</span>
+          <span class="badge">Numba · Xarray</span>
+          <span class="badge">Latin Jazz</span>
+          <span class="badge">DIY & Plants</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured blocks -->
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        <article class="card">
+          <h3 class="m0">Featured: EHI-350 for India</h3>
+          <p class="m0 mt1">Vectorized extended heat index with metabolic & solar inputs; district-level summaries and policy-ready outputs.</p>
+          <p class="mt2"><a class="btn btn-ghost" href="research.html">Open project</a></p>
+        </article>
+
+        <article class="card">
+          <h3 class="m0">Latest Writing</h3>
+          <p class="m0 mt1">Deep-dives on heat stress and vulnerability across Central America & Mexico — methods, maps, and context.</p>
+          <p class="mt2"><a class="btn btn-ghost" href="writing.html">Browse posts</a></p>
+        </article>
+
+        <article class="card">
+          <h3 class="m0">ClimaCoder</h3>
+          <p class="m0 mt1">Joint space with my boyfriend for our climate tools & notes — code that anyone can run and build on.</p>
+          <p class="mt2"><a class="btn btn-ghost" href="climacoder.html">Visit ClimaCoder</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="y"></span> Elif Kılıç · <a href="mailto:eli2ilic@berkeley.edu">eli2ilic@berkeley.edu</a>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
 </html>
