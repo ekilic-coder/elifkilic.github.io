@@ -1,140 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quetzal Animations Demo</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #f9fafb;
-      color: #111;
-      text-align: center;
-    }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Quetzal Intro → Orbit → Freeze</title>
+<style>
+  :root{
+    --glide-height: 160px;
+    --orbit-size: 260px;     /* container size */
+    --globe-size: 240px;     /* globe img size  */
+    --quetzal-size: 120px;   /* quetzal img size */
+    --orbit-radius: 155px;   /* distance from globe center */
+  }
 
-    h1 {
-      margin-top: 1.5rem;
-      font-size: 2rem;
-    }
+  body{ margin:0; font-family: system-ui, sans-serif; background:#f9fafb; color:#111; }
 
-    /* ==================== GLIDE ==================== */
-    .quetzal-glide {
-      position: relative;
-      width: 100%;
-      height: 160px;        /* adjust height for your header/section */
-      overflow: hidden;
-      margin: 2rem 0;
-      background: linear-gradient(to top, #e0f7f5, #fff);
-    }
+  /* ====== SECTION: your header/banner where the first glide happens ====== */
+  .hero {
+    position:relative; width:100%; height:var(--glide-height);
+    background:linear-gradient(to top,#e0f7f5,#fff); overflow:hidden;
+  }
 
-    .quetzal-glide .bird {
-      position: absolute;
-      top: 40%;
-      left: -220px;          /* start off-screen */
-      transform-origin: 25% 60%;  /* pivot near shoulder to accent tail */
-      animation:
-        glide 18s linear infinite,
-        bob 4s ease-in-out infinite,
-        tail-sway 1.6s ease-in-out infinite;
-      will-change: transform;
-    }
+  /* The overlay bird for first-visit glide */
+  .intro-glide-bird {
+    position:absolute; top:40%; left:-220px;
+    width:180px; height:auto;
+    transform-origin:25% 60%;
+    animation:
+      intro-glide var(--intro-glide-duration, 6s) linear 1,
+      bob 4s ease-in-out infinite,
+      tail-sway 1.6s ease-in-out infinite;
+    will-change: transform;
+  }
 
-    @keyframes glide {
-      0%   { transform: translateX(0) translateY(0) rotate(-3deg); }
-      90%  { transform: translateX(calc(100vw + 440px)) translateY(0) rotate(2deg); }
-      100% { transform: translateX(calc(100vw + 440px)) translateY(0) rotate(2deg); }
-    }
+  @keyframes intro-glide {
+    0%   { transform: translateX(0) translateY(0) rotate(-3deg); }
+    100% { transform: translateX(calc(100vw + 440px)) translateY(0) rotate(2deg); }
+  }
+  @keyframes bob { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-10px) } }
+  @keyframes tail-sway{
+    0%,100%{ rotate:0deg } 25%{ rotate:2.2deg } 50%{ rotate:-2.6deg } 75%{ rotate:1.6deg }
+  }
 
-    @keyframes bob {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-10px); }
-    }
+  /* ====== SECTION: the globe logo area ====== */
+  .logo-block{ padding:40px 0; display:grid; place-items:center; }
 
-    @keyframes tail-sway {
-      0%,100% { rotate: 0deg; }
-      25%     { rotate: 2.2deg; }
-      50%     { rotate: -2.6deg; }
-      75%     { rotate: 1.6deg; }
-    }
+  .orbit-wrap{
+    position:relative; width:var(--orbit-size); height:var(--orbit-size);
+  }
+  .globe{
+    position:absolute; inset:0; margin:auto;
+    width:var(--globe-size); height:var(--globe-size);
+  }
+  .quetzal-orbit{
+    position:absolute; left:50%; top:50%;
+    width:var(--quetzal-size); height:auto;
+    transform: translate(-50%,-50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+    transform-origin:center;
+    will-change: transform;
+  }
 
-    @media (prefers-reduced-motion: reduce) {
-      .quetzal-glide .bird {
-        animation: none;
-        left: 10px;
-      }
-    }
+  /* When we want it frozen, we’ll set an inline transform via JS. No animation needed. */
 
-    /* ==================== ORBIT ==================== */
-    .orbit-section {
-      margin: 3rem auto;
-    }
+  /* (Optional) light helper styles so you can see spacing */
+  .spacer{ height:32px }
 
-    .orbit-wrap {
-      position: relative;
-      width: 260px;
-      height: 260px;   /* slightly larger than globe */
-      margin: auto;
-    }
-
-    .orbit-wrap .globe {
-      position: absolute;
-      inset: 0;
-      margin: auto;
-      width: 240px;
-      height: 240px;
-    }
-
-    .orbit-wrap .quetzal {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transform-origin: center;
-      animation:
-        orbit 12s linear infinite,
-        flap 1.8s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    @keyframes orbit {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(155px) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(155px) rotate(-360deg);
-      }
-    }
-
-    @keyframes flap {
-      0%,100% { filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
-      50%     { transform: translate(-50%, -50%) rotate(0deg) translateX(155px) rotate(-2deg); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .orbit-wrap .quetzal {
-        animation: none;
-        transform: translate(-50%, -50%) translateX(155px);
-      }
-    }
-  </style>
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce){
+    .intro-glide-bird{ animation:none; left:10px }
+  }
+</style>
 </head>
 <body>
 
-  <h1>Quetzal Animations Demo</h1>
+  <!-- HERO for the first glide -->
+  <header class="hero" id="hero">
+    <!-- This bird is injected/removed by JS only on first visit -->
+  </header>
 
-  <!-- GLIDING -->
-  <section class="quetzal-glide">
-    <img class="bird" src="/assets/quetzal_optimized.webp" alt="Quetzal" width="180" height="180" />
-  </section>
+  <div class="spacer"></div>
 
-  <!-- ORBIT -->
-  <section class="orbit-section">
-    <div class="orbit-wrap">
-      <img class="globe" src="/assets/globe_logo.png" alt="Globe" width="240" height="240" />
-      <img class="quetzal" src="/assets/quetzal_optimized.webp" alt="Quetzal" width="120" height="120" />
+  <!-- GLOBE area -->
+  <section class="logo-block">
+    <div class="orbit-wrap" id="orbitWrap">
+      <img class="globe" src="globe_logo.png" alt="Globe" width="240" height="240" />
+      <img class="quetzal-orbit" id="quetzalOrbit" src="quetzal_optimized.webp" alt="Quetzal" width="120" height="120" />
     </div>
   </section>
 
+<script>
+/* ===========================
+   TWEAK THESE KNOBS
+   =========================== */
+const SETTINGS = {
+  firstVisitKey: 'quetzalIntroSeenV1',
+  // Intro glide (across top banner)
+  introGlideDurationMs: 6000,   // 6s glide
+  // Fly-by around globe:
+  orbitDurationMs: 5000,        // total time of the fly-by
+  turns: 1.25,                  // number of full turns before freezing
+  finalAngleDeg: -22,           // where to freeze relative to the globe (tweak to match your original image)
+  // If you need tiny offsets to match where the quetzal sits over the globe:
+  finalNudgePx: { x: 0, y: 0 }, // small pixel adjustments after the transform
+};
+
+/* ===========================
+   UTILITIES
+   =========================== */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Set frozen final transform on the orbiting quetzal */
+function setFrozenPose(el, angleDeg){
+  const radius = getComputedStyle(document.documentElement).getPropertyValue('--orbit-radius').trim() || '155px';
+  // Build the same transform chain as in CSS keyframes but with a fixed angle
+  const a = angleDeg;
+  const t = `translate(-50%,-50%) rotate(${a}deg) translateX(${radius}) rotate(${-a}deg)`;
+  el.style.transform = t;
+  // Optional tiny nudge to pixel-align:
+  el.style.marginLeft = SETTINGS.finalNudgePx.x + 'px';
+  el.style.marginTop  = SETTINGS.finalNudgePx.y + 'px';
+}
+
+/* Animate orbit with Web Animations API (smoother + easy to stop) */
+function animateOrbitOnce(el, totalMs, turns, finalAngleDeg){
+  const radius = getComputedStyle(document.documentElement).getPropertyValue('--orbit-radius').trim() || '155px';
+  const startAngle = 0;
+  const endAngle = 360 * turns;
+
+  const kf = [
+    { transform: `translate(-50%,-50%) rotate(${startAngle}deg) translateX(${radius}) rotate(${-startAngle}deg)` },
+    { transform: `translate(-50%,-50%) rotate(${endAngle}deg) translateX(${radius}) rotate(${-endAngle}deg)` }
+  ];
+
+  const anim = el.animate(kf, {
+    duration: totalMs,
+    easing: 'linear',
+    iterations: 1,
+    fill: 'forwards'
+  });
+
+  anim.addEventListener('finish', () => {
+    // Snap to the exact final pose
+    setFrozenPose(el, finalAngleDeg);
+    localStorage.setItem(SETTINGS.firstVisitKey, '1');
+  });
+
+  return anim;
+}
+
+/* Intro glide bird element creation */
+function createIntroBird(){
+  const img = document.createElement('img');
+  img.src = 'quetzal_optimized.webp';
+  img.alt = 'Quetzal';
+  img.width = 180; img.height = 180;
+  img.className = 'intro-glide-bird';
+  img.style.setProperty('--intro-glide-duration', SETTINGS.introGlideDurationMs + 'ms');
+  return img;
+}
+
+/* ===========================
+   MAIN FLOW
+   =========================== */
+window.addEventListener('DOMContentLoaded', () => {
+  const seen = localStorage.getItem(SETTINGS.firstVisitKey);
+  const orbitBird = document.getElementById('quetzalOrbit');
+
+  if (prefersReducedMotion){
+    // Respect users who prefer less motion: just freeze immediately.
+    setFrozenPose(orbitBird, SETTINGS.finalAngleDeg);
+    return;
+  }
+
+  if (!seen) {
+    // FIRST VISIT: 1) glide across hero, 2) orbit fly-by, 3) freeze
+    const hero = document.getElementById('hero');
+    const introBird = createIntroBird();
+    hero.appendChild(introBird);
+
+    // After glide ends, remove overlay bird and start orbit animation
+    setTimeout(() => {
+      introBird.remove();
+
+      // Start the orbit fly-by once the hero glide is done
+      animateOrbitOnce(
+        orbitBird,
+        SETTINGS.orbitDurationMs,
+        SETTINGS.turns,
+        SETTINGS.finalAngleDeg
+      );
+
+    }, SETTINGS.introGlideDurationMs + 50);
+
+  } else {
+    // NOT first visit: just freeze the orbit bird immediately
+    setFrozenPose(orbitBird, SETTINGS.finalAngleDeg);
+  }
+});
+</script>
 </body>
 </html>
