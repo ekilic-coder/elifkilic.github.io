@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quetzal Animations Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f9fafb;
+      color: #111;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 1.5rem;
+      font-size: 2rem;
+    }
+
+    /* ==================== GLIDE ==================== */
+    .quetzal-glide {
+      position: relative;
+      width: 100%;
+      height: 160px;        /* adjust height for your header/section */
+      overflow: hidden;
+      margin: 2rem 0;
+      background: linear-gradient(to top, #e0f7f5, #fff);
+    }
+
+    .quetzal-glide .bird {
+      position: absolute;
+      top: 40%;
+      left: -220px;          /* start off-screen */
+      transform-origin: 25% 60%;  /* pivot near shoulder to accent tail */
+      animation:
+        glide 18s linear infinite,
+        bob 4s ease-in-out infinite,
+        tail-sway 1.6s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes glide {
+      0%   { transform: translateX(0) translateY(0) rotate(-3deg); }
+      90%  { transform: translateX(calc(100vw + 440px)) translateY(0) rotate(2deg); }
+      100% { transform: translateX(calc(100vw + 440px)) translateY(0) rotate(2deg); }
+    }
+
+    @keyframes bob {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-10px); }
+    }
+
+    @keyframes tail-sway {
+      0%,100% { rotate: 0deg; }
+      25%     { rotate: 2.2deg; }
+      50%     { rotate: -2.6deg; }
+      75%     { rotate: 1.6deg; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .quetzal-glide .bird {
+        animation: none;
+        left: 10px;
+      }
+    }
+
+    /* ==================== ORBIT ==================== */
+    .orbit-section {
+      margin: 3rem auto;
+    }
+
+    .orbit-wrap {
+      position: relative;
+      width: 260px;
+      height: 260px;   /* slightly larger than globe */
+      margin: auto;
+    }
+
+    .orbit-wrap .globe {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 240px;
+      height: 240px;
+    }
+
+    .orbit-wrap .quetzal {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transform-origin: center;
+      animation:
+        orbit 12s linear infinite,
+        flap 1.8s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes orbit {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(155px) rotate(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(155px) rotate(-360deg);
+      }
+    }
+
+    @keyframes flap {
+      0%,100% { filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+      50%     { transform: translate(-50%, -50%) rotate(0deg) translateX(155px) rotate(-2deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orbit-wrap .quetzal {
+        animation: none;
+        transform: translate(-50%, -50%) translateX(155px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Quetzal Animations Demo</h1>
+
+  <!-- GLIDING -->
+  <section class="quetzal-glide">
+    <img class="bird" src="/assets/quetzal.webp" alt="Quetzal" width="180" height="180" />
+  </section>
+
+  <!-- ORBIT -->
+  <section class="orbit-section">
+    <div class="orbit-wrap">
+      <img class="globe" src="/assets/globe-logo.png" alt="Globe" width="240" height="240" />
+      <img class="quetzal" src="/assets/quetzal.webp" alt="Quetzal" width="120" height="120" />
+    </div>
+  </section>
+
+</body>
+</html>
