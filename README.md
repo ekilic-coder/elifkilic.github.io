@@ -1,4 +1,4 @@
-# Elif Kilic Personal Website
+# Welcome to my personal website! 
 
 This repository contains the source code for my personal website built with
 standard HTML and CSS. The site is organised into separate pages:
@@ -52,9 +52,3 @@ a new post or update an existing one:
 GitHub Pages is enabled for this repository. After pushing changes to the
 `main` branch, GitHub will automatically rebuild and deploy the site. Visit
 `https://<your-username>.github.io/` to see the latest version.
-
-## Contributing
-
-If you want to collaborate on this repository, please open a pull request with
-your changes. Feel free to suggest improvements to the design, content or
-workflow.
