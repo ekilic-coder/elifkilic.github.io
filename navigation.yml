@@ -1,0 +1,12 @@
+# what changed & why: Define the top navigation structure for the site. Each entry has a title and URL.
+main:
+  - title: Home
+    url: /
+  - title: Research
+    url: /research/
+  - title: Writing
+    url: /writing/
+  - title: ClimaCoder
+    url: /climacoder/
+  - title: Bio
+    url: /bio/

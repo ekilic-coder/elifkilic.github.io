@@ -1,6 +1,14 @@
-title: "Elif Kilic"
+# what changed & why: Initialize Jekyll site configuration for personal website, setting site title, base URL, and theme for GitHub Pages.
+title: "Elif Kılıç"
 email: "elifkilic@berkeley.edu"
-description: "My personal website and resume"
-baseurl: ""
-url: "https://elifkilic.org"
-
+description: "My personal website and climate-heat research portfolio"
+baseurl: "" # deploys to root
+url: "https://elifkilic.org" # update with your custom domain if using one
+theme: minima
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+permalink: /:categories/:title/
+# Social links can be configured here if desired
