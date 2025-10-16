@@ -1,72 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elif Kilic – ClimaCoder</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="site-title">Elif Kilic</h1>
-        <nav class="site-nav">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="climacoder.html" class="active">ClimaCoder</a></li>
-            <li><a href="writing.html">Writing</a></li>
-            <li><a href="demo.html">demo</a></li>
-          </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elif Kilic – ClimaCoder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #0066cc;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: auto;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Dropdown button */
+        .dropdown > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown > a::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+        
+        .dropdown:hover > a {
+            color: #0066cc;
+        }
+        
+        .dropdown:hover > a::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .quetzal-glide {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .quetzal-glide .bird {
+            animation: glide 8s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        
+        @keyframes glide {
+            0%, 100% { transform: translateX(-20px) translateY(0); }
+            50% { transform: translateX(20px) translateY(-10px); }
+        }
+        
+        .content-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .content-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+        
+        .content-card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .content-card strong {
+            color: #0066cc;
+        }
+        
+        .content-card a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .content-card a:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+        
+        .screenshot-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .screenshot {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin: 1rem auto;
+            display: block;
+        }
+        
+        .note {
+            margin-top: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        footer {
+            background: white;
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">Elif Kilic</a>
+            
+            <!-- Bio Dropdown -->
+            <div class="dropdown">
+                <a href="/bio.html">Bio</a>
+                <div class="dropdown-content">
+                    <a href="/bio.html">About Me</a>
+                    <a href="/bio.html#education">Education</a>
+                    <a href="/bio.html#experience">Experience</a>
+                    <a href="assets/cv.pdf">Download CV</a>
+                </div>
+            </div>
+            
+            <!-- Research Dropdown -->
+            <div class="dropdown">
+                <a href="/research.html">Research</a>
+                <div class="dropdown-content">
+                    <a href="/research/heatindex.html">Heat Index Calculator</a>
+                    <a href="/research.html#ehi350">EHI-350 Measurement</a>
+                    <a href="/research.html#publications">Publications</a>
+                </div>
+            </div>
+            
+            <!-- ClimaCoder Dropdown -->
+            <div class="dropdown">
+                <a href="/climacoder.html">ClimaCoder</a>
+                <div class="dropdown-content">
+                    <a href="/climacoder/writing.html">Writing</a>
+                    <a href="/climacoder.html#overview">Overview</a>
+                    <a href="/climacoder.html#team">Team</a>
+                </div>
+            </div>
         </nav>
-      </div>
     </header>
 
-    <main class="container">
-      <h2>ClimaCoder</h2>
-      <p>
-        <!-- Put this inside <body> where you want the glide to appear -->
+    <main>
+        <h2>ClimaCoder</h2>
+        
         <div class="quetzal-glide">
-          <img class="bird" src="/assets/quetzal.webp" alt="Quetzal" width="180" height="180" />
+            <img class="bird" src="/assets/quetzal.webp" alt="Quetzal" width="180" height="180" />
         </div>
-        <strong>ClimaCoder</strong> is a collaborative project between my partner and me.
-        We use our combined expertise in climate science and software engineering to
-        develop tools and analyses that improve our understanding of climate and
-        social systems. The site is a platform for sharing open-source code,
-        visualizations and narratives about climate extremes.
-      </p>
-      <p>
-        On <em>ClimaCoder</em> you will find our blog <strong>Climate Crossroads</strong>,
-        where we discuss topics such as extreme heat, environmental justice, and
-        new computational methods. We also host notebooks and tutorials for
-        reproducible research.
-      </p>
-      <p>
-        Visit our joint site: <a href="https://climacoder.com" target="_blank"
-          >climacoder.com</a
-        >
-      </p>
-      <img
-        src="assets/images/climacoder-home.png"
-        alt="Screenshot of ClimaCoder homepage"
-        class="screenshot"
-      />
-      <p class="note">
-        <small
-          >Screenshot of the ClimaCoder home page. It shows our logo, email
-          address and navigation menu【653844880303417†screenshot】.</small
-        >
-      </p>
+
+        <div class="content-card">
+            <p>
+                <strong>ClimaCoder</strong> is a collaborative project between my partner and me.
+                We use our combined expertise in climate science and software engineering to
+                develop tools and analyses that improve our understanding of climate and
+                social systems. The site is a platform for sharing open-source code,
+                visualizations and narratives about climate extremes.
+            </p>
+
+            <p>
+                On <em>ClimaCoder</em> you will find our blog <strong>Climate Crossroads</strong>,
+                where we discuss topics such as extreme heat, environmental justice, and
+                new computational methods. We also host notebooks and tutorials for
+                reproducible research.
+            </p>
+
+            <p>
+                Visit our joint site: <a href="https://climacoder.com" target="_blank">climacoder.com</a>
+            </p>
+        </div>
+
+        <div class="screenshot-section">
+            <img
+                src="assets/images/climacoder-home.png"
+                alt="Screenshot of ClimaCoder homepage"
+                class="screenshot"
+            />
+            <p class="note">
+                <small>Screenshot of the ClimaCoder home page. It shows our logo, email
+                address and navigation menu.</small>
+            </p>
+        </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
-      </div>
+    <footer>
+        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
     </footer>
 
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
+        document.getElementById("year").textContent = new Date().getFullYear();
     </script>
-  </body>
+</body>
 </html>
