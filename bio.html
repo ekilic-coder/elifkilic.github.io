@@ -1,17 +1,306 @@
----
-layout: page
-title: "Bio & Favorites"
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elif Kilic – Bio & Favorites</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #0066cc;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: auto;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Dropdown button */
+        .dropdown > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown > a::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+        
+        .dropdown:hover > a {
+            color: #0066cc;
+        }
+        
+        .dropdown:hover > a::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .bio-intro {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .bio-intro p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .favorites-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .favorites-section h3 {
+            font-size: 1.3rem;
+            color: #0066cc;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .favorites-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        
+        .favorites-section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .favorites-section strong {
+            color: #333;
+        }
+        
+        .quotes-section {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        blockquote {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border-left: 4px solid #0066cc;
+            margin: 0;
+        }
+        
+        blockquote p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        blockquote footer {
+            font-size: 1rem;
+            color: #666;
+            font-style: normal;
+            text-align: right;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+        
+        blockquote footer::before {
+            content: '— ';
+        }
+        
+        footer.site-footer {
+            background: white;
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">Elif Kilic</a>
+            
+            <!-- Bio Dropdown -->
+            <div class="dropdown">
+                <a href="/bio.html">Bio</a>
+                <div class="dropdown-content">
+                    <a href="/bio.html">About Me</a>
+                    <a href="/bio.html#education">Education</a>
+                    <a href="/bio.html#experience">Experience</a>
+                    <a href="assets/cv.pdf">Download CV</a>
+                </div>
+            </div>
+            
+            <!-- Research Dropdown -->
+            <div class="dropdown">
+                <a href="/research.html">Research</a>
+                <div class="dropdown-content">
+                    <a href="/research/heatindex.html">Heat Index Calculator</a>
+                    <a href="/research.html#ehi350">EHI-350 Measurement</a>
+                    <a href="/research.html#publications">Publications</a>
+                </div>
+            </div>
+            
+            <!-- ClimaCoder Dropdown -->
+            <div class="dropdown">
+                <a href="/climacoder.html">ClimaCoder</a>
+                <div class="dropdown-content">
+                    <a href="/climacoder/writing.html">Writing</a>
+                    <a href="/climacoder.html#overview">Overview</a>
+                    <a href="/climacoder.html#team">Team</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-<!-- what changed & why: Added a personal bio page to share personality, hobbies, and inspirational quotes -->
+    <main>
+        <h2>Bio & Favorites</h2>
+        
+        <div class="bio-intro">
+            <p>
+                I love micro-adventures around the Bay Area, reading widely, and building 
+                tools that help people thrive in heat.
+            </p>
+        </div>
 
-I love micro‑adventures around the Bay Area, reading widely, and building tools that help people thrive in heat.
+        <div class="favorites-section">
+            <h3>Now reading</h3>
+            <p><em>[Add your current book]</em></p>
+            
+            <h3>Little joys</h3>
+            <p>
+                Strong coffee, street markets, public libraries, walks in local parks.
+            </p>
+        </div>
 
-**Now reading:** _[add your current book]_  
-**Little joys:** strong coffee, street markets, public libraries, walks in local parks.
+        <div class="quotes-section">
+            <blockquote>
+                <p>
+                    "You don't have to become something you're not to be better than you were."
+                </p>
+                <footer>Sidney Poitier</footer>
+            </blockquote>
 
-> “You don’t have to become something you’re not to be better than you were.”  
-> ~ Sidney Poitier
+            <blockquote>
+                <p>
+                    "I'm here to contribute. We all depend on each other. I depend on people 
+                    in generations prior to me. People in generations after me will depend on me."
+                </p>
+                <footer>Bryan Nwafor</footer>
+            </blockquote>
+        </div>
+    </main>
 
-> “I’m here to contribute. We all depend on each other. I depend on people in generations prior to me. People in generations after me will depend on me.”  
-> ~ Bryan Nwafor
+    <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
