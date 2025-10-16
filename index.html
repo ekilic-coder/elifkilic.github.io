@@ -64,12 +64,17 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            padding: 0.5rem 0;
         }
         
         .dropdown > a::after {
             content: '▼';
             font-size: 0.7rem;
             transition: transform 0.3s;
+        }
+        
+        .dropdown:hover > a {
+            color: #0066cc;
         }
         
         .dropdown:hover > a::after {
@@ -199,6 +204,17 @@
         <nav>
             <a href="/" class="logo">Elif Kilic</a>
             
+            <!-- Bio Dropdown -->
+            <div class="dropdown">
+                <a href="/bio.html">Bio</a>
+                <div class="dropdown-content">
+                    <a href="/bio.html">About Me</a>
+                    <a href="/bio.html#education">Education</a>
+                    <a href="/bio.html#experience">Experience</a>
+                    <a href="assets/cv.pdf">Download CV</a>
+                </div>
+            </div>
+            
             <!-- Research Dropdown -->
             <div class="dropdown">
                 <a href="/research.html">Research</a>
@@ -216,17 +232,6 @@
                     <a href="/climacoder/writing.html">Writing</a>
                     <a href="/climacoder.html#overview">Overview</a>
                     <a href="/climacoder.html#team">Team</a>
-                </div>
-            </div>
-            
-            <!-- Bio Dropdown -->
-            <div class="dropdown">
-                <a href="/bio.html">Bio</a>
-                <div class="dropdown-content">
-                    <a href="/bio.html">About Me</a>
-                    <a href="/bio.html#education">Education</a>
-                    <a href="/bio.html#experience">Experience</a>
-                    <a href="assets/cv.pdf">Download CV</a>
                 </div>
             </div>
         </nav>
