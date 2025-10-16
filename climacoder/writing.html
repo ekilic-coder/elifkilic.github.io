@@ -1,207 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elif Kilic – Writing</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="site-title">Elif Kilic</h1>
-        <nav class="site-nav">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="climacoder.html">ClimaCoder</a></li>
-            <li><a href="writing.html" class="active">Writing</a></li>
-          </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elif Kilic – Heat Stress & Vulnerability Writing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #0066cc;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: auto;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown > a::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+        
+        .dropdown:hover > a {
+            color: #0066cc;
+        }
+        
+        .dropdown:hover > a::after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            z-index: 1000;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        main {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .intro {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        
+        section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        section h3 a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        section h3 a:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+        
+        section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #0066cc;
+            margin: 3rem 0;
+        }
+        
+        .instructions h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions code {
+            background: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #d63384;
+        }
+        
+        .instructions pre {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .instructions pre code {
+            background: transparent;
+            padding: 0;
+            color: #333;
+        }
+        
+        .references-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+        }
+        
+        .references-section h3 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+        
+        .references {
+            list-style: none;
+            counter-reset: reference-counter;
+            padding-left: 0;
+        }
+        
+        .references li {
+            counter-increment: reference-counter;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+        
+        .references li::before {
+            content: "[" counter(reference-counter) "]";
+            position: absolute;
+            left: 0;
+            font-weight: 600;
+            color: #0066cc;
+        }
+        
+        footer {
+            background: white;
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">Elif Kilic</a>
+            
+            <div class="dropdown">
+                <a href="/bio.html">Bio</a>
+                <div class="dropdown-content">
+                    <a href="/bio.html">About Me</a>
+                    <a href="/bio.html#education">Education</a>
+                    <a href="/bio.html#experience">Experience</a>
+                    <a href="/assets/cv.pdf">Download CV</a>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <a href="/research.html">Research</a>
+                <div class="dropdown-content">
+                    <a href="/research/heatindex.html">Heat Index Calculator</a>
+                    <a href="/research.html#ehi350">EHI-350 Measurement</a>
+                    <a href="/research.html#publications">Publications</a>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <a href="/climacoder.html">ClimaCoder</a>
+                <div class="dropdown-content">
+                    <a href="/climacoder/writing.html">Writing</a>
+                    <a href="/climacoder.html#overview">Overview</a>
+                    <a href="/climacoder.html#team">Team</a>
+                </div>
+            </div>
         </nav>
-      </div>
     </header>
 
-    <main class="container">
-      <h2>Heat Stress and Vulnerability</h2>
-      <p>
-        Extreme heat is a “silent threat” because its impacts often go unnoticed until
-        communities experience spikes in dehydration, heat stroke, kidney disease
-        and other illnesses【95984291269869†L110-L118】. Central America and Mexico are
-        particularly susceptible because many people live in poorly planned urban
-        areas without access to clean water and sanitation and because high poverty
-        levels limit adaptation options【95984291269869†L121-L128】.
-        Vulnerable groups include children, pregnant women, older adults, people with
-        disabilities and outdoor workers【109903180744806†L256-L262】. The following
-        sections summarise how heat stress affects each country in the region.
-      </p>
+    <main>
+        <h2>Heat Stress and Vulnerability</h2>
+        
+        <div class="intro">
+            <p>
+                Extreme heat is a "silent threat" because its impacts often go unnoticed until
+                communities experience spikes in dehydration, heat stroke, kidney disease
+                and other illnesses. Central America and Mexico are
+                particularly susceptible because many people live in poorly planned urban
+                areas without access to clean water and sanitation and because high poverty
+                levels limit adaptation options.
+                Vulnerable groups include children, pregnant women, older adults, people with
+                disabilities and outdoor workers. The following
+                sections summarise how heat stress affects each country in the region.
+            </p>
+        </div>
 
-      <section id="belize">
-        <h3>Belize</h3>
-        <p>
-          The ThinkHazard database classifies Belize’s extreme heat hazard as high,
-          meaning prolonged exposure to dangerous temperatures is expected at least
-          once in the next five years【518284492743674†L34-L41】. Heat affects a
-          variety of sectors—including health, energy, transport and agriculture—and
-          disproportionately impacts urban populations and outdoor workers【518284492743674†L65-L70】.
-          In 2024 temperatures above 100 °F triggered forest fires, prompting the
-          Belize Red Cross to provide hygiene kits and cash assistance【109903180744806†L225-L245】.
-        </p>
-      </section>
+        <section id="belize">
+            <h3>Belize</h3>
+            <p>
+                The ThinkHazard database classifies Belize's extreme heat hazard as high,
+                meaning prolonged exposure to dangerous temperatures is expected at least
+                once in the next five years. Heat affects a
+                variety of sectors—including health, energy, transport and agriculture—and
+                disproportionately impacts urban populations and outdoor workers.
+                In 2024 temperatures above 100 °F triggered forest fires, prompting the
+                Belize Red Cross to provide hygiene kits and cash assistance.
+            </p>
+        </section>
 
-      <section id="guatemala">
-        <h3>Guatemala</h3>
-        <p>
-          Guatemala is one of the Central American countries with the highest risk of
-          heat-related impacts【95984291269869†L145-L147】. Heat waves and drought have
-          contributed to a 622 % increase in dengue cases between early 2023 and
-          early 2024【109903180744806†L225-L245】. The extreme heat hazard is classified as
-          high【404623699824588†L33-L40】, and vulnerability is amplified by rapid
-          urbanisation, limited infrastructure and high poverty【95984291269869†L121-L128】.
-          Protecting children, older adults and outdoor workers is therefore a
-          national priority【109903180744806†L256-L262】.
-        </p>
-      </section>
+        <section id="guatemala">
+            <h3>Guatemala</h3>
+            <p>
+                Guatemala is one of the Central American countries with the highest risk of
+                heat-related impacts. Heat waves and drought have
+                contributed to a 622% increase in dengue cases between early 2023 and
+                early 2024. The extreme heat hazard is classified as
+                high, and vulnerability is amplified by rapid
+                urbanisation, limited infrastructure and high poverty.
+                Protecting children, older adults and outdoor workers is therefore a
+                national priority.
+            </p>
+        </section>
 
-      <section id="honduras">
-        <h3>Honduras</h3>
-        <p>
-          Like Guatemala, Honduras faces a high extreme heat hazard【706382942679153†L33-L39】.
-          The country recorded a 580 % increase in dengue cases in early 2024 compared
-          with the previous year due to a combination of heat and drought【109903180744806†L225-L245】.
-          High poverty, limited access to water and health services, and widespread
-          outdoor work make the population particularly vulnerable【95984291269869†L121-L128】.
-        </p>
-      </section>
+        <section id="honduras">
+            <h3>Honduras</h3>
+            <p>
+                Like Guatemala, Honduras faces a high extreme heat hazard.
+                The country recorded a 580% increase in dengue cases in early 2024 compared
+                with the previous year due to a combination of heat and drought.
+                High poverty, limited access to water and health services, and widespread
+                outdoor work make the population particularly vulnerable.
+            </p>
+        </section>
 
-      <section id="el-salvador">
-        <h3>El Salvador</h3>
-        <p>
-          El Salvador is listed alongside Guatemala as having the highest heat risk in
-          Central America【95984291269869†L145-L147】. Although detailed statistics are
-          scarce, the country shares many of the same vulnerabilities: high
-          urbanisation, inadequate infrastructure and limited health care capacity
-          increase susceptibility to heat-related illness【95984291269869†L121-L128】.
-        </p>
-      </section>
+        <section id="el-salvador">
+            <h3>El Salvador</h3>
+            <p>
+                El Salvador is listed alongside Guatemala as having the highest heat risk in
+                Central America. Although detailed statistics are
+                scarce, the country shares many of the same vulnerabilities: high
+                urbanisation, inadequate infrastructure and limited health care capacity
+                increase susceptibility to heat-related illness.
+            </p>
+        </section>
 
-      <section id="nicaragua">
-        <h3>Nicaragua</h3>
-        <p>
-          Nicaragua does not have a publicly available hazard classification but
-          experiences the same regional challenges: poor housing, lack of potable
-          water and high poverty leave many communities exposed to extreme heat and
-          humidity【95984291269869†L121-L128】. Evidence on heat-related health impacts
-          remains limited, yet studies suggest that heat waves can exacerbate
-          dehydration, heat stroke and other illnesses【95984291269869†L110-L118】.
-        </p>
-      </section>
+        <section id="nicaragua">
+            <h3>Nicaragua</h3>
+            <p>
+                Nicaragua does not have a publicly available hazard classification but
+                experiences the same regional challenges: poor housing, lack of potable
+                water and high poverty leave many communities exposed to extreme heat and
+                humidity. Evidence on heat-related health impacts
+                remains limited, yet studies suggest that heat waves can exacerbate
+                dehydration, heat stroke and other illnesses.
+            </p>
+        </section>
 
-      <section id="costa-rica">
-        <h3>Costa Rica</h3>
-        <p>
-          Costa Rica is generally considered less vulnerable due to stronger
-          institutions, but rising temperatures and humidity still pose risks to
-          outdoor workers and urban residents. As in the rest of the region,
-          vulnerable groups include children, pregnant women and older adults【109903180744806†L256-L262】.
-          More research is needed to quantify how climate change will affect
-          heat-related illnesses in the coming decades【95984291269869†L152-L158】.
-        </p>
-      </section>
+        <section id="costa-rica">
+            <h3>Costa Rica</h3>
+            <p>
+                Costa Rica is generally considered less vulnerable due to stronger
+                institutions, but rising temperatures and humidity still pose risks to
+                outdoor workers and urban residents. As in the rest of the region,
+                vulnerable groups include children, pregnant women and older adults.
+                More research is needed to quantify how climate change will affect
+                heat-related illnesses in the coming decades.
+            </p>
+        </section>
 
-      <section id="panama">
-        <h3>Panama</h3>
-        <p>
-          Limited hazard data exist for Panama, but the country is experiencing
-          increasingly hot summers and humidity. With large urban centres on both
-          coasts and a booming service economy, heat exposure will impact workers in
-          construction, tourism and logistics. Ensuring access to cooling and
-          hydration for vulnerable populations will be critical【95984291269869†L121-L128】.
-        </p>
-      </section>
+        <section id="panama">
+            <h3>Panama</h3>
+            <p>
+                Limited hazard data exist for Panama, but the country is experiencing
+                increasingly hot summers and humidity. With large urban centres on both
+                coasts and a booming service economy, heat exposure will impact workers in
+                construction, tourism and logistics. Ensuring access to cooling and
+                hydration for vulnerable populations will be critical.
+            </p>
+        </section>
 
-      <section id="mexico">
-        <h3>Mexico</h3>
-        <p>
-          Mexico has been hit by a multiyear drought since the winter of
-          2022–2023. By May 2024 nearly 76 % of the country was experiencing drought,
-          making it the most widespread drought since 2011【843139461447320†L116-L134】.
-          The drought has intensified heat waves, causing water scarcity and
-          agricultural losses; central and southern Mexico—home to major
-          population centres—have been particularly affected【843139461447320†L116-L134】.
-          Vulnerable populations include outdoor workers, farmers and those without
-          air conditioning or access to reliable water sources【109903180744806†L256-L262】.
-        </p>
-      </section>
+        <section id="mexico">
+            <h3>Mexico</h3>
+            <p>
+                Mexico has been hit by a multiyear drought since the winter of
+                2022–2023. By May 2024 nearly 76% of the country was experiencing drought,
+                making it the most widespread drought since 2011.
+                The drought has intensified heat waves, causing water scarcity and
+                agricultural losses; central and southern Mexico—home to major
+                population centres—have been particularly affected.
+                Vulnerable populations include outdoor workers, farmers and those without
+                air conditioning or access to reliable water sources.
+            </p>
+        </section>
 
-      <h3>How to Publish Your Writing and Graphs</h3>
-      <p>
-        You can extend this page by adding new sections for additional topics or by
-        updating existing text. To document your findings graphically, upload
-        figures into the <code>assets/graphs</code> folder with descriptive file
-        names (for example <code>2025-08-15-heat-index-map.png</code>). Then insert
-        the graph in the relevant section using an <code>&lt;img&gt;</code> tag, e.g.:
-      </p>
-      <pre><code>&lt;img src="assets/graphs/2025-08-15-heat-index-map.png" alt="Heat index map for 15 Aug 2025" /&gt;</code></pre>
-      <p>
-        Commit the new file and updated HTML to your repository. Once pushed to
-        GitHub, your graph will automatically appear on the published website. This
-        simple workflow—upload the image, reference it in HTML and push your
-        changes—ensures your work is time-stamped and attributable to you.
-      </p>
+        <div class="instructions">
+            <h3>How to Publish Your Writing and Graphs</h3>
+            <p>
+                You can extend this page by adding new sections for additional topics or by
+                updating existing text. To document your findings graphically, upload
+                figures into the <code>assets/graphs</code> folder with descriptive file
+                names (for example <code>2025-08-15-heat-index-map.png</code>). Then insert
+                the graph in the relevant section using an <code>&lt;img&gt;</code> tag, e.g.:
+            </p>
+            <pre><code>&lt;img src="assets/graphs/2025-08-15-heat-index-map.png" alt="Heat index map for 15 Aug 2025" /&gt;</code></pre>
+            <p>
+                Commit the new file and updated HTML to your repository. Once pushed to
+                GitHub, your graph will automatically appear on the published website. This
+                simple workflow—upload the image, reference it in HTML and push your
+                changes—ensures your work is time-stamped and attributable to you.
+            </p>
+        </div>
 
-      <h3>References</h3>
-      <ol class="references">
-        <li id="ref1">
-          Extreme heat can cause dehydration, heat cramps, heat stroke, mental
-          illnesses, renal and cardio‑pulmonary diseases, and premature death【95984291269869†L110-L118】.
-        </li>
-        <li id="ref2">
-          Central and South America face high vulnerability to heat because of rapid
-          urbanisation, lack of potable water and sanitation, poor infrastructure and
-          high poverty【95984291269869†L121-L128】.
-        </li>
-        <li id="ref3">
-          Guatemala and El Salvador are identified as having the highest heat risk
-          in Central America【95984291269869†L145-L147】.
-        </li>
-        <li id="ref4">
-          Evidence linking heat stress to health care demands, vector‑borne disease
-          proliferation, reduced agricultural productivity and migration remains
-          limited, highlighting the need for more research【95984291269869†L152-L158】.
-        </li>
-        <li id="ref5">
-          The ThinkHazard database classifies Belize, Guatemala and Honduras as
-          experiencing a high extreme heat hazard【518284492743674†L34-L41】【404623699824588†L33-L40】【706382942679153†L33-L39】.
-        </li>
-        <li id="ref6">
-          Extreme heat affects multiple sectors and disproportionately impacts
-          urban residents and outdoor workers【518284492743674†L65-L70】.
-        </li>
-        <li id="ref7">
-          Drought and heat waves in 2023–2024 led to dramatic increases in dengue
-          cases in Guatemala (622 %) and Honduras (580 %) and caused forest fires in
-          Belize【109903180744806†L225-L245】.
-        </li>
-        <li id="ref8">
-          Children, people with disabilities, pregnant women, older adults and
-          outdoor workers are among the groups most vulnerable to heat stress【109903180744806†L256-L262】.
-        </li>
-        <li id="ref9">
-          Mexico’s multiyear drought since winter 2022–2023 caused widespread water
-          scarcity and amplified heat waves, with 76 % of the country in drought by
-          May 2024【843139461447320†L116-L134】.
-        </li>
-      </ol>
+        <div class="references-section">
+            <h3>References</h3>
+            <ol class="references">
+                <li id="ref1">
+                    Extreme heat can cause dehydration, heat cramps, heat stroke, mental
+                    illnesses, renal and cardio-pulmonary diseases, and premature death.
+                </li>
+                <li id="ref2">
+                    Central and South America face high vulnerability to heat because of rapid
+                    urbanisation, lack of potable water and sanitation, poor infrastructure and
+                    high poverty.
+                </li>
+                <li id="ref3">
+                    Guatemala and El Salvador are identified as having the highest heat risk
+                    in Central America.
+                </li>
+                <li id="ref4">
+                    Evidence linking heat stress to health care demands, vector-borne disease
+                    proliferation, reduced agricultural productivity and migration remains
+                    limited, highlighting the need for more research.
+                </li>
+                <li id="ref5">
+                    The ThinkHazard database classifies Belize, Guatemala and Honduras as
+                    experiencing a high extreme heat hazard.
+                </li>
+                <li id="ref6">
+                    Extreme heat affects multiple sectors and disproportionately impacts
+                    urban residents and outdoor workers.
+                </li>
+                <li id="ref7">
+                    Drought and heat waves in 2023–2024 led to dramatic increases in dengue
+                    cases in Guatemala (622%) and Honduras (580%) and caused forest fires in
+                    Belize.
+                </li>
+                <li id="ref8">
+                    Children, people with disabilities, pregnant women, older adults and
+                    outdoor workers are among the groups most vulnerable to heat stress.
+                </li>
+                <li id="ref9">
+                    Mexico's multiyear drought since winter 2022–2023 caused widespread water
+                    scarcity and amplified heat waves, with 76% of the country in drought by
+                    May 2024.
+                </li>
+            </ol>
+        </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
-      </div>
+    <footer>
+        <p>&copy; <span id="year"></span> Elif Kilic. All rights reserved.</p>
     </footer>
 
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
+        document.getElementById("year").textContent = new Date().getFullYear();
     </script>
-  </body>
+</body>
 </html>
