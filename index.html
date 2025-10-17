@@ -91,9 +91,20 @@
             min-width: 200px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             border-radius: 8px;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
             padding: 0.5rem 0;
             z-index: 1000;
+        }
+        
+        /* Add padding to dropdown area for easier hovering */
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.25rem;
+            z-index: 999;
         }
         
         .dropdown-content a {
@@ -112,6 +123,61 @@
         
         .dropdown:hover .dropdown-content {
             display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Nested dropdown (submenu) */
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu > a::after {
+            content: ' ▸';
+            float: right;
+        }
+        
+        .dropdown-submenu-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+        }
+        
+        .dropdown-submenu:hover .dropdown-submenu-content {
+            display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+        
+        .dropdown-submenu-content a {
+            color: #333;
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+        
+        .dropdown-submenu-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
         }
         
         main {
@@ -211,7 +277,7 @@
                     <a href="/bio.html">About Me</a>
                     <a href="/bio.html#education">Education</a>
                     <a href="/bio.html#experience">Experience</a>
-                    <a href="assets/cv.pdf">Download CV</a>
+                    <a href="/assets/cv.pdf">Download CV</a>
                 </div>
             </div>
             
@@ -226,7 +292,6 @@
             </div>
             
             <!-- ClimaCoder Dropdown -->
-           <!-- ClimaCoder Dropdown -->
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
