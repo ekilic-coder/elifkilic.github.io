@@ -91,9 +91,20 @@
             min-width: 200px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             border-radius: 8px;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
             padding: 0.5rem 0;
             z-index: 1000;
+        }
+        
+        /* Add padding to dropdown area for easier hovering */
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.25rem;
+            z-index: 999;
         }
         
         .dropdown-content a {
@@ -112,6 +123,18 @@
         
         .dropdown:hover .dropdown-content {
             display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         main {
@@ -163,8 +186,18 @@
         
         .project h3 {
             font-size: 1.5rem;
-            color: #0066cc;
             margin-bottom: 1rem;
+        }
+        
+        .project h3 a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .project h3 a:hover {
+            color: #0052a3;
+            text-decoration: underline;
         }
         
         .project p {
@@ -201,9 +234,9 @@
                 <a href="/bio.html">Bio</a>
                 <div class="dropdown-content">
                     <a href="/bio.html">About Me</a>
-                    <a href="/bio.html#education">Education</a>
-                    <a href="/bio.html#experience">Experience</a>
-                    <a href="assets/cv.pdf">Download CV</a>
+                    <a href="/cv.html">CV</a>
+                    <a href="/projects.html">Projects</a>
+                    <a href="/teaching.html">Teaching</a>
                 </div>
             </div>
             
@@ -221,9 +254,21 @@
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
-                    <a href="/climacoder/writing.html">Writing</a>
-                    <a href="/climacoder.html#overview">Overview</a>
                     <a href="/climacoder.html#team">Team</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Research ▸</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/countries/belize.html">Belize</a>
+                            <a href="/climacoder/countries/guatemala.html">Guatemala</a>
+                            <a href="/climacoder/countries/honduras.html">Honduras</a>
+                            <a href="/climacoder/countries/el-salvador.html">El Salvador</a>
+                            <a href="/climacoder/countries/nicaragua.html">Nicaragua</a>
+                            <a href="/climacoder/countries/costa-rica.html">Costa Rica</a>
+                            <a href="/climacoder/countries/panama.html">Panama</a>
+                            <a href="/climacoder/countries/mexico.html">Mexico</a>
+                        </div>
+                    </div>
+                    <a href="/climacoder/writing.html">Writing</a>
                 </div>
             </div>
         </nav>
@@ -242,7 +287,7 @@
 
         <div class="project-list">
             <article class="project">
-                <h3>Heat Stress Indices in Central America</h3>
+                <h3><a href="/research/heat-stress-central-america.html">Heat Stress Indices in Central America</a></h3>
                 <p>
                     Developed spatiotemporal maps of heat stress indices (Wet Bulb Globe
                     Temperature, Heat Index) across Central America to identify seasonal
@@ -252,7 +297,7 @@
             </article>
 
             <article class="project">
-                <h3>Humidity and Heat Wave Co-occurrence</h3>
+                <h3><a href="/research/humidity-heatwave.html">Humidity and Heat Wave Co-occurrence</a></h3>
                 <p>
                     Analyzed historical weather records to quantify how humidity
                     exacerbates heat waves. Results show that high dew points often
@@ -262,7 +307,7 @@
             </article>
 
             <article class="project">
-                <h3>Health Impacts of Extreme Heat</h3>
+                <h3><a href="/research/health-impacts.html">Health Impacts of Extreme Heat</a></h3>
                 <p>
                     Collaborated with public health experts to examine emergency room
                     admissions during extreme heat events. We found a clear association
