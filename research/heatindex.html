@@ -359,7 +359,7 @@
         let heatIndexData = null;
 
         // FIXED: Use correct path to data file
-        fetch('/assets/data/heatindex_data.json')
+        fetch('../assets/data/heatindex_data.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
