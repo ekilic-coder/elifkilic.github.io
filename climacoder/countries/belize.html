@@ -213,20 +213,13 @@
             margin-bottom: 1.5rem;
         }
         
-        .map-placeholder {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
+        .map-container {
+            width: 100%;
+            height: 750px;
+            border: none;
             border-radius: 8px;
-            padding: 4rem 2rem;
-            text-align: center;
-            color: #666;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             margin: 1rem 0;
-        }
-        
-        .map-placeholder h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #495057;
         }
         
         .chart-grid {
@@ -236,13 +229,52 @@
             margin-top: 2rem;
         }
         
-        .chart-placeholder {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
+        .chart-container {
+            width: 100%;
+            height: 550px;
+            border: none;
             border-radius: 8px;
-            padding: 3rem 2rem;
-            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tab-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
             color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            color: #0066cc;
+        }
+        
+        .tab.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
         }
         
         footer {
@@ -329,49 +361,76 @@
         </div>
 
         <div class="dashboard-section">
-            <h2>Interactive Heat Map</h2>
-            <div class="map-placeholder">
-                <h3>🗺️ Interactive Map Coming Soon</h3>
-                <p>This section will contain an interactive heat stress map for Belize</p>
-                <p style="margin-top: 1rem; font-size: 0.9rem;">
-                    To add your map: Upload your visualization and replace this placeholder
-                </p>
+            <h2>Interactive Heat Stress Maps</h2>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('ehi')">Heat Index (EHI)</button>
+                    <button class="tab" onclick="showTab('zones')">Stress Zones</button>
+                    <button class="tab" onclick="showTab('timeseries')">Time Series</button>
+                </div>
+                
+                <div id="ehi" class="tab-content active">
+                    <iframe src="../maps/web_maps/belize_2023-05_resting_ehi.html" class="map-container"></iframe>
+                </div>
+                
+                <div id="zones" class="tab-content">
+                    <iframe src="../maps/web_maps/belize_2023-05_resting_zones.html" class="map-container"></iframe>
+                </div>
+                
+                <div id="timeseries" class="tab-content">
+                    <iframe src="../maps/web_maps/belize_2023-05_resting_timeseries.html" class="map-container"></iframe>
+                </div>
             </div>
+            
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; color: #666;">
+                <strong>Data:</strong> May 2023, Resting Work Level (100 W/m²). 
+                Interactive maps show Extended Heat Index (EHI) values, physiological stress zones, 
+                and temporal trends across Belize.
+            </p>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Work Intensity Comparison</h2>
+            <p style="font-size: 1.05rem; line-height: 1.7; color: #555; margin-bottom: 1.5rem;">
+                Heat stress varies significantly based on physical activity level. Compare how different 
+                work intensities affect heat vulnerability across the same geographic area.
+            </p>
+            <iframe src="../maps/web_maps/belize_2023-05_comparison.html" class="map-container"></iframe>
         </div>
 
         <div class="dashboard-section">
             <h2>Temperature & Heat Index Data</h2>
             <div class="chart-grid">
-                <div class="chart-placeholder">
-                    <h3>📊 Monthly Temperature Trends</h3>
-                    <p>Add your temperature chart here</p>
+                <div>
+                    <h3 style="margin-bottom: 1rem;">Monthly Temperature Trends</h3>
+                    <iframe src="../maps/web_maps/belize_2023-05_resting_timeseries.html" class="chart-container"></iframe>
                 </div>
-                <div class="chart-placeholder">
-                    <h3>📈 Heat Index Distribution</h3>
-                    <p>Add your heat index data here</p>
+                <div>
+                    <h3 style="margin-bottom: 1rem;">Heat Index Distribution</h3>
+                    <iframe src="../maps/web_maps/belize_2023-05_resting_ehi.html" class="chart-container"></iframe>
                 </div>
             </div>
         </div>
 
         <div class="dashboard-section">
             <h2>Vulnerable Populations</h2>
-            <div class="chart-placeholder">
-                <h3>👥 Population Analysis</h3>
-                <p>Add demographic and vulnerability analysis here</p>
-            </div>
+            <p style="font-size: 1.05rem; line-height: 1.7; color: #555; margin-bottom: 1.5rem;">
+                Urban populations and outdoor workers face disproportionate heat exposure. 
+                Areas with high EHI values and severe stress zones indicate communities at 
+                greatest risk during extreme heat events.
+            </p>
+            <iframe src="../maps/web_maps/belize_2023-05_resting_zones.html" class="chart-container" style="height: 650px;"></iframe>
         </div>
 
         <div class="dashboard-section">
             <h2>Health Impact Data</h2>
             <p style="font-size: 1.05rem; line-height: 1.7; color: #555; margin-bottom: 1.5rem;">
                 Forest fires triggered by extreme heat in 2024 required emergency response 
-                from the Belize Red Cross. This section can include data on heat-related 
-                health incidents, emergency room visits, and other health impacts.
+                from the Belize Red Cross. The Extended Heat Index helps predict periods of 
+                heightened health risk and informs early warning systems.
             </p>
-            <div class="chart-placeholder">
-                <h3>🏥 Health Impact Visualization</h3>
-                <p>Add your health impact data and charts here</p>
-            </div>
+            <iframe src="../maps/web_maps/belize_2023-05_comparison.html" class="chart-container" style="height: 700px;"></iframe>
         </div>
     </main>
 
@@ -381,6 +440,22 @@
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+        
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
     </script>
 </body>
 </html>
