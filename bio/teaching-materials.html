@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELİF KILIÇ – Teaching Materials (Private)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Password Screen */
+        .password-screen {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .password-screen h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .password-screen p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Content Screen */
+        .content-screen {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .content-screen.active {
+            display: block;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .course-section {
+            margin-bottom: 40px;
+        }
+
+        .course-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            font-size: 1.4rem;
+        }
+
+        .material-list {
+            list-style: none;
+        }
+
+        .material-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .material-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .material-info {
+            flex: 1;
+        }
+
+        .material-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .material-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .material-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .material-link {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .material-link:hover {
+            background: #764ba2;
+        }
+
+        .material-link.preview {
+            background: #48bb78;
+        }
+
+        .material-link.preview:hover {
+            background: #38a169;
+        }
+
+        @media (max-width: 768px) {
+            .material-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .material-links {
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            .material-link {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Screen -->
+    <div class="password-screen" id="passwordScreen">
+        <h2>🔒 Private Course Materials</h2>
+        <p>Enter password to access teaching materials</p>
+        <input 
+            type="password" 
+            class="password-input" 
+            id="passwordInput" 
+            placeholder="Enter password"
+            onkeypress="if(event.key === 'Enter') checkPassword()"
+        >
+        <button class="submit-btn" onclick="checkPassword()">Access Materials</button>
+        <p class="error-message" id="errorMessage">Incorrect password. Please try again.</p>
+    </div>
+
+    <!-- Content Screen -->
+    <div class="content-screen" id="contentScreen">
+        <a href="teaching.html" class="back-link">← Back to Teaching Page</a>
+        
+        <div class="header">
+            <h1>📚 Private Teaching Materials</h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- EPS 81 Materials -->
+        <div class="course-section">
+            <h2>EPS 81: Extreme Weather and Climate</h2>
+            <ul class="material-list">
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Study Session 1: Climate Basics</div>
+                        <div class="material-description">Worksheet covering fundamental climate concepts</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+                
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Study Session 2: Atmospheric Circulation</div>
+                        <div class="material-description">Practice problems on wind patterns and pressure systems</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Midterm Review Guide</div>
+                        <div class="material-description">Comprehensive review covering first half of course</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Guest Lecture: Heat Index & Human Health</div>
+                        <div class="material-description">Slides from guest lecture on extreme heat</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- EPS C20 Materials -->
+        <div class="course-section">
+            <h2>EPS C20: Earthquakes in Your Backyard</h2>
+            <ul class="material-list">
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Discussion Section Notes - Week 1</div>
+                        <div class="material-description">Introduction to earthquake mechanics</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Hazard Mitigation Activity</div>
+                        <div class="material-description">Group activity on earthquake preparedness</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- CIVENG 180 Materials -->
+        <div class="course-section">
+            <h2>CIVENG 180: CEE Systems Design</h2>
+            <ul class="material-list">
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Project Grading Rubric</div>
+                        <div class="material-description">Detailed criteria for design project evaluation</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">Feedback Template</div>
+                        <div class="material-description">Template for providing constructive project feedback</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" class="material-link preview">Preview</a>
+                        <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="material-link">Download</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Complete Folders -->
+        <div class="course-section">
+            <h2>📁 Complete Course Folders</h2>
+            <ul class="material-list">
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">All EPS 81 Materials</div>
+                        <div class="material-description">Access the complete Google Drive folder</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="material-link">Open Folder</a>
+                    </div>
+                </li>
+
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">All EPS C20 Materials</div>
+                        <div class="material-description">Access the complete Google Drive folder</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="material-link">Open Folder</a>
+                    </div>
+                </li>
+
+                <li class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">All CIVENG 180 Materials</div>
+                        <div class="material-description">Access the complete Google Drive folder</div>
+                    </div>
+                    <div class="material-links">
+                        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="material-link">Open Folder</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Set your password here - CHANGE THIS!
+        const CORRECT_PASSWORD = "YourSecurePassword123";
+
+        // Check if already logged in (using session storage)
+        window.onload = function() {
+            if (sessionStorage.getItem('teachingAccess') === 'granted') {
+                showContent();
+            }
+        };
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (input === CORRECT_PASSWORD) {
+                sessionStorage.setItem('teachingAccess', 'granted');
+                showContent();
+                errorMessage.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        function showContent() {
+            document.getElementById('passwordScreen').style.display = 'none';
+            document.getElementById('contentScreen').classList.add('active');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('teachingAccess');
+            document.getElementById('contentScreen').classList.remove('active');
+            document.getElementById('passwordScreen').style.display = 'block';
+            document.getElementById('passwordInput').value = '';
+        }
+    </script>
+</body>
+</html>
