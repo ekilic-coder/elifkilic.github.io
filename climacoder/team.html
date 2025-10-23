@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELİF KILIÇ – ClimaCoder</title>
+    <title>Team | ClimaCoder</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #333;
             background: #fafafa;
         }
-        
+
         header {
             background: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -25,7 +25,7 @@
             top: 0;
             z-index: 100;
         }
-        
+
         nav {
             max-width: 1200px;
             margin: 0 auto;
@@ -34,31 +34,30 @@
             gap: 2rem;
             align-items: center;
         }
-        
+
         nav a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+
         nav a:hover {
             color: #0066cc;
         }
-        
+
         nav .logo {
             font-weight: 700;
             font-size: 1.2rem;
             margin-right: auto;
         }
-        
-        /* Dropdown container */
+
+        /* Dropdown styles */
         .dropdown {
             position: relative;
             display: inline-block;
         }
-        
-        /* Dropdown button */
+
         .dropdown > a {
             cursor: pointer;
             display: flex;
@@ -66,22 +65,21 @@
             gap: 0.3rem;
             padding: 0.5rem 0;
         }
-        
+
         .dropdown > a::after {
             content: '▼';
             font-size: 0.7rem;
             transition: transform 0.3s;
         }
-        
+
         .dropdown:hover > a {
             color: #0066cc;
         }
-        
+
         .dropdown:hover > a::after {
             transform: rotate(180deg);
         }
-        
-        /* Dropdown content */
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -96,7 +94,6 @@
             z-index: 1000;
         }
 
-        /* Add padding to dropdown area for easier hovering */
         .dropdown::before {
             content: '';
             position: absolute;
@@ -137,7 +134,6 @@
             }
         }
 
-        /* Nested dropdown (submenu) */
         .dropdown-submenu {
             position: relative;
         }
@@ -179,152 +175,97 @@
             background-color: #f5f5f5;
             color: #0066cc;
         }
-        
+
         main {
             max-width: 1000px;
             margin: 4rem auto;
             padding: 2rem;
         }
 
-        .research-threads {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            text-align: center;
         }
 
-        .thread-card {
+        .intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 3rem;
             background: white;
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .thread-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
-        .thread-card h4 {
-            font-size: 1.4rem;
-            color: #0066cc;
-            margin-bottom: 1rem;
-        }
-
-        .thread-card p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #555;
-            margin-bottom: 1rem;
-        }
-
-        .thread-card .status {
-            display: inline-block;
-            background: #e8f5e9;
-            color: #388e3c;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .thread-link {
-            display: inline-block;
-            background: #0066cc;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .thread-link:hover {
-            background: #0052a3;
-            transform: translateY(-2px);
-        }
-        
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #1a1a1a;
             text-align: center;
         }
-        
-        .quetzal-glide {
-            text-align: center;
-            margin: 2rem 0;
+
+        .team-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
         }
-        
-        .quetzal-glide .bird {
-            animation: glide 8s ease-in-out infinite;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-        }
-        
-        @keyframes glide {
-            0%, 100% { transform: translateX(-20px) translateY(0); }
-            50% { transform: translateX(20px) translateY(-10px); }
-        }
-        
-        .content-card {
+
+        .team-member {
             background: white;
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            align-items: start;
         }
-        
-        .content-card p {
+
+        .member-photo {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .member-photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .member-info h2 {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-title {
             font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
+            color: #666;
+            font-weight: 600;
             margin-bottom: 1.5rem;
         }
-        
-        .content-card p:last-child {
-            margin-bottom: 0;
+
+        .member-bio {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
         }
-        
-        .content-card strong {
-            color: #0066cc;
+
+        .member-bio p {
+            margin-bottom: 1rem;
         }
-        
-        .content-card a {
-            color: #0066cc;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
+
+        @media (max-width: 768px) {
+            .team-member {
+                grid-template-columns: 1fr;
+            }
         }
-        
-        .content-card a:hover {
-            color: #0052a3;
-            text-decoration: underline;
-        }
-        
-        .screenshot-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        
-        .screenshot {
-            width: 100%;
-            max-width: 700px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            margin: 1rem auto;
-            display: block;
-        }
-        
-        .note {
-            margin-top: 1rem;
-            color: #666;
-            font-style: italic;
-        }
-        
+
         footer {
             background: white;
             margin-top: 4rem;
@@ -339,8 +280,7 @@
     <header>
         <nav>
             <a href="/" class="logo">ELİF KILIÇ</a>
-            
-            <!-- Bio Dropdown -->
+
             <div class="dropdown">
                 <a href="/bio.html">Bio</a>
                 <div class="dropdown-content">
@@ -350,7 +290,6 @@
                 </div>
             </div>
 
-            <!-- Research Dropdown -->
             <div class="dropdown">
                 <a href="/research.html">Research</a>
                 <div class="dropdown-content">
@@ -360,11 +299,10 @@
                 </div>
             </div>
 
-            <!-- ClimaCoder Dropdown -->
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
-                    <a href="/climacoder.html#team">Team</a>
+                    <a href="/climacoder/team.html">Team</a>
                     <div class="dropdown-submenu">
                         <a href="#">Research ▸</a>
                         <div class="dropdown-submenu-content">
@@ -385,66 +323,75 @@
     </header>
 
     <main>
-        <h2>ClimaCoder</h2>
+        <h1>Team</h1>
 
-        <div class="quetzal-glide">
-            <img class="bird" src="/assets/quetzal.webp" alt="Quetzal" width="180" height="180" />
-        </div>
-
-        <div class="content-card">
+        <div class="intro">
             <p>
-                <strong>ClimaCoder</strong> is an independent research collaboration focused on heat stress
-                and climate vulnerability in Latin America. We work outside traditional academic institutions
-                to create open-access climate tools and analysis for regions that are often overlooked in
-                climate research.
-            </p>
-
-            <p>
-                Latin American communities face some of the most severe heat stress risks globally, yet they're
-                frequently excluded from climate research priorities. We're working to change that by developing
-                publicly available heat stress models, historical climate analysis, and actionable data for
-                communities, public health officials, and local planners.
-            </p>
-
-            <p>
-                Visit the main ClimaCoder site: <a href="https://climacoder.com" target="_blank">climacoder.com</a>
+                ClimaCoder is an independent research collaboration focused on heat stress and climate
+                vulnerability in Latin America. We work outside traditional academic institutions to create
+                open-access climate tools and analysis for regions that are often overlooked in climate research.
             </p>
         </div>
 
-        <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; font-size: 1.8rem; color: #1a1a1a;">Research Threads</h3>
-
-        <div class="research-threads">
-            <div class="thread-card">
-                <h4>Systematic Review: Heat Stress in Latin America</h4>
-                <p>
-                    A comprehensive systematic review synthesizing heat stress research across Latin America.
-                    This project examines heat vulnerability, health impacts, and adaptation strategies in
-                    Central and South American communities. The goal is to identify critical knowledge gaps
-                    and inform future research priorities for climate adaptation in the region.
-                </p>
-                <span class="status">In Progress</span>
+        <div class="team-grid">
+            <div class="team-member">
+                <div>
+                    <div class="member-photo-placeholder">EK</div>
+                    <!-- Replace with: <img src="/assets/images/elif.jpg" alt="Elif Kiliç" class="member-photo"> -->
+                </div>
+                <div class="member-info">
+                    <h2>Elif Kiliç</h2>
+                    <div class="member-title">Environmental Engineer & Climate Scientist</div>
+                    <div class="member-bio">
+                        <p>
+                            I'm an environmental engineer and climate scientist focused on understanding and modeling
+                            extreme heat stress. My work involves pulling apart large climate datasets (ERA5, CMIP6),
+                            adapting physiological heat stress models to better reflect real-world conditions, and
+                            creating tools that communities can actually use to prepare for dangerous heat.
+                        </p>
+                        <p>
+                            Most climate research follows funding priorities, which often means the Global South gets
+                            left behind. Through ClimaCoder, I'm building open-access heat stress maps and models for
+                            Latin America because communities shouldn't have to wait for someone else to decide their
+                            risks are worth studying.
+                        </p>
+                        <p>
+                            My background is in environmental engineering and linguistics, and I hold a Master's degree
+                            from UC Berkeley where I developed the Extended Heat Index (EHI-350) for assessing
+                            occupational heat stress. When I'm not working with climate data, I'm usually traveling
+                            through Latin America or tending to my hydroponic garden.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="thread-card">
-                <h4>Historical Heat Stress Modeling</h4>
-                <p>
-                    Developing historical heat stress assessments for each Latin American country using ERA5
-                    climate reanalysis data and the Extended Heat Index framework. These country-specific
-                    dashboards provide interactive visualizations of heat stress patterns, occupational risk
-                    zones, and temporal trends to help communities understand their current heat exposure.
-                </p>
-                <a href="/climacoder/countries/belize.html" class="thread-link">View Belize Dashboard</a>
-            </div>
-
-            <div class="thread-card">
-                <h4>Future Heat Stress Projections (Machine Learning)</h4>
-                <p>
-                    Using machine learning approaches to project future heat stress scenarios under climate
-                    change for Latin American countries. This work combines CMIP6 climate model outputs with
-                    the Extended Heat Index to forecast when and where extreme heat will exceed human
-                    physiological limits, informing long-term adaptation planning.
-                </p>
-                <span class="status">Early Development</span>
+            <div class="team-member">
+                <div>
+                    <div class="member-photo-placeholder">J</div>
+                    <!-- Replace with: <img src="/assets/images/jonathan.jpg" alt="Jonathan" class="member-photo"> -->
+                </div>
+                <div class="member-info">
+                    <h2>Jonathan</h2>
+                    <div class="member-title">Mathematician & Software Engineer</div>
+                    <div class="member-bio">
+                        <p>
+                            I'm a mathematician and software engineer who builds data pipelines and infrastructure.
+                            My background in mathematics taught me to find patterns and solve problems systematically,
+                            and software engineering gave me the tools to turn those solutions into working systems.
+                        </p>
+                        <p>
+                            For ClimaCoder, I focus on the technical infrastructure: building and maintaining data
+                            pipelines, creating web-based visualization tools, and making sure our climate analysis
+                            is reproducible and accessible. Good data infrastructure isn't just about efficiency—it's
+                            about making research transparent and enabling others to build on our work.
+                        </p>
+                        <p>
+                            Outside of technical work, I spend time cooking and experimenting with recipes, often
+                            using the peppers Elif grows. I believe technology should make knowledge more accessible
+                            and help people work together more effectively.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
