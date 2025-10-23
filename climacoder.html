@@ -181,9 +181,23 @@
         }
         
         main {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 4rem auto;
             padding: 2rem;
+        }
+
+        .climacoder-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .climacoder-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
         .research-threads {
@@ -427,14 +441,14 @@
                     <div class="dropdown-submenu">
                         <a href="#">Writing</a>
                         <div class="dropdown-submenu-content">
-                            <a href="/climacoder/writing.html#belize">Belize</a>
-                            <a href="/climacoder/writing.html#guatemala">Guatemala</a>
-                            <a href="/climacoder/writing.html#honduras">Honduras</a>
-                            <a href="/climacoder/writing.html#el-salvador">El Salvador</a>
-                            <a href="/climacoder/writing.html#nicaragua">Nicaragua</a>
-                            <a href="/climacoder/writing.html#costa-rica">Costa Rica</a>
-                            <a href="/climacoder/writing.html#panama">Panama</a>
-                            <a href="/climacoder/writing.html#mexico">Mexico</a>
+                            <a href="/climacoder/writing/belize.html">Belize</a>
+                            <a href="/climacoder/writing/guatemala.html">Guatemala</a>
+                            <a href="/climacoder/writing/honduras.html">Honduras</a>
+                            <a href="/climacoder/writing/el-salvador.html">El Salvador</a>
+                            <a href="/climacoder/writing/nicaragua.html">Nicaragua</a>
+                            <a href="/climacoder/writing/costa-rica.html">Costa Rica</a>
+                            <a href="/climacoder/writing/panama.html">Panama</a>
+                            <a href="/climacoder/writing/mexico.html">Mexico</a>
                         </div>
                     </div>
                 </div>
@@ -452,58 +466,52 @@
             <img class="bird" src="/assets/quetzal.webp" alt="Quetzal" width="180" height="180" />
         </div>
 
-        <div class="content-card">
-            <p>
-                The places most affected by climate change are also the ones least studied. Too often, research only follows the money, and the Global South gets left behind. I don't want to wait for someone else to decide our struggles are "lucrative" enough to care about—so I'm working to build open, high-quality tools that Latin American communities can actually use to prepare for extreme heat.
-            </p>
-
-            <p>
-                My work blends environmental engineering, climate science, and data analysis. I pull apart massive climate datasets (think ERA5 and CMIP6), tweak the equations so they better reflect lived reality, and turn them into heat-stress maps and models that are freely available. The goal isn't just academic papers—it's helping public health teams, local planners, and everyday people get ahead of the next dangerous heat wave.
-            </p>
-
-            <p>
-                When I close the laptop, I'm usually on the move—traveling through Latin America, searching out hidden bookstores, food stalls, and conversations that remind me why this work matters. This site is where all of it comes together: climate insights, open-source projects, and the occasional travel story.
-            </p>
-
-            <p>
-                If you believe climate research should serve people before profit, or if you just want to trade hostel tips and spice-level war stories, you're in the right place.
-            </p>
-        </div>
-
-        <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; font-size: 1.8rem; color: #1a1a1a;">Research Threads</h3>
-
-        <div class="research-threads">
-            <div class="thread-card">
-                <h4>Systematic Review: Heat Stress in Latin America</h4>
+        <div class="climacoder-container">
+            <!-- LEFT: Overview/Mission -->
+            <div class="content-card">
+                <h3 style="margin-top: 0; margin-bottom: 1.5rem; font-size: 1.5rem; color: #1a1a1a;">Overview</h3>
                 <p>
-                    A comprehensive systematic review synthesizing heat stress research across Latin America.
-                    This project examines heat vulnerability, health impacts, and adaptation strategies in
-                    Central and South American communities. The goal is to identify critical knowledge gaps
-                    and inform future research priorities for climate adaptation in the region.
+                    The places most affected by climate change are also the ones least studied. Too often, research only follows the money, and the Global South gets left behind. I don't want to wait for someone else to decide our struggles are "lucrative" enough to care about—so I'm working to build open, high-quality tools that Latin American communities can actually use to prepare for extreme heat.
                 </p>
-                <span class="status">In Progress</span>
             </div>
 
-            <div class="thread-card">
-                <h4>Historical Heat Stress Modeling</h4>
-                <p>
-                    Developing historical heat stress assessments for each Latin American country using ERA5
-                    climate reanalysis data and the Extended Heat Index framework. These country-specific
-                    dashboards provide interactive visualizations of heat stress patterns, occupational risk
-                    zones, and temporal trends to help communities understand their current heat exposure.
-                </p>
-                <a href="/climacoder/countries/belize.html" class="thread-link">View Belize Dashboard</a>
-            </div>
+            <!-- RIGHT: Research Threads -->
+            <div>
+                <h3 style="margin-top: 0; margin-bottom: 1.5rem; font-size: 1.5rem; color: #1a1a1a;">Research Threads</h3>
+                <div class="research-threads">
+                    <div class="thread-card">
+                        <h4>Systematic Review: Heat Stress in Latin America</h4>
+                        <p>
+                            A comprehensive systematic review synthesizing heat stress research across Latin America.
+                            This project examines heat vulnerability, health impacts, and adaptation strategies in
+                            Central and South American communities. The goal is to identify critical knowledge gaps
+                            and inform future research priorities for climate adaptation in the region.
+                        </p>
+                        <span class="status">In Progress</span>
+                    </div>
 
-            <div class="thread-card">
-                <h4>Future Heat Stress Projections (Machine Learning)</h4>
-                <p>
-                    Using machine learning approaches to project future heat stress scenarios under climate
-                    change for Latin American countries. This work combines CMIP6 climate model outputs with
-                    the Extended Heat Index to forecast when and where extreme heat will exceed human
-                    physiological limits, informing long-term adaptation planning.
-                </p>
-                <span class="status">Early Development</span>
+                    <div class="thread-card">
+                        <h4>Historical Heat Stress Modeling</h4>
+                        <p>
+                            Developing historical heat stress assessments for each Latin American country using ERA5
+                            climate reanalysis data and the Extended Heat Index framework. These country-specific
+                            dashboards provide interactive visualizations of heat stress patterns, occupational risk
+                            zones, and temporal trends to help communities understand their current heat exposure.
+                        </p>
+                        <a href="/climacoder/countries/belize.html" class="thread-link">View Belize Dashboard</a>
+                    </div>
+
+                    <div class="thread-card">
+                        <h4>Future Heat Stress Projections (Machine Learning)</h4>
+                        <p>
+                            Using machine learning approaches to project future heat stress scenarios under climate
+                            change for Latin American countries. This work combines CMIP6 climate model outputs with
+                            the Extended Heat Index to forecast when and where extreme heat will exceed human
+                            physiological limits, informing long-term adaptation planning.
+                        </p>
+                        <span class="status">Early Development</span>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

@@ -208,11 +208,27 @@
             color: #444;
         }
         
-        .favorites-section {
+        .personal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .personal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .favorites-section, .personal-card {
             background: white;
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .favorites-section {
             margin-bottom: 2rem;
         }
         
@@ -407,28 +423,40 @@
             </p>
         </div>
 
-        <div class="favorites-section">
-            <h3>Currently</h3>
-            <p>
-                <strong>Reading:</strong> <em>La era del conspiracionismo: Trump, el culto a la mentira y el asalto al Capitolio</em> by Ignacio Ramonet
-            </p>
-            <p>
-                <strong>Learning:</strong> Transitioning to hydroponics and exploring sustainable urban gardening techniques
-            </p>
+        <div class="personal-grid">
+            <div class="personal-card">
+                <h3 style="font-size: 1.3rem; color: #0066cc; margin-bottom: 0.8rem; font-weight: 600;">Currently Reading</h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: #555; margin: 0;">
+                    <em>La era del conspiracionismo: Trump, el culto a la mentira y el asalto al Capitolio</em> by Ignacio Ramonet
+                </p>
+            </div>
 
-            <h3>Travel</h3>
-            <p>
-                I've been fortunate to explore diverse landscapes and cultures across South America, Central America,
-                and Europe. These experiences have deepened my understanding of how climate and environment shape
-                communities differently across the world, informing both my research perspective and my commitment
-                to creating accessible, culturally-relevant climate tools.
-            </p>
+            <div class="personal-card">
+                <h3 style="font-size: 1.3rem; color: #0066cc; margin-bottom: 0.8rem; font-weight: 600;">Currently Learning</h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: #555; margin: 0;">
+                    Transitioning to hydroponics and exploring sustainable urban gardening techniques
+                </p>
+            </div>
+        </div>
 
-            <h3>Little Joys</h3>
-            <p>
-                Strong coffee, street markets, public libraries, walks in local parks, discovering new podcasts,
-                and the satisfaction of watching plants grow from seed to harvest.
-            </p>
+        <div class="personal-grid">
+            <div class="personal-card">
+                <h3 style="font-size: 1.3rem; color: #0066cc; margin-bottom: 0.8rem; font-weight: 600;">Travel</h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: #555; margin: 0;">
+                    I've been fortunate to explore diverse landscapes and cultures across South America, Central America,
+                    and Europe. These experiences have deepened my understanding of how climate and environment shape
+                    communities differently across the world, informing both my research perspective and my commitment
+                    to creating accessible, culturally-relevant climate tools.
+                </p>
+            </div>
+
+            <div class="personal-card">
+                <h3 style="font-size: 1.3rem; color: #0066cc; margin-bottom: 0.8rem; font-weight: 600;">Little Joys</h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: #555; margin: 0;">
+                    Strong coffee, street markets, public libraries, walks in local parks, discovering new podcasts,
+                    and the satisfaction of watching plants grow from seed to harvest.
+                </p>
+            </div>
         </div>
 
         <div class="quotes-section">

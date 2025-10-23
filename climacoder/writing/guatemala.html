@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team | ClimaCoder</title>
+    <title>Guatemala - Heat Stress Analysis | ELİF KILIÇ</title>
     <style>
         * {
             margin: 0;
@@ -52,7 +52,6 @@
             margin-right: auto;
         }
 
-        /* Dropdown styles */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -176,114 +175,81 @@
             color: #0066cc;
         }
 
+        .breadcrumb {
+            max-width: 1000px;
+            margin: 2rem auto 0;
+            padding: 0 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
         main {
             max-width: 1000px;
-            margin: 4rem auto;
-            padding: 2rem;
+            margin: 2rem auto 4rem;
+            padding: 0 2rem;
         }
 
-        h1 {
+        .article-header {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .article-header h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
             color: #1a1a1a;
-            text-align: center;
-        }
-
-        .intro {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
-            margin-bottom: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-
-        .team-grid {
-            display: grid;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .team-member {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        .member-photo {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .member-photo-placeholder {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: 700;
-        }
-
-        .member-info h2 {
-            font-size: 2rem;
-            color: #0066cc;
             margin-bottom: 0.5rem;
         }
 
-        .member-title {
-            font-size: 1.1rem;
+        .article-header .subtitle {
+            font-size: 1.2rem;
             color: #666;
-            font-weight: 600;
+            font-weight: 400;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .article-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
             margin-bottom: 1.5rem;
         }
 
-        .member-bio {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #555;
+        .article-content p:last-child {
+            margin-bottom: 0;
         }
 
-        .member-bio p {
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .team-member {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .photo-gallery {
-            background: white;
-            padding: 2.5rem;
+        .footer-note {
+            background: #f8f9fa;
+            padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            margin-top: 3rem;
-            text-align: center;
+            border-left: 4px solid #0066cc;
+            margin-bottom: 2rem;
         }
 
-        .photo-gallery h3 {
-            font-size: 1.5rem;
-            color: #0066cc;
-            margin-bottom: 1rem;
-        }
-
-        .gallery-note {
-            color: #666;
-            font-style: italic;
+        .footer-note p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
+            margin: 0;
         }
 
         footer {
@@ -398,69 +364,37 @@
                 </div>
             </div>
 
-            <!-- Tender Resilience -->
             <a href="/tender-resilience.html">Tender Resilience</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Team</h1>
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/climacoder.html">ClimaCoder</a> / <a href="/climacoder/writing.html">Writing</a> / Guatemala
+    </div>
 
-        <div class="intro">
+    <main>
+        <div class="article-header">
+            <h1>Guatemala</h1>
+            <p class="subtitle">Heat Stress Analysis</p>
+        </div>
+
+        <div class="article-content">
             <p>
-                ClimaCoder is an independent research collaboration focused on heat stress and climate
-                vulnerability in Latin America. We work outside traditional academic institutions to create
-                open-access climate tools and analysis for regions that are often overlooked in climate research.
+                Guatemala is one of the Central American countries with the highest risk of
+                heat-related impacts. Heat waves and drought have
+                contributed to a 622% increase in dengue cases between early 2023 and
+                early 2024. The extreme heat hazard is classified as
+                high, and vulnerability is amplified by rapid
+                urbanisation, limited infrastructure and high poverty.
+                Protecting children, older adults and outdoor workers is therefore a
+                national priority.
             </p>
         </div>
 
-        <div class="team-grid">
-            <div class="team-member">
-                <div>
-                    <div class="member-photo-placeholder">EK</div>
-                    <!-- Replace with: <img src="/assets/images/elif.jpg" alt="Elif Kiliç" class="member-photo"> -->
-                </div>
-                <div class="member-info">
-                    <h2>Elif Kiliç</h2>
-                    <div class="member-title">Environmental Engineer & Climate Scientist</div>
-                    <div class="member-bio">
-                        <p>
-                            I'm an environmental engineer working on climate change in the places that need it most—and get studied least. The research world tends to follow the money, leaving the Global South behind. I'm not waiting for someone to decide these communities are "lucrative" enough to matter, so I'm building open tools they can actually use to prepare for extreme heat.
-                        </p>
-                        <p>
-                            My work blends environmental engineering, climate science, and data analysis. I work with massive climate datasets like ERA5 and CMIP6, refining the models to better reflect reality on the ground, then turn them into heat-stress maps and projections that are freely available. The goal isn't just papers—it's giving public health teams, local planners, and communities what they need to get ahead of the next heat wave.
-                        </p>
-                        <p>
-                            When I'm not at my desk, I'm usually traveling through Latin America—finding bookstores, food stalls, and the conversations that remind me why this work matters.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-member">
-                <div class="member-info">
-                    <h2>Jonathan</h2>
-                    <div class="member-title">Mathematician & Software Engineer</div>
-                    <div class="member-bio">
-                        <p>
-                            Jonathan is a mathematician-turned-software-and-data-engineer who keeps ClimaCoder's systems running smoothly. He builds and maintains the data pipelines that power our heat stress models, finding clarity in messy datasets and turning complex climate data into usable tools. His work makes it possible to share knowledge openly and support the communities that need it most.
-                        </p>
-                        <p>
-                            When he's not debugging code, he's usually in the kitchen perfecting his salsa recipes—lately experimenting with the serranos and jalapeños I grow in the garden. He believes technology should serve people, not profit, and brings that same care to everything he builds.
-                        </p>
-                    </div>
-                </div>
-                <div>
-                    <div class="member-photo-placeholder">J</div>
-                    <!-- Replace with: <img src="/assets/images/jonathan.jpg" alt="Jonathan" class="member-photo"> -->
-                </div>
-            </div>
-        </div>
-
-        <div class="photo-gallery">
-            <h3>Gallery</h3>
-            <p class="gallery-note">Photos coming soon</p>
-            <!-- Space for additional photos -->
+        <div class="footer-note">
+            <p>
+                More analyses and insights coming soon. This is part of our ongoing systematic review of heat stress across Latin America.
+            </p>
         </div>
     </main>
 
