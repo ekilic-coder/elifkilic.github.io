@@ -215,6 +215,7 @@
 
         .publication-list {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
@@ -230,17 +231,6 @@
         .publication-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
-        .pub-number {
-            display: inline-block;
-            background: #0066cc;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 0.8rem;
         }
 
         .publication-card h3 {
@@ -439,7 +429,6 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <div class="pub-number">[A.1]</div>
                 <h3>Get the heat index right</h3>
                 <div class="publication-meta">
                     <strong>Gadgil, A., Kilic, E.</strong> (2024, June). Down To Earth.
@@ -452,7 +441,6 @@
             </div>
 
             <div class="publication-card">
-                <div class="pub-number">[A.2]</div>
                 <h3>Primer on heat stress</h3>
                 <div class="publication-meta">
                     <strong>Kilic, E., Gadgil, A.</strong> (2024, July). Berkeley Institute of Governmental Studies.
@@ -469,7 +457,6 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <div class="pub-number">[C.1]</div>
                 <h3>Passive cooling strategies in India</h3>
                 <div class="publication-meta">
                     <strong>Wu, Y., Malik, J., Kilic, E., et al.</strong> (2024, Sept.). In ASim2024 Proceedings, Osaka, Japan.
@@ -486,7 +473,6 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <div class="pub-number">[T.1]</div>
                 <h3>Modifications to the Extended Heat Index to Account for Outdoor Workers in Humid Heat</h3>
                 <div class="publication-meta">
                     <strong>Kilic, E.</strong> (2025, May). Master's thesis, University of California, Berkeley.
@@ -503,7 +489,6 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <div class="pub-number">[P.1]</div>
                 <h3>HEAT RADAR – Seeing future heat extremes at any location</h3>
                 <div class="publication-meta">
                     <strong>Gadgil, A., Kilic, E.</strong> (2025, July). U.S. Provisional Patent Application No. 63/123,456. Filed July 21, 2025.
@@ -521,7 +506,6 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <div class="pub-number">[S.1]</div>
                 <h3>Evaluating indoor thermal resilience of passive and low-power cooling shelters for outdoor workers in India</h3>
                 <div class="publication-meta">
                     <strong>Wu, Y., Malik, J., Hong, T., Kilic, E., et al.</strong> (2025, Aug.). Manuscript under review at Building Simulation.
@@ -538,7 +522,6 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <div class="pub-number">[W.1]</div>
                 <h3>Integrating behavioral and physiological vulnerability into the Extended Heat Index: A case study for Indian laborers</h3>
                 <div class="publication-meta">
                     <strong>Kilic, E., et al.</strong> (in preparation). Target journal: Environmental Research Letters.
