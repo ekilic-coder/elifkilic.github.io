@@ -266,6 +266,26 @@
             }
         }
 
+        .photo-gallery {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .photo-gallery h3 {
+            font-size: 1.5rem;
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-note {
+            color: #666;
+            font-style: italic;
+        }
+
         footer {
             background: white;
             margin-top: 4rem;
@@ -273,6 +293,52 @@
             text-align: center;
             border-top: 1px solid #e0e0e0;
             color: #666;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+
+        .footer-links .linkedin-icon {
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links .linkedin-icon:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .footer-links .linkedin-icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-separator {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -304,7 +370,7 @@
                 <div class="dropdown-content">
                     <a href="/climacoder/team.html">Team</a>
                     <div class="dropdown-submenu">
-                        <a href="#">Research ▸</a>
+                        <a href="#">Research</a>
                         <div class="dropdown-submenu-content">
                             <a href="/climacoder/countries/belize.html">Belize</a>
                             <a href="/climacoder/countries/guatemala.html">Guatemala</a>
@@ -316,9 +382,24 @@
                             <a href="/climacoder/countries/mexico.html">Mexico</a>
                         </div>
                     </div>
-                    <a href="/climacoder/writing.html">Writing</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Writing</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/writing.html#belize">Belize</a>
+                            <a href="/climacoder/writing.html#guatemala">Guatemala</a>
+                            <a href="/climacoder/writing.html#honduras">Honduras</a>
+                            <a href="/climacoder/writing.html#el-salvador">El Salvador</a>
+                            <a href="/climacoder/writing.html#nicaragua">Nicaragua</a>
+                            <a href="/climacoder/writing.html#costa-rica">Costa Rica</a>
+                            <a href="/climacoder/writing.html#panama">Panama</a>
+                            <a href="/climacoder/writing.html#mexico">Mexico</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Tender Resilience -->
+            <a href="/tender-resilience.html">Tender Resilience</a>
         </nav>
     </header>
 
@@ -335,6 +416,25 @@
 
         <div class="team-grid">
             <div class="team-member">
+                <div class="member-info">
+                    <h2>Jonathan</h2>
+                    <div class="member-title">Mathematician & Software Engineer</div>
+                    <div class="member-bio">
+                        <p>
+                            Jonathan is a mathematician-turned-software-and-data-engineer who keeps ClimaCoder's systems running smoothly. He builds and maintains the data pipelines that power our heat stress models, finding clarity in messy datasets and turning complex climate data into usable tools. His work makes it possible to share knowledge openly and support the communities that need it most.
+                        </p>
+                        <p>
+                            When he's not debugging code, he's usually in the kitchen perfecting his salsa recipes—lately experimenting with the serranos and jalapeños I grow in the garden. He believes technology should serve people, not profit, and brings that same care to everything he builds.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="member-photo-placeholder">J</div>
+                    <!-- Replace with: <img src="/assets/images/jonathan.jpg" alt="Jonathan" class="member-photo"> -->
+                </div>
+            </div>
+
+            <div class="team-member">
                 <div>
                     <div class="member-photo-placeholder">EK</div>
                     <!-- Replace with: <img src="/assets/images/elif.jpg" alt="Elif Kiliç" class="member-photo"> -->
@@ -344,60 +444,37 @@
                     <div class="member-title">Environmental Engineer & Climate Scientist</div>
                     <div class="member-bio">
                         <p>
-                            I'm an environmental engineer and climate scientist focused on understanding and modeling
-                            extreme heat stress. My work involves pulling apart large climate datasets (ERA5, CMIP6),
-                            adapting physiological heat stress models to better reflect real-world conditions, and
-                            creating tools that communities can actually use to prepare for dangerous heat.
+                            I'm an environmental engineer working on climate change in the places that need it most—and get studied least. The research world tends to follow the money, leaving the Global South behind. I'm not waiting for someone to decide these communities are "lucrative" enough to matter, so I'm building open tools they can actually use to prepare for extreme heat.
                         </p>
                         <p>
-                            Most climate research follows funding priorities, which often means the Global South gets
-                            left behind. Through ClimaCoder, I'm building open-access heat stress maps and models for
-                            Latin America because communities shouldn't have to wait for someone else to decide their
-                            risks are worth studying.
+                            My work blends environmental engineering, climate science, and data analysis. I work with massive climate datasets like ERA5 and CMIP6, refining the models to better reflect reality on the ground, then turn them into heat-stress maps and projections that are freely available. The goal isn't just papers—it's giving public health teams, local planners, and communities what they need to get ahead of the next heat wave.
                         </p>
                         <p>
-                            My background is in environmental engineering and linguistics, and I hold a Master's degree
-                            from UC Berkeley where I developed the Extended Heat Index (EHI-350) for assessing
-                            occupational heat stress. When I'm not working with climate data, I'm usually traveling
-                            through Latin America or tending to my hydroponic garden.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-member">
-                <div>
-                    <div class="member-photo-placeholder">J</div>
-                    <!-- Replace with: <img src="/assets/images/jonathan.jpg" alt="Jonathan" class="member-photo"> -->
-                </div>
-                <div class="member-info">
-                    <h2>Jonathan</h2>
-                    <div class="member-title">Mathematician & Software Engineer</div>
-                    <div class="member-bio">
-                        <p>
-                            I'm a mathematician and software engineer who builds data pipelines and infrastructure.
-                            My background in mathematics taught me to find patterns and solve problems systematically,
-                            and software engineering gave me the tools to turn those solutions into working systems.
-                        </p>
-                        <p>
-                            For ClimaCoder, I focus on the technical infrastructure: building and maintaining data
-                            pipelines, creating web-based visualization tools, and making sure our climate analysis
-                            is reproducible and accessible. Good data infrastructure isn't just about efficiency—it's
-                            about making research transparent and enabling others to build on our work.
-                        </p>
-                        <p>
-                            Outside of technical work, I spend time cooking and experimenting with recipes, often
-                            using the peppers Elif grows. I believe technology should make knowledge more accessible
-                            and help people work together more effectively.
+                            When I'm not at my desk, I'm usually traveling through Latin America—finding bookstores, food stalls, and the conversations that remind me why this work matters.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="photo-gallery">
+            <h3>Gallery</h3>
+            <p class="gallery-note">Photos coming soon</p>
+            <!-- Space for additional photos -->
+        </div>
     </main>
 
     <footer>
-        <p>&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a>
+            <span class="footer-separator">|</span>
+            <a href="mailto:climacoder@gmail.com">climacoder@gmail.com</a>
+            <span class="footer-separator">|</span>
+            <a href="https://www.linkedin.com/in/elifakilic/" target="_blank" class="linkedin-icon" aria-label="LinkedIn Profile">
+                <img src="/assets/images/linkedin-icon.svg" alt="LinkedIn" />
+            </a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
     </footer>
 
     <script>

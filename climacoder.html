@@ -333,6 +333,52 @@
             border-top: 1px solid #e0e0e0;
             color: #666;
         }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+
+        .footer-links .linkedin-icon {
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links .linkedin-icon:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .footer-links .linkedin-icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-separator {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -364,9 +410,9 @@
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
-                    <a href="/climacoder.html#team">Team</a>
+                    <a href="/climacoder/team.html">Team</a>
                     <div class="dropdown-submenu">
-                        <a href="#">Research ▸</a>
+                        <a href="#">Research</a>
                         <div class="dropdown-submenu-content">
                             <a href="/climacoder/countries/belize.html">Belize</a>
                             <a href="/climacoder/countries/guatemala.html">Guatemala</a>
@@ -378,9 +424,24 @@
                             <a href="/climacoder/countries/mexico.html">Mexico</a>
                         </div>
                     </div>
-                    <a href="/climacoder/writing.html">Writing</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Writing</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/writing.html#belize">Belize</a>
+                            <a href="/climacoder/writing.html#guatemala">Guatemala</a>
+                            <a href="/climacoder/writing.html#honduras">Honduras</a>
+                            <a href="/climacoder/writing.html#el-salvador">El Salvador</a>
+                            <a href="/climacoder/writing.html#nicaragua">Nicaragua</a>
+                            <a href="/climacoder/writing.html#costa-rica">Costa Rica</a>
+                            <a href="/climacoder/writing.html#panama">Panama</a>
+                            <a href="/climacoder/writing.html#mexico">Mexico</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Tender Resilience -->
+            <a href="/tender-resilience.html">Tender Resilience</a>
         </nav>
     </header>
 
@@ -393,21 +454,19 @@
 
         <div class="content-card">
             <p>
-                <strong>ClimaCoder</strong> is an independent research collaboration focused on heat stress
-                and climate vulnerability in Latin America. We work outside traditional academic institutions
-                to create open-access climate tools and analysis for regions that are often overlooked in
-                climate research.
+                The places most affected by climate change are also the ones least studied. Too often, research only follows the money, and the Global South gets left behind. I don't want to wait for someone else to decide our struggles are "lucrative" enough to care about—so I'm working to build open, high-quality tools that Latin American communities can actually use to prepare for extreme heat.
             </p>
 
             <p>
-                Latin American communities face some of the most severe heat stress risks globally, yet they're
-                frequently excluded from climate research priorities. We're working to change that by developing
-                publicly available heat stress models, historical climate analysis, and actionable data for
-                communities, public health officials, and local planners.
+                My work blends environmental engineering, climate science, and data analysis. I pull apart massive climate datasets (think ERA5 and CMIP6), tweak the equations so they better reflect lived reality, and turn them into heat-stress maps and models that are freely available. The goal isn't just academic papers—it's helping public health teams, local planners, and everyday people get ahead of the next dangerous heat wave.
             </p>
 
             <p>
-                Visit the main ClimaCoder site: <a href="https://climacoder.com" target="_blank">climacoder.com</a>
+                When I close the laptop, I'm usually on the move—traveling through Latin America, searching out hidden bookstores, food stalls, and conversations that remind me why this work matters. This site is where all of it comes together: climate insights, open-source projects, and the occasional travel story.
+            </p>
+
+            <p>
+                If you believe climate research should serve people before profit, or if you just want to trade hostel tips and spice-level war stories, you're in the right place.
             </p>
         </div>
 
@@ -450,7 +509,16 @@
     </main>
 
     <footer>
-        <p>&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a>
+            <span class="footer-separator">|</span>
+            <a href="mailto:climacoder@gmail.com">climacoder@gmail.com</a>
+            <span class="footer-separator">|</span>
+            <a href="https://www.linkedin.com/in/elifakilic/" target="_blank" class="linkedin-icon" aria-label="LinkedIn Profile">
+                <img src="/assets/images/linkedin-icon.svg" alt="LinkedIn" />
+            </a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
     </footer>
 
     <script>

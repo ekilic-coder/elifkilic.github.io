@@ -181,100 +181,74 @@
         }
         
         main {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 4rem auto;
             padding: 2rem;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .profile-section {
             background: white;
+            padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 100px;
         }
-        
-        .profile-section {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
+
         .profile-img {
             width: 180px;
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem auto;
             border: 4px solid #f0f0f0;
+            display: block;
         }
-        
+
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
             color: #1a1a1a;
+            text-align: center;
         }
-        
+
         .title {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-        
+
         .bio {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.7;
             color: #444;
-            margin-bottom: 2rem;
             text-align: left;
         }
-        
-        .cv-link {
-            display: inline-block;
-            background: #0066cc;
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s;
-            margin: 1rem 0 2rem 0;
-        }
-        
-        .cv-link:hover {
-            background: #0052a3;
-        }
-        
-        .contact-section {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid #f0f0f0;
-        }
-        
-        h2 {
-            font-size: 1.5rem;
+
+        .bio p {
             margin-bottom: 1rem;
-            color: #1a1a1a;
         }
-        
-        .contact-info {
-            font-size: 1.1rem;
-        }
-        
-        .contact-info a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        
-        .contact-info a:hover {
-            text-decoration: underline;
+
+        .bio p:last-child {
+            margin-bottom: 0;
         }
 
         .research-snapshot {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 2rem;
+            background: transparent;
         }
 
         .research-snapshot h2 {
             font-size: 2rem;
             margin-bottom: 2rem;
             color: #1a1a1a;
-            text-align: center;
         }
 
         .research-card {
@@ -325,6 +299,72 @@
         .research-link:hover {
             background: #0052a3;
         }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-section {
+                position: static;
+            }
+        }
+
+        footer {
+            background: white;
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+
+        .footer-links .linkedin-icon {
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links .linkedin-icon:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .footer-links .linkedin-icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-separator {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -356,9 +396,9 @@
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
-                    <a href="/climacoder.html#team">Team</a>
+                    <a href="/climacoder/team.html">Team</a>
                     <div class="dropdown-submenu">
-                        <a href="#">Research ▸</a>
+                        <a href="#">Research</a>
                         <div class="dropdown-submenu-content">
                             <a href="/climacoder/countries/belize.html">Belize</a>
                             <a href="/climacoder/countries/guatemala.html">Guatemala</a>
@@ -370,48 +410,77 @@
                             <a href="/climacoder/countries/mexico.html">Mexico</a>
                         </div>
                     </div>
-                    <a href="/climacoder/writing.html">Writing</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Writing</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/writing.html#belize">Belize</a>
+                            <a href="/climacoder/writing.html#guatemala">Guatemala</a>
+                            <a href="/climacoder/writing.html#honduras">Honduras</a>
+                            <a href="/climacoder/writing.html#el-salvador">El Salvador</a>
+                            <a href="/climacoder/writing.html#nicaragua">Nicaragua</a>
+                            <a href="/climacoder/writing.html#costa-rica">Costa Rica</a>
+                            <a href="/climacoder/writing.html#panama">Panama</a>
+                            <a href="/climacoder/writing.html#mexico">Mexico</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Tender Resilience -->
+            <a href="/tender-resilience.html">Tender Resilience</a>
         </nav>
     </header>
 
     <main>
-        <div class="profile-section">
-            <img src="assets/images/profile.jpeg" alt="ELİF KILIÇ" class="profile-img">
+        <div class="main-container">
+            <div class="profile-section">
+                <img src="assets/images/profile.jpeg" alt="ELİF KILIÇ" class="profile-img">
 
-            <h1>ELİF KILIÇ</h1>
-            <p class="title">Research Scientist</p>
+                <h1>ELİF KILIÇ</h1>
+                <p class="title">Research Scientist</p>
 
-            <div class="bio">
-                <p>I am a Research Scientist at the India Energy & Climate Center (IECC) at the University of California, Berkeley. I hold a Master's degree in Environmental Engineering from UC Berkeley, where I developed the Extended Heat Index (EHI-350) metric to better measure extreme heat stress impacts on human health and labor productivity.</p>
+                <div class="bio">
+                    <p>I am a Research Scientist at the India Energy & Climate Center (IECC) at the University of California, Berkeley. I hold a Master's degree in Environmental Engineering from UC Berkeley, where I developed the Extended Heat Index (EHI-350) metric to better measure extreme heat stress impacts on human health and labor productivity.</p>
 
-                <p>My current work focuses on understanding and addressing extreme heat vulnerability across diverse communities and geographies.</p>
-            </div>
-        </div>
-
-        <div class="research-snapshot">
-            <h2>Current Research</h2>
-
-            <div class="research-card">
-                <h3>Extended Heat Index for India</h3>
-                <p class="research-org">India Energy & Climate Center (IECC), UC Berkeley</p>
-                <p>Developing and applying the Extended Heat Index (EHI-350) framework to assess occupational heat stress risks across Indian districts. This work combines physiological heat stress modeling with climate data to provide actionable guidance for policymakers and public health officials on protecting workers and vulnerable populations from extreme heat.</p>
-                <a href="/research/heatindex.html" class="research-link">Learn More</a>
+                    <p>My current work focuses on understanding and addressing extreme heat vulnerability across diverse communities and geographies.</p>
+                </div>
             </div>
 
-            <div class="research-card">
-                <h3>Systematic Review: Heat Stress in Latin America</h3>
-                <p class="research-org">ClimaCoder</p>
-                <p>Conducting a comprehensive systematic review of heat stress research and interventions across Latin America. This collaborative project synthesizes existing evidence on heat vulnerability, health impacts, and adaptation strategies in Central American and Latin American communities to identify knowledge gaps and inform future research priorities.</p>
-                <a href="/climacoder.html" class="research-link">Learn More</a>
-            </div>
-        </div>
+            <div class="research-snapshot">
+                <h2>Current Research</h2>
 
-        <div class="contact-section">
-            <h2>Contact</h2>
-            <p class="contact-info">Email: <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a></p>
+                <div class="research-card">
+                    <h3>Extended Heat Index for India</h3>
+                    <p class="research-org">India Energy & Climate Center (IECC), UC Berkeley</p>
+                    <p>Developing and applying the Extended Heat Index (EHI-350) framework to assess occupational heat stress risks across Indian districts. This work combines physiological heat stress modeling with climate data to provide actionable guidance for policymakers and public health officials on protecting workers and vulnerable populations from extreme heat.</p>
+                    <a href="/research/heatindex.html" class="research-link">Learn More</a>
+                </div>
+
+                <div class="research-card">
+                    <h3>Systematic Review: Heat Stress in Latin America</h3>
+                    <p class="research-org">ClimaCoder</p>
+                    <p>Conducting a comprehensive systematic review of heat stress research and interventions across Latin America. This collaborative project synthesizes existing evidence on heat vulnerability, health impacts, and adaptation strategies in Central American and Latin American communities to identify knowledge gaps and inform future research priorities.</p>
+                    <a href="/climacoder.html" class="research-link">Learn More</a>
+                </div>
+            </div>
         </div>
     </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a>
+            <span class="footer-separator">|</span>
+            <a href="mailto:climacoder@gmail.com">climacoder@gmail.com</a>
+            <span class="footer-separator">|</span>
+            <a href="https://www.linkedin.com/in/elifakilic/" target="_blank" class="linkedin-icon" aria-label="LinkedIn Profile">
+                <img src="/assets/images/linkedin-icon.svg" alt="LinkedIn" />
+            </a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
