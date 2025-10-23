@@ -263,6 +263,68 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
+
+        .research-snapshot {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .research-snapshot h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .research-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .research-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .research-card h3 {
+            font-size: 1.5rem;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .research-org {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .research-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-link {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .research-link:hover {
+            background: #0052a3;
+        }
     </style>
 </head>
 <body>
@@ -317,19 +379,35 @@
     <main>
         <div class="profile-section">
             <img src="assets/images/profile.jpeg" alt="ELİF KILIÇ" class="profile-img">
-            
+
             <h1>ELİF KILIÇ</h1>
             <p class="title">Research Scientist</p>
-            
+
             <div class="bio">
                 <p>I am a Research Scientist at the India Energy & Climate Center (IECC) at the University of California, Berkeley. I hold a Master's degree in Environmental Engineering from UC Berkeley, where I developed the Extended Heat Index (EHI-350) metric to better measure extreme heat stress impacts on human health and labor productivity.</p>
-                
-                <p>My research focuses on heat vulnerability in Central America and Mexico, combining climate science, data analysis, and interactive tools to help communities and policymakers understand and respond to extreme heat risks. Through the ClimaCoder collaboration, I create accessible resources that translate complex climate data into actionable insights.</p>
+
+                <p>My current work focuses on understanding and addressing extreme heat vulnerability across diverse communities and geographies.</p>
             </div>
-            
-            <a href="assets/cv.pdf" class="cv-link">Download my CV</a>
         </div>
-        
+
+        <div class="research-snapshot">
+            <h2>Current Research</h2>
+
+            <div class="research-card">
+                <h3>Extended Heat Index for India</h3>
+                <p class="research-org">India Energy & Climate Center (IECC), UC Berkeley</p>
+                <p>Developing and applying the Extended Heat Index (EHI-350) framework to assess occupational heat stress risks across Indian districts. This work combines physiological heat stress modeling with climate data to provide actionable guidance for policymakers and public health officials on protecting workers and vulnerable populations from extreme heat.</p>
+                <a href="/research/heatindex.html" class="research-link">Learn More</a>
+            </div>
+
+            <div class="research-card">
+                <h3>Systematic Review: Heat Stress in Latin America</h3>
+                <p class="research-org">ClimaCoder</p>
+                <p>Conducting a comprehensive systematic review of heat stress research and interventions across Latin America. This collaborative project synthesizes existing evidence on heat vulnerability, health impacts, and adaptation strategies in Central American and Latin American communities to identify knowledge gaps and inform future research priorities.</p>
+                <a href="/climacoder.html" class="research-link">Learn More</a>
+            </div>
+        </div>
+
         <div class="contact-section">
             <h2>Contact</h2>
             <p class="contact-info">Email: <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a></p>
