@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mexico Heat Vulnerability Dashboard | ELİF KILIÇ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #0066cc;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: auto;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown > a::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+        
+        .dropdown:hover > a {
+            color: #0066cc;
+        }
+        
+        .dropdown:hover > a::after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            margin-top: 0.25rem;
+            padding: 0.5rem 0;
+            z-index: 1000;
+        }
+
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.25rem;
+            z-index: 999;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu > a::after {
+            content: ' ▸';
+            float: right;
+        }
+
+        .dropdown-submenu-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+        }
+
+        .dropdown-submenu:hover .dropdown-submenu-content {
+            display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        .dropdown-submenu-content a {
+            color: #333;
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-submenu-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
+        }
+        
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 0 2rem;
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto 4rem;
+            padding: 2rem;
+        }
+        
+        .country-header {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+            padding: 3rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+        }
+        
+        .country-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .country-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .coming-soon {
+            background: white;
+            padding: 4rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .coming-soon h2 {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-bottom: 1.5rem;
+        }
+        
+        .coming-soon p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .coming-soon .status-note {
+            background: #fff3e0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid #f57c00;
+        }
+
+        .coming-soon .status-note p {
+            margin: 0;
+            font-weight: 600;
+            color: #e65100;
+        }
+        
+        footer {
+            background: white;
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">ELİF KILIÇ</a>
+
+            <div class="dropdown">
+                <a href="/bio.html">Bio</a>
+                <div class="dropdown-content">
+                    <a href="/bio.html">About Me</a>
+                    <a href="/bio/projects.html">Projects</a>
+                    <a href="/bio/teaching.html">Teaching</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="/research.html">Research</a>
+                <div class="dropdown-content">
+                    <a href="/research/heatindex.html">Extended Heat Index</a>
+                    <a href="/research.html#future-heat-stress">Future Heat Stress</a>
+                    <a href="/research/publications.html">Publications / Presentations</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="/climacoder.html">ClimaCoder</a>
+                <div class="dropdown-content">
+                    <a href="/climacoder/team.html">Team</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Research ▸</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/countries/belize.html">Belize</a>
+                            <a href="/climacoder/countries/guatemala.html">Guatemala</a>
+                            <a href="/climacoder/countries/honduras.html">Honduras</a>
+                            <a href="/climacoder/countries/el-salvador.html">El Salvador</a>
+                            <a href="/climacoder/countries/nicaragua.html">Nicaragua</a>
+                            <a href="/climacoder/countries/costa-rica.html">Costa Rica</a>
+                            <a href="/climacoder/countries/panama.html">Panama</a>
+                            <a href="/climacoder/countries/mexico.html">Mexico</a>
+                        </div>
+                    </div>
+                    <a href="/climacoder/writing.html">Writing</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/climacoder.html">ClimaCoder</a> / <a href="/climacoder/writing.html">Research</a> / Mexico
+    </div>
+
+    <main>
+        <div class="country-header">
+            <h1>Mexico</h1>
+            <p>Heat Vulnerability Dashboard & Data Analysis</p>
+        </div>
+
+        <div class="coming-soon">
+            <h2>Dashboard In Development</h2>
+            <p>
+                The Mexico heat vulnerability dashboard is currently being developed. This page will feature
+                interactive maps showing Extended Heat Index (EHI) values, physiological stress zones, temporal
+                trends, and work intensity comparisons using ERA5 climate reanalysis data.
+            </p>
+            <p>
+                For now, you can read about mexico heat stress and vulnerability on the 
+                <a href="/climacoder/writing.html#mexico" style="color: #0066cc; text-decoration: none; font-weight: 600;">Writing page</a>.
+            </p>
+
+            <div class="status-note">
+                <p>Expected completion: Early 2025</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
