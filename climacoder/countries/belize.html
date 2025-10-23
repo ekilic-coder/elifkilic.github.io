@@ -88,11 +88,21 @@
             min-width: 200px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             border-radius: 8px;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
             padding: 0.5rem 0;
             z-index: 1000;
         }
-        
+
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.25rem;
+            z-index: 999;
+        }
+
         .dropdown-content a {
             color: #333;
             padding: 0.8rem 1.5rem;
@@ -101,14 +111,68 @@
             font-weight: 400;
             transition: background 0.2s;
         }
-        
+
         .dropdown-content a:hover {
             background-color: #f5f5f5;
             color: #0066cc;
         }
-        
+
         .dropdown:hover .dropdown-content {
             display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu > a::after {
+            content: ' ▸';
+            float: right;
+        }
+
+        .dropdown-submenu-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+        }
+
+        .dropdown-submenu:hover .dropdown-submenu-content {
+            display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        .dropdown-submenu-content a {
+            color: #333;
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-submenu-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
         }
         
         .breadcrumb {
@@ -291,32 +355,43 @@
     <header>
         <nav>
             <a href="/" class="logo">ELİF KILIÇ</a>
-            
+
             <div class="dropdown">
                 <a href="/bio.html">Bio</a>
                 <div class="dropdown-content">
                     <a href="/bio.html">About Me</a>
-                    <a href="/bio.html#education">Education</a>
-                    <a href="/bio.html#experience">Experience</a>
-                    <a href="/assets/cv.pdf">Download CV</a>
+                    <a href="/bio/projects.html">Projects</a>
+                    <a href="/bio/teaching.html">Teaching</a>
                 </div>
             </div>
-            
+
             <div class="dropdown">
                 <a href="/research.html">Research</a>
                 <div class="dropdown-content">
-                    <a href="/research/heatindex.html">Heat Index Calculator</a>
-                    <a href="/research.html#ehi350">EHI-350 Measurement</a>
-                    <a href="/research.html#publications">Publications</a>
+                    <a href="/research/heatindex.html">Extended Heat Index</a>
+                    <a href="/research.html#future-heat-stress">Future Heat Stress</a>
+                    <a href="/research/publications.html">Publications / Presentations</a>
                 </div>
             </div>
-            
+
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
+                    <a href="/climacoder/team.html">Team</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Research ▸</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/countries/belize.html">Belize</a>
+                            <a href="/climacoder/countries/guatemala.html">Guatemala</a>
+                            <a href="/climacoder/countries/honduras.html">Honduras</a>
+                            <a href="/climacoder/countries/el-salvador.html">El Salvador</a>
+                            <a href="/climacoder/countries/nicaragua.html">Nicaragua</a>
+                            <a href="/climacoder/countries/costa-rica.html">Costa Rica</a>
+                            <a href="/climacoder/countries/panama.html">Panama</a>
+                            <a href="/climacoder/countries/mexico.html">Mexico</a>
+                        </div>
+                    </div>
                     <a href="/climacoder/writing.html">Writing</a>
-                    <a href="/climacoder.html#overview">Overview</a>
-                    <a href="/climacoder.html#team">Team</a>
                 </div>
             </div>
         </nav>
