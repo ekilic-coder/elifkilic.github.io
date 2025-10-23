@@ -314,6 +314,52 @@
             border-top: 1px solid #e0e0e0;
             color: #666;
         }
+    
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+
+        .footer-links .linkedin-icon {
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links .linkedin-icon:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .footer-links .linkedin-icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-separator {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -345,9 +391,9 @@
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
-                    <a href="/climacoder.html#team">Team</a>
+                    <a href="/climacoder/team.html">Team</a>
                     <div class="dropdown-submenu">
-                        <a href="#">Research ▸</a>
+                        <a href="#">Research</a>
                         <div class="dropdown-submenu-content">
                             <a href="/climacoder/countries/belize.html">Belize</a>
                             <a href="/climacoder/countries/guatemala.html">Guatemala</a>
@@ -359,9 +405,23 @@
                             <a href="/climacoder/countries/mexico.html">Mexico</a>
                         </div>
                     </div>
-                    <a href="/climacoder/writing.html">Writing</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Writing</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/writing.html#belize">Belize</a>
+                            <a href="/climacoder/writing.html#guatemala">Guatemala</a>
+                            <a href="/climacoder/writing.html#honduras">Honduras</a>
+                            <a href="/climacoder/writing.html#el-salvador">El Salvador</a>
+                            <a href="/climacoder/writing.html#nicaragua">Nicaragua</a>
+                            <a href="/climacoder/writing.html#costa-rica">Costa Rica</a>
+                            <a href="/climacoder/writing.html#panama">Panama</a>
+                            <a href="/climacoder/writing.html#mexico">Mexico</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        
+            <a href="/tender-resilience.html">Tender Resilience</a>
         </nav>
     </header>
 
@@ -552,7 +612,16 @@
     </main>
 
     <footer>
-        <p>&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="mailto:elifkilic@berkeley.edu">elifkilic@berkeley.edu</a>
+            <span class="footer-separator">|</span>
+            <a href="mailto:climacoder@gmail.com">climacoder@gmail.com</a>
+            <span class="footer-separator">|</span>
+            <a href="https://www.linkedin.com/in/elifakilic/" target="_blank" class="linkedin-icon" aria-label="LinkedIn Profile">
+                <img src="/assets/images/linkedin-icon.svg" alt="LinkedIn" />
+            </a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
     </footer>
 
     <script>
