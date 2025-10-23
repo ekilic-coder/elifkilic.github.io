@@ -224,6 +224,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
         .publication-card:hover {
@@ -231,9 +232,20 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
 
+        .pub-number {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
         .publication-card h3 {
             font-size: 1.3rem;
-            color: #0066cc;
+            color: #333;
             margin-bottom: 0.8rem;
         }
 
@@ -263,6 +275,35 @@
 
         .publication-link:hover {
             background: #0052a3;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .status-badge.thesis {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-badge.patent {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .status-badge.submission {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-badge.wip {
+            background: #e8f5e9;
+            color: #388e3c;
         }
 
         footer {
@@ -334,40 +375,119 @@
             </p>
         </div>
 
-        <h2 class="section-title">Publications</h2>
+        <h2 class="section-title">Articles & Reports [A]</h2>
 
         <div class="publication-list">
             <div class="publication-card">
-                <h3>Get the heat index right: An important first step to protect people from heatwaves</h3>
+                <div class="pub-number">[A.1]</div>
+                <h3>Get the heat index right</h3>
                 <div class="publication-meta">
-                    Down to Earth, June 2024
+                    <strong>Gadgil, A., Kilic, E.</strong> (2024, June). Down To Earth.
                 </div>
                 <p>
                     Discussion of the importance of accurate heat index measurement for public health
                     protection during extreme heat events.
                 </p>
+                <a href="https://www.downtoearth.org.in/climate-change/get-the-heat-index-right-an-important-first-step-to-protect-people-from-heatwaves" target="_blank" class="publication-link">Read Article</a>
             </div>
 
             <div class="publication-card">
-                <h3>Primer on heat stress: Causes, impacts, and solutions</h3>
+                <div class="pub-number">[A.2]</div>
+                <h3>Primer on heat stress</h3>
                 <div class="publication-meta">
-                    India Energy & Climate Center (IECC), July 2024
+                    <strong>Kilic, E., Gadgil, A.</strong> (2024, July). Berkeley Institute of Governmental Studies.
                 </div>
                 <p>
                     Comprehensive primer covering the science of heat stress, its health and economic
                     impacts, and evidence-based adaptation strategies.
                 </p>
+                <a href="https://iecc.gspp.berkeley.edu/wp-content/uploads/2024/07/IECC-Primer-on-Heat-Stress-Jul24.pdf" target="_blank" class="publication-link">Download PDF</a>
             </div>
+        </div>
 
+        <h2 class="section-title">Conference Proceedings [C]</h2>
+
+        <div class="publication-list">
             <div class="publication-card">
-                <h3>Passive cooling strategies to enhance resilience design of a cooling shelter in India</h3>
+                <div class="pub-number">[C.1]</div>
+                <h3>Passive cooling strategies in India</h3>
                 <div class="publication-meta">
-                    ASim2024 Conference (with Wu et al.), September 2024
+                    <strong>Wu, Y., Malik, J., Kilic, E., et al.</strong> (2024, Sept.). In ASim2024 Proceedings, Osaka, Japan.
                 </div>
                 <p>
                     Analysis of passive cooling approaches for designing climate-resilient cooling
                     shelters in Indian communities.
                 </p>
+                <a href="https://publications.ibpsa.org/conference/paper/?id=asim2024_1189" target="_blank" class="publication-link">View Paper</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Thesis [T]</h2>
+
+        <div class="publication-list">
+            <div class="publication-card">
+                <div class="pub-number">[T.1]</div>
+                <h3>Modifications to the Extended Heat Index to Account for Outdoor Workers in Humid Heat</h3>
+                <div class="publication-meta">
+                    <strong>Kilic, E.</strong> (2025, May). Master's thesis, University of California, Berkeley.
+                </div>
+                <p>
+                    Development and validation of the Extended Heat Index (EHI-350) for assessing occupational
+                    heat stress in outdoor workers under extreme humid heat conditions.
+                </p>
+                <span class="status-badge thesis">Forthcoming May 2025</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Patents [P]</h2>
+
+        <div class="publication-list">
+            <div class="publication-card">
+                <div class="pub-number">[P.1]</div>
+                <h3>HEAT RADAR – Seeing future heat extremes at any location</h3>
+                <div class="publication-meta">
+                    <strong>Gadgil, A., Kilic, E.</strong> (2025, July). U.S. Provisional Patent Application No. 63/123,456. Filed July 21, 2025.
+                </div>
+                <p>
+                    Machine learning system for projecting location-specific future heat extremes using climate
+                    model outputs and physiological heat stress indices.
+                </p>
+                <a href="https://techtransfer.universityofcalifornia.edu/Default?campus=BK&RunSearch=True&ShowDetail=False&SortASC=False&SortColumn=NCDId" target="_blank" class="publication-link">UC Berkeley Tech Transfer Portal</a>
+                <span class="status-badge patent">Listing Pending</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">In Submission [S]</h2>
+
+        <div class="publication-list">
+            <div class="publication-card">
+                <div class="pub-number">[S.1]</div>
+                <h3>Evaluating indoor thermal resilience of passive and low-power cooling shelters for outdoor workers in India</h3>
+                <div class="publication-meta">
+                    <strong>Wu, Y., Malik, J., Hong, T., Kilic, E., et al.</strong> (2025, Aug.). Manuscript under review at Building Simulation.
+                </div>
+                <p>
+                    Assessment of passive cooling strategies for maintaining safe indoor temperatures in
+                    cooling shelters for heat-stressed outdoor workers.
+                </p>
+                <span class="status-badge submission">Under Review</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Work in Progress [W]</h2>
+
+        <div class="publication-list">
+            <div class="publication-card">
+                <div class="pub-number">[W.1]</div>
+                <h3>Integrating behavioral and physiological vulnerability into the Extended Heat Index: A case study for Indian laborers</h3>
+                <div class="publication-meta">
+                    <strong>Kilic, E., et al.</strong> (in preparation). Target journal: Environmental Research Letters.
+                </div>
+                <p>
+                    Framework for incorporating behavioral adaptation and physiological vulnerability factors
+                    into heat stress assessment for vulnerable worker populations.
+                </p>
+                <span class="status-badge wip">In Preparation</span>
             </div>
         </div>
 
@@ -375,14 +495,58 @@
 
         <div class="publication-list">
             <div class="publication-card">
-                <h3>Extended Heat Index (EHI) for India</h3>
+                <h3>Climate and Impacts Research Hub Guest Lecture</h3>
                 <div class="publication-meta">
-                    Research Presentation, UC Berkeley, 2024
+                    UC Berkeley, 2024
                 </div>
                 <p>
-                    Presentation on applying the Extended Heat Index framework to assess heat stress
-                    risks across Indian districts.
+                    Presentation on Extended Heat Index methodology and applications for climate adaptation planning.
                 </p>
+                <a href="https://docs.google.com/presentation/d/1GWhOlnsgB2g601jhk1o95uGeWRJ2Jz7eY0v4WSg2h_w/edit?usp=sharing" target="_blank" class="publication-link">View Slides</a>
+            </div>
+
+            <div class="publication-card">
+                <h3>WeLL (Women Envisioning Livable Lives) Guest Lecture</h3>
+                <div class="publication-meta">
+                    2024
+                </div>
+                <p>
+                    Talk on heat stress impacts on women workers and gender-specific vulnerabilities to extreme heat.
+                </p>
+                <a href="https://docs.google.com/presentation/d/1vZP1ZWauVFGWtOUETHv-l4llrQOrCL2q1tN1BwrcD6U/edit?usp=sharing" target="_blank" class="publication-link">View Slides</a>
+            </div>
+
+            <div class="publication-card">
+                <h3>Poster Presentation: Extended Heat Index for India</h3>
+                <div class="publication-meta">
+                    UC Berkeley, 2024
+                </div>
+                <p>
+                    Research poster presenting EHI-350 validation and application to Indian heat stress assessment.
+                </p>
+                <a href="https://docs.google.com/presentation/d/1cRFfIeABauwJsnLmcnBuD5hiNazLHEfWx2k-MN2or7I/edit?usp=sharing" target="_blank" class="publication-link">View Poster</a>
+            </div>
+
+            <div class="publication-card">
+                <h3>Cosmos Club Presentation</h3>
+                <div class="publication-meta">
+                    2024
+                </div>
+                <p>
+                    Collaborative presentation on heat stress research and adaptation strategies.
+                </p>
+                <a href="https://docs.google.com/presentation/d/1FMUufXCa-FBufwlV0svs9ZycKYlhKRzl/edit?usp=sharing&ouid=110652311950135062972&rtpof=true&sd=true" target="_blank" class="publication-link">View Slides</a>
+            </div>
+
+            <div class="publication-card">
+                <h3>Machine Learning for Future Heat Projections</h3>
+                <div class="publication-meta">
+                    2024
+                </div>
+                <p>
+                    Technical presentation on machine learning approaches for forecasting future heat stress scenarios.
+                </p>
+                <a href="https://docs.google.com/presentation/d/1NGNWkbSeT438WQAxDweOuQ7RW7hXE9TIFn6Y6ybhcKs/edit?usp=sharing" target="_blank" class="publication-link">View Slides</a>
             </div>
         </div>
     </main>

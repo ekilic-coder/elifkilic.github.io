@@ -205,7 +205,39 @@
             line-height: 1.7;
             color: #555;
         }
-        
+
+        .project-org {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .project-link:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+        }
+
         code {
             background: #f5f5f5;
             padding: 0.2rem 0.5rem;
@@ -213,7 +245,7 @@
             font-family: 'Courier New', monospace;
             font-size: 0.95em;
         }
-        
+
         footer {
             background: white;
             margin-top: 4rem;
@@ -274,44 +306,48 @@
     </header>
 
     <main>
-        <h2>Research Projects</h2>
-        
+        <h2>Research</h2>
+
         <div class="intro">
             <p>
-                I use observational data, remote sensing and climate models to study extreme
-                heat, humidity and their health impacts. Below are examples of my recent
-                research projects.
+                My research focuses on understanding and addressing extreme heat vulnerability through
+                physiological heat stress modeling, climate data analysis, and development of accessible
+                decision-support tools. I work at the intersection of climate science, public health, and
+                adaptation policy to protect vulnerable populations from rising heat extremes.
             </p>
         </div>
 
         <div class="project-list">
             <article class="project">
-                <h3><a href="/research/heat-stress-central-america.html">Heat Stress Indices in Central America</a></h3>
+                <h3><a href="/research/heatindex.html">Extended Heat Index: Occupational Heat Stress Assessment</a></h3>
+                <p class="project-org">India Energy & Climate Center (IECC), UC Berkeley</p>
                 <p>
-                    Developed spatiotemporal maps of heat stress indices (Wet Bulb Globe
-                    Temperature, Heat Index) across Central America to identify seasonal
-                    hotspots and vulnerable communities. This work highlights how extreme
-                    heat coincides with agricultural calendars and labor patterns.
+                    Developing and applying the Extended Heat Index (EHI-350) framework to assess heat stress
+                    risks for outdoor workers across India. This work adapts the JPL/NASA heat index model
+                    to account for different metabolic rates (resting, light, moderate, heavy work) and
+                    environmental conditions. The EHI-350 provides a physiologically-grounded metric that
+                    goes beyond traditional heat indices to identify when and where work becomes dangerous
+                    due to the body's inability to thermoregulate.
                 </p>
+                <div class="project-links">
+                    <a href="/research/heatindex.html" class="project-link">Interactive Calculator</a>
+                    <a href="https://github.com/ekilic-coder/Heat-Alerts-EHI" target="_blank" class="project-link">India Heat Alerts API</a>
+                    <a href="https://github.com/ekilic-coder/ehi-350-validation" target="_blank" class="project-link">EHI-350 Validation</a>
+                </div>
             </article>
 
             <article class="project">
-                <h3><a href="/research/humidity-heatwave.html">Humidity and Heat Wave Co-occurrence</a></h3>
+                <h3><a href="/research.html#future-heat-stress">Future Heat Stress Projections</a></h3>
+                <p class="project-org">India Energy & Climate Center (IECC), UC Berkeley</p>
                 <p>
-                    Analyzed historical weather records to quantify how humidity
-                    exacerbates heat waves. Results show that high dew points often
-                    coincide with temperature extremes, increasing physiological strain on
-                    outdoor workers and urban residents.
+                    Developing machine learning models to project future heat stress scenarios under climate
+                    change. This ongoing work combines climate model outputs with the Extended Heat Index
+                    framework to forecast when and where extreme heat will exceed human physiological limits.
+                    The goal is to provide actionable, location-specific projections that can inform long-term
+                    adaptation planning and policy decisions.
                 </p>
-            </article>
-
-            <article class="project">
-                <h3><a href="/research/health-impacts.html">Health Impacts of Extreme Heat</a></h3>
-                <p>
-                    Collaborated with public health experts to examine emergency room
-                    admissions during extreme heat events. We found a clear association
-                    between heat waves and increased cases of dehydration, heat stroke
-                    and kidney disease.
+                <p style="margin-top: 1rem; font-style: italic; color: #666;">
+                    This research is currently in development. More details coming soon.
                 </p>
             </article>
         </div>
