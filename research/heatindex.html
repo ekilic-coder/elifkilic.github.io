@@ -341,11 +341,13 @@
 
         <div id="loading" class="loading">Loading data...</div>
         <div id="plot"></div>
-        
+
         <div class="info-box" id="stats" style="display:none;">
             <h3>Scenario Statistics</h3>
             <p id="stats-content"></p>
         </div>
+
+        <div id="zonePlot" style="margin-top: 30px;"></div>
     </div>
 
     <footer>
@@ -397,26 +399,136 @@
                 scenario.ehi.map(row => row[colIndex])
             );
 
+            // Custom color scale: darker reds for higher EHI values
+            const customColorscale = [
+                [0, '#ffffcc'],      // Very light yellow for low EHI
+                [0.2, '#ffeda0'],    // Light yellow
+                [0.35, '#fed976'],   // Yellow
+                [0.5, '#feb24c'],    // Orange
+                [0.65, '#fd8d3c'],   // Dark orange
+                [0.75, '#fc4e2a'],   // Red-orange
+                [0.85, '#e31a1c'],   // Red
+                [0.92, '#bd0026'],   // Dark red
+                [1, '#800026']       // Very dark red for extreme EHI
+            ];
+
             const trace = {
                 x: temps_C,
                 y: rhs_percent,
                 z: ehi_transposed,
                 type: 'heatmap',
-                colorscale: 'RdYlBu',
-                reversescale: true,
+                colorscale: customColorscale,
                 colorbar: {
-                    title: 'Heat Index (K)',
-                    titleside: 'right'
+                    title: 'EHI (K)',
+                    titleside: 'right',
+                    thickness: 20,
+                    len: 0.8
                 },
-                hovertemplate: 
+                hovertemplate:
                     'Temp: %{x:.1f}°C<br>' +
                     'RH: %{y:.0f}%<br>' +
-                    'Heat Index: %{z:.1f}K<br>' +
-                    '<extra></extra>'
+                    'EHI: %{z:.1f}K (%{customdata:.1f}°C)<br>' +
+                    '<extra></extra>',
+                customdata: ehi_transposed.map(row => row.map(val => val - 273.15))
             };
 
             const layout = {
-                title: `${model} - Qm=${qm} W/m² - MRT offset=${mrt}K`,
+                title: {
+                    text: `Extended Heat Index: ${model} Model<br><sub>Metabolic Rate: ${qm} W/m² | MRT Offset: ${mrt}K</sub>`,
+                    font: { size: 18 }
+                },
+                xaxis: {
+                    title: 'Air Temperature (°C)',
+                    gridcolor: '#e0e0e0'
+                },
+                yaxis: {
+                    title: 'Relative Humidity (%)',
+                    gridcolor: '#e0e0e0'
+                },
+                plot_bgcolor: '#fff',
+                paper_bgcolor: '#fff',
+                height: 600,
+                margin: { t: 100 }
+            };
+
+            Plotly.newPlot('plot', [trace], layout, {responsive: true});
+            showStatistics(scenario.ehi);
+            createZonePlot(ehi_transposed, temps_C, rhs_percent);
+        }
+
+        function showStatistics(ehi) {
+            const flat = ehi.flat();
+            const min = Math.min(...flat);
+            const max = Math.max(...flat);
+            const mean = flat.reduce((a, b) => a + b, 0) / flat.length;
+
+            document.getElementById('stats').style.display = 'block';
+            document.getElementById('stats-content').innerHTML = `
+                <strong>Min:</strong> ${min.toFixed(1)} K (${(min-273.15).toFixed(1)}°C)<br>
+                <strong>Max:</strong> ${max.toFixed(1)} K (${(max-273.15).toFixed(1)}°C)<br>
+                <strong>Mean:</strong> ${mean.toFixed(1)} K (${(mean-273.15).toFixed(1)}°C)
+            `;
+        }
+
+        function createZonePlot(ehi_data, temps_C, rhs_percent) {
+            // Define heat stress zones based on EHI thresholds (in Celsius)
+            // Zone 1: Safe (< 32°C EHI)
+            // Zone 2: Caution (32-35°C EHI)
+            // Zone 3: Extreme Caution (35-39°C EHI)
+            // Zone 4: Danger (39-42°C EHI)
+            // Zone 5: Extreme Danger (> 42°C EHI)
+
+            const zones = ehi_data.map(row =>
+                row.map(ehi_K => {
+                    const ehi_C = ehi_K - 273.15;
+                    if (ehi_C < 32) return 1;
+                    if (ehi_C < 35) return 2;
+                    if (ehi_C < 39) return 3;
+                    if (ehi_C < 42) return 4;
+                    return 5;
+                })
+            );
+
+            const zoneColors = [
+                [0, '#2ecc71'],      // Zone 1: Green (Safe)
+                [0.2, '#f1c40f'],    // Zone 2: Yellow (Caution)
+                [0.4, '#e67e22'],    // Zone 3: Orange (Extreme Caution)
+                [0.6, '#e74c3c'],    // Zone 4: Red (Danger)
+                [0.8, '#8b0000']     // Zone 5: Dark Red (Extreme Danger)
+            ];
+
+            const zoneTrace = {
+                x: temps_C,
+                y: rhs_percent,
+                z: zones,
+                type: 'heatmap',
+                colorscale: zoneColors,
+                colorbar: {
+                    title: 'Risk Zone',
+                    titleside: 'right',
+                    thickness: 20,
+                    len: 0.8,
+                    tickvals: [1, 2, 3, 4, 5],
+                    ticktext: ['Safe', 'Caution', 'Extreme Caution', 'Danger', 'Extreme Danger']
+                },
+                hovertemplate:
+                    'Temp: %{x:.1f}°C<br>' +
+                    'RH: %{y:.0f}%<br>' +
+                    'Zone: %{customdata}<br>' +
+                    '<extra></extra>',
+                customdata: zones.map(row =>
+                    row.map(z => {
+                        const labels = ['', 'Safe', 'Caution', 'Extreme Caution', 'Danger', 'Extreme Danger'];
+                        return labels[z];
+                    })
+                )
+            };
+
+            const zoneLayout = {
+                title: {
+                    text: 'Heat Stress Risk Zones',
+                    font: { size: 18 }
+                },
                 xaxis: {
                     title: 'Air Temperature (°C)',
                     gridcolor: '#e0e0e0'
@@ -430,22 +542,7 @@
                 height: 600
             };
 
-            Plotly.newPlot('plot', [trace], layout, {responsive: true});
-            showStatistics(scenario.ehi);
-        }
-
-        function showStatistics(ehi) {
-            const flat = ehi.flat();
-            const min = Math.min(...flat);
-            const max = Math.max(...flat);
-            const mean = flat.reduce((a, b) => a + b, 0) / flat.length;
-            
-            document.getElementById('stats').style.display = 'block';
-            document.getElementById('stats-content').innerHTML = `
-                <strong>Min:</strong> ${min.toFixed(1)} K (${(min-273.15).toFixed(1)}°C)<br>
-                <strong>Max:</strong> ${max.toFixed(1)} K (${(max-273.15).toFixed(1)}°C)<br>
-                <strong>Mean:</strong> ${mean.toFixed(1)} K (${(mean-273.15).toFixed(1)}°C)
-            `;
+            Plotly.newPlot('zonePlot', [zoneTrace], zoneLayout, {responsive: true});
         }
     </script>
 </body>

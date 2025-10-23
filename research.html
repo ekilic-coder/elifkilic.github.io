@@ -336,8 +336,8 @@
                 </div>
             </article>
 
-            <article class="project">
-                <h3><a href="/research.html#future-heat-stress">Future Heat Stress Projections</a></h3>
+            <article class="project" id="future-heat-stress">
+                <h3>Future Heat Stress Projections</h3>
                 <p class="project-org">India Energy & Climate Center (IECC), UC Berkeley</p>
                 <p>
                     Developing machine learning models to project future heat stress scenarios under climate
@@ -346,9 +346,41 @@
                     The goal is to provide actionable, location-specific projections that can inform long-term
                     adaptation planning and policy decisions.
                 </p>
-                <p style="margin-top: 1rem; font-style: italic; color: #666;">
-                    This research is currently in development. More details coming soon.
+
+                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #0066cc;">Research Overview</h4>
+                <p>
+                    Climate models project substantial increases in temperature and humidity extremes throughout
+                    the 21st century. However, these projections are rarely translated into physiologically-relevant
+                    metrics that decision-makers can use. This project bridges that gap by combining CMIP6 climate
+                    model outputs with the Extended Heat Index to create location-specific forecasts of when outdoor
+                    work and normal activities will become physiologically dangerous or impossible.
                 </p>
+
+                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #0066cc;">Methodology</h4>
+                <p>
+                    We're using stacked generalization and ensemble machine learning approaches to:
+                </p>
+                <ul style="margin-left: 2rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Process multi-model CMIP6 climate projections (SSP2-4.5, SSP5-8.5 scenarios)</li>
+                    <li>Apply the Extended Heat Index framework to projected temperature and humidity</li>
+                    <li>Generate probabilistic forecasts of heat stress exceedance for different activity levels</li>
+                    <li>Identify when specific locations will cross critical physiological thresholds</li>
+                </ul>
+
+                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #0066cc;">Applications</h4>
+                <p>
+                    This work supports long-term adaptation planning by providing answers to critical questions:
+                    When will outdoor work become unsafe during specific months? Which regions will cross
+                    physiological limits first? How much time do communities have to adapt before heat stress
+                    becomes unmanageable?
+                </p>
+
+                <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; border-left: 4px solid #f57c00;">
+                    <p style="margin: 0; font-weight: 600; color: #e65100;">
+                        <strong>Status:</strong> This research is currently in early development. Initial results
+                        expected in 2025. Patent application filed (see Publications page).
+                    </p>
+                </div>
             </article>
         </div>
     </main>
