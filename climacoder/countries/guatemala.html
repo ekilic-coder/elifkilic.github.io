@@ -110,7 +110,48 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        
+
+        /* Nested dropdown (submenu) */
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu > a::after {
+            content: ' ▸';
+            float: right;
+        }
+
+        .dropdown-submenu-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+        }
+
+        .dropdown-submenu-content a {
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+            transition: background 0.2s;
+        }
+
+        .dropdown-submenu-content a:hover {
+            background-color: #f5f5f5;
+            color: #0066cc;
+        }
+
+        .dropdown-submenu:hover .dropdown-submenu-content {
+            display: block;
+        }
+
         .breadcrumb {
             max-width: 1200px;
             margin: 2rem auto 0;
@@ -328,9 +369,34 @@
             <div class="dropdown">
                 <a href="/climacoder.html">ClimaCoder</a>
                 <div class="dropdown-content">
-                    <a href="/climacoder/writing.html">Writing</a>
-                    <a href="/climacoder.html#overview">Overview</a>
-                    <a href="/climacoder.html#team">Team</a>
+                    <a href="/climacoder/team.html">Team</a>
+                    <div class="dropdown-submenu">
+                        <a href="#">Research</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/countries/belize.html">Belize</a>
+                            <a href="/climacoder/countries/guatemala.html">Guatemala</a>
+                            <a href="/climacoder/countries/honduras.html">Honduras</a>
+                            <a href="/climacoder/countries/el-salvador.html">El Salvador</a>
+                            <a href="/climacoder/countries/nicaragua.html">Nicaragua</a>
+                            <a href="/climacoder/countries/costa-rica.html">Costa Rica</a>
+                            <a href="/climacoder/countries/panama.html">Panama</a>
+                            <a href="/climacoder/countries/mexico.html">Mexico</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-submenu">
+                        <a href="#">Writing</a>
+                        <div class="dropdown-submenu-content">
+                            <a href="/climacoder/writing/belize.html">Belize</a>
+                            <a href="/climacoder/writing/guatemala.html">Guatemala</a>
+                            <a href="/climacoder/writing/honduras.html">Honduras</a>
+                            <a href="/climacoder/writing/el-salvador.html">El Salvador</a>
+                            <a href="/climacoder/writing/nicaragua.html">Nicaragua</a>
+                            <a href="/climacoder/writing/costa-rica.html">Costa Rica</a>
+                            <a href="/climacoder/writing/panama.html">Panama</a>
+                            <a href="/climacoder/writing/mexico.html">Mexico</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         
