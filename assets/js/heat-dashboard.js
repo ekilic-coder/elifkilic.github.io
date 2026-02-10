@@ -32,19 +32,19 @@ const HeatDashboard = (() => {
   /* ---- Fetch helpers ---- */
   function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-  async function fetchJSON(url, retries = 3) {
+  async function fetchJSON(url, retries = 4) {
     for (let i = 0; i < retries; i++) {
       const r = await fetch(url);
       if (r.ok) return r.json();
       if (r.status === 429 && i < retries - 1) {
-        await delay(2000 * (i + 1)); // back off: 2s, 4s
+        await delay(3000 * (i + 1)); // back off: 3s, 6s, 9s
         continue;
       }
-      if (!r.ok) throw new Error(`Fetch failed: ${r.status}`);
+      if (!r.ok) throw new Error(`API rate limit (${r.status}) — try refreshing in a minute`);
     }
   }
 
-  /* ---- Current conditions ---- */
+  /* ---- Current conditions (forecast endpoint — separate rate pool) ---- */
   async function fetchCurrent(lat, lon) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
       + `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m`
@@ -52,42 +52,41 @@ const HeatDashboard = (() => {
     return fetchJSON(url);
   }
 
-  /* ---- Historical (last 5 years daily) ---- */
+  /* ---- Historical (last 3 years daily, 2 variables to reduce API weight) ---- */
   async function fetchHistorical(lat, lon) {
     const now = new Date();
     const end = `${now.getFullYear() - 1}-12-31`;
-    const start = `${now.getFullYear() - 6}-01-01`;
+    const start = `${now.getFullYear() - 4}-01-01`;
     const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}`
       + `&start_date=${start}&end_date=${end}`
-      + `&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`
+      + `&daily=temperature_2m_max,apparent_temperature_max`
       + `&timezone=auto`;
     return fetchJSON(url);
   }
 
-  /* ---- Long-term annual trend (1960-present) — chunked into decades ---- */
+  /* ---- Long-term annual trend — chunked into 15-year segments, 1 variable ---- */
   async function fetchLongTerm(lat, lon) {
     const endYear = new Date().getFullYear() - 1;
-    const startYear = 1960;
-    const chunkSize = 10;
-    const allDates = [], allTmax = [], allAtmax = [];
+    const startYear = 1980; // 1980–present gives solid warming signal with fewer API calls
+    const chunkSize = 15;
+    const allDates = [], allTmax = [];
 
     for (let y = startYear; y <= endYear; y += chunkSize) {
       const s = `${y}-01-01`;
       const e = `${Math.min(y + chunkSize - 1, endYear)}-12-31`;
       const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}`
         + `&start_date=${s}&end_date=${e}`
-        + `&daily=temperature_2m_max,apparent_temperature_max`
+        + `&daily=temperature_2m_max`
         + `&timezone=auto`;
       const chunk = await fetchJSON(url);
       allDates.push(...chunk.daily.time);
       allTmax.push(...chunk.daily.temperature_2m_max);
-      allAtmax.push(...chunk.daily.apparent_temperature_max);
-      if (y + chunkSize <= endYear) await delay(600); // pace requests
+      if (y + chunkSize <= endYear) await delay(2500); // generous pause between chunks
     }
-    return { daily: { time: allDates, temperature_2m_max: allTmax, apparent_temperature_max: allAtmax } };
+    return { daily: { time: allDates, temperature_2m_max: allTmax } };
   }
 
-  /* ---- CMIP6 climate projections ---- */
+  /* ---- CMIP6 climate projections (climate endpoint — separate rate pool) ---- */
   async function fetchProjections(lat, lon) {
     const url = `https://climate-api.open-meteo.com/v1/climate?latitude=${lat}&longitude=${lon}`
       + `&start_date=1950-01-01&end_date=2050-12-31`
@@ -95,23 +94,6 @@ const HeatDashboard = (() => {
       + `&daily=temperature_2m_max,temperature_2m_min`
       + `&timezone=auto`;
     return fetchJSON(url);
-  }
-
-  /* ---- Aggregate daily data to monthly ---- */
-  function toMonthly(dates, values) {
-    const months = {};
-    dates.forEach((d, i) => {
-      if (values[i] == null) return;
-      const key = d.slice(0, 7); // "YYYY-MM"
-      if (!months[key]) months[key] = [];
-      months[key].push(values[i]);
-    });
-    const keys = Object.keys(months).sort();
-    return {
-      labels: keys,
-      means: keys.map(k => months[k].reduce((a, b) => a + b, 0) / months[k].length),
-      maxes: keys.map(k => Math.max(...months[k]))
-    };
   }
 
   /* ---- Aggregate daily data to yearly ---- */
@@ -140,11 +122,12 @@ const HeatDashboard = (() => {
       if (atmax[i] != null) byMonth[m].at.push(atmax[i]);
     });
     const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const nYears = new Set(dates.map(d => d.slice(0,4))).size || 1;
     return {
       months: monthNames,
       avgMax: byMonth.map(b => b.t.length ? b.t.reduce((a, c) => a + c, 0) / b.t.length : null),
       avgApparent: byMonth.map(b => b.at.length ? b.at.reduce((a, c) => a + c, 0) / b.at.length : null),
-      daysAbove35: byMonth.map(b => b.at.length ? b.at.filter(v => v >= 35).length / (b.at.length / 5) : 0) // avg per year (5yr)
+      daysAbove35: byMonth.map(b => b.at.length ? b.at.filter(v => v >= 35).length / nYears : 0)
     };
   }
 
@@ -166,7 +149,7 @@ const HeatDashboard = (() => {
     container.innerHTML = `
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1.5rem">
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
-          <div style="font-size:2rem;font-weight:800;color:#e65100">${c.temperature_2m.toFixed(1)}°C</div>
+          <div style="font-size:2rem;font-weight:800;color:#e65100">${c.temperature_2m.toFixed(1)}\u00b0C</div>
           <div style="font-size:0.8rem;color:#666">Temperature</div>
         </div>
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
@@ -174,11 +157,11 @@ const HeatDashboard = (() => {
           <div style="font-size:0.8rem;color:#666">Humidity</div>
         </div>
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
-          <div style="font-size:2rem;font-weight:800;color:#e65100">${c.apparent_temperature.toFixed(1)}°C</div>
+          <div style="font-size:2rem;font-weight:800;color:#e65100">${c.apparent_temperature.toFixed(1)}\u00b0C</div>
           <div style="font-size:0.8rem;color:#666">Feels Like</div>
         </div>
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
-          <div style="font-size:2rem;font-weight:800;color:${zone.color}">${hi.toFixed(1)}°C</div>
+          <div style="font-size:2rem;font-weight:800;color:${zone.color}">${hi.toFixed(1)}\u00b0C</div>
           <div style="font-size:0.8rem;color:#666">Heat Index</div>
         </div>
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
@@ -199,16 +182,16 @@ const HeatDashboard = (() => {
     ];
     const layout = {
       ...layoutBase,
-      title: { text: "Seasonal Heat Profile (5-Year Average)", font: { size: 14 } },
+      title: { text: "Seasonal Heat Profile (3-Year Average)", font: { size: 14 } },
       barmode: "group",
-      yaxis: { title: "Temperature (°C)" },
+      yaxis: { title: "Temperature (\u00b0C)" },
       legend: { orientation: "h", y: -0.2 },
       shapes: [{
         type: "line", x0: -0.5, x1: 11.5, y0: 35, y1: 35,
         line: { color: "red", width: 1.5, dash: "dash" }
       }],
       annotations: [{
-        x: 11, y: 35, text: "Danger (35°C)", showarrow: false,
+        x: 11, y: 35, text: "Danger (35\u00b0C)", showarrow: false,
         font: { size: 10, color: "red" }, yshift: 10
       }]
     };
@@ -217,7 +200,6 @@ const HeatDashboard = (() => {
 
   /* ---- Render: long-term warming trend ---- */
   function renderTrend(divId, yearly) {
-    // Simple linear regression for trendline
     const n = yearly.labels.length;
     const xm = yearly.labels.reduce((a, b) => a + b, 0) / n;
     const ym = yearly.means.reduce((a, b) => a + b, 0) / n;
@@ -236,13 +218,13 @@ const HeatDashboard = (() => {
         name: "Annual Avg Max", type: "scatter", mode: "lines",
         line: { color: "#ff9800", width: 1.5 } },
       { x: yearly.labels, y: trendY.map(v => +v.toFixed(2)),
-        name: `Trend (+${warming}°C)`, type: "scatter", mode: "lines",
+        name: `Trend (+${warming}\u00b0C)`, type: "scatter", mode: "lines",
         line: { color: "#d32f2f", width: 2, dash: "dash" } }
     ];
     const layout = {
       ...layoutBase,
-      title: { text: `Long-Term Warming (1960\u2013Present): +${warming}°C`, font: { size: 14 } },
-      yaxis: { title: "Avg Daily Max Temp (°C)" },
+      title: { text: `Long-Term Warming (1980\u2013Present): +${warming}\u00b0C`, font: { size: 14 } },
+      yaxis: { title: "Avg Daily Max Temp (\u00b0C)" },
       xaxis: { title: "" },
       legend: { orientation: "h", y: -0.2 }
     };
@@ -264,7 +246,6 @@ const HeatDashboard = (() => {
         line: { color: colors[i % colors.length], width: 1.5 }
       });
     });
-    // If we have the base key without model suffix
     if (data.daily.temperature_2m_max) {
       const yearly = toYearly(data.daily.time, data.daily.temperature_2m_max);
       traces.unshift({
@@ -276,7 +257,7 @@ const HeatDashboard = (() => {
     const layout = {
       ...layoutBase,
       title: { text: "Climate Projections to 2050 (CMIP6 HighResMIP)", font: { size: 14 } },
-      yaxis: { title: "Annual Avg Max Temp (°C)" },
+      yaxis: { title: "Annual Avg Max Temp (\u00b0C)" },
       xaxis: { title: "" },
       legend: { orientation: "h", y: -0.2 },
       shapes: [{
@@ -290,10 +271,8 @@ const HeatDashboard = (() => {
   /* ---- Render: monthly heatmap (recent years) ---- */
   function renderMonthlyHeatmap(divId, data) {
     const dates = data.daily.time;
-    const tmax = data.daily.temperature_2m_max;
     const atmax = data.daily.apparent_temperature_max;
 
-    // Build year x month grid of apparent temperature max
     const years = {};
     dates.forEach((d, i) => {
       if (atmax[i] == null) return;
@@ -313,11 +292,11 @@ const HeatDashboard = (() => {
         [0, "#fff9c4"], [0.25, "#ffe082"], [0.5, "#ff9800"],
         [0.75, "#f44336"], [1, "#b71c1c"]
       ],
-      colorbar: { title: "°C", thickness: 15 }
+      colorbar: { title: "\u00b0C", thickness: 15 }
     }];
     const layout = {
       ...layoutBase,
-      title: { text: "Monthly Peak Apparent Temperature (°C)", font: { size: 14 } },
+      title: { text: "Monthly Peak Apparent Temperature (\u00b0C)", font: { size: 14 } },
       yaxis: { title: "", autorange: "reversed" },
       xaxis: { title: "" }
     };
@@ -340,11 +319,11 @@ const HeatDashboard = (() => {
     });
     const yrs = Object.keys(years).sort().map(Number);
     const traces = [
-      { x: yrs, y: yrs.map(y => years[y].d35), name: "\u226535°C", type: "bar",
+      { x: yrs, y: yrs.map(y => years[y].d35), name: "\u226535\u00b0C", type: "bar",
         marker: { color: "rgba(255,152,0,0.7)" } },
-      { x: yrs, y: yrs.map(y => years[y].d40), name: "\u226540°C", type: "bar",
+      { x: yrs, y: yrs.map(y => years[y].d40), name: "\u226540\u00b0C", type: "bar",
         marker: { color: "rgba(244,67,54,0.7)" } },
-      { x: yrs, y: yrs.map(y => years[y].d45), name: "\u226545°C", type: "bar",
+      { x: yrs, y: yrs.map(y => years[y].d45), name: "\u226545\u00b0C", type: "bar",
         marker: { color: "rgba(183,28,28,0.7)" } }
     ];
     const layout = {
@@ -355,6 +334,12 @@ const HeatDashboard = (() => {
       legend: { orientation: "h", y: -0.2 }
     };
     Plotly.newPlot(divId, traces, layout, config);
+  }
+
+  /* ---- Show error in a chart placeholder ---- */
+  function showChartError(divId, msg) {
+    const el = document.getElementById(divId);
+    if (el) el.innerHTML = `<p style="color:#e65100;text-align:center;padding:2rem;font-size:0.9rem">${msg}</p>`;
   }
 
   /* ---- Main init ---- */
@@ -394,18 +379,23 @@ const HeatDashboard = (() => {
       if (el) el.innerHTML = '<p style="text-align:center;color:#ccc;padding:2rem">Loading...</p>';
     });
 
+    // --- Phase 1: Current conditions + projections (different API hosts, safe in parallel) ---
     try {
-      // Fetch current + projections in parallel (different API endpoints, no rate issues)
       const [current, proj] = await Promise.all([
         fetchCurrent(lat, lon),
         fetchProjections(lat, lon)
       ]);
-
-      // Render current conditions immediately
       renderCurrent(document.getElementById("hd-current"), current, name);
       renderProjections("hd-projections", proj);
+    } catch (err) {
+      document.getElementById("hd-current").innerHTML =
+        '<p style="color:#e65100;text-align:center;padding:1rem">Could not load current conditions.</p>';
+      showChartError("hd-projections", "Could not load projections.");
+    }
 
-      // Fetch archive data sequentially to avoid 429 rate limits
+    // --- Phase 2: Historical archive (3 years, 2 vars) ---
+    await delay(1000);
+    try {
       const hist = await fetchHistorical(lat, lon);
       const cal = seasonalCalendar(
         hist.daily.time, hist.daily.temperature_2m_max, hist.daily.apparent_temperature_max
@@ -413,22 +403,20 @@ const HeatDashboard = (() => {
       renderSeasonal("hd-seasonal", cal);
       renderMonthlyHeatmap("hd-heatmap", hist);
       renderDangerDays("hd-danger", hist);
+    } catch (err) {
+      showChartError("hd-seasonal", "Could not load seasonal data. Try refreshing in a minute.");
+      showChartError("hd-heatmap", "Could not load heatmap data.");
+      showChartError("hd-danger", "Could not load danger-days data.");
+    }
 
-      await delay(500); // brief pause before long-term chunked fetches
-
+    // --- Phase 3: Long-term trend (chunked, 1 variable, generous pacing) ---
+    await delay(2000);
+    try {
       const longTerm = await fetchLongTerm(lat, lon);
       const yearly = toYearly(longTerm.daily.time, longTerm.daily.temperature_2m_max);
       renderTrend("hd-trend", yearly);
     } catch (err) {
-      // Show error only in sections that haven't rendered a Plotly chart yet
-      const pending = ["hd-seasonal","hd-heatmap","hd-danger","hd-trend","hd-projections"];
-      pending.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && !el.querySelector(".plotly")) {
-          el.innerHTML = `<p style="color:#e65100;text-align:center;padding:1rem">
-            Could not load this chart. ${err.message}</p>`;
-        }
-      });
+      showChartError("hd-trend", "Could not load long-term trend. Try refreshing in a minute.");
     }
   }
 
