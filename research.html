@@ -393,36 +393,106 @@
             </p>
         </div>
 
+        <!-- Key stats ribbon -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2.5rem">
+            <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+                <div style="font-size:2rem;font-weight:800;color:#0066cc">5</div>
+                <div style="font-size:0.85rem;color:#666;margin-top:0.25rem">Physiological Models</div>
+            </div>
+            <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+                <div style="font-size:2rem;font-weight:800;color:#0066cc">700+</div>
+                <div style="font-size:0.85rem;color:#666;margin-top:0.25rem">Indian Districts Covered</div>
+            </div>
+            <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+                <div style="font-size:2rem;font-weight:800;color:#0066cc">4</div>
+                <div style="font-size:0.85rem;color:#666;margin-top:0.25rem">Work Intensity Levels</div>
+            </div>
+            <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+                <div style="font-size:2rem;font-weight:800;color:#0066cc">8</div>
+                <div style="font-size:0.85rem;color:#666;margin-top:0.25rem">Countries Analyzed</div>
+            </div>
+        </div>
+
         <div class="project-list">
             <article class="project">
-                <h3><a href="/research/heatindex.html">Extended Heat Index: Occupational Heat Stress Assessment</a></h3>
+                <h3><a href="/research/heatindex.html">Extended Heat Index (EHI-350): Redefining Heat Stress Measurement</a></h3>
                 <p class="project-org">India Energy & Climate Center (IECC), UC Berkeley</p>
                 <p>
-                    Developing and applying the Extended Heat Index (EHI-350) framework to assess heat stress
-                    risks for outdoor workers across India. This work adapts the JPL/NASA heat index model
-                    to account for different metabolic rates (resting, light, moderate, heavy work) and
-                    environmental conditions. The EHI-350 provides a physiologically-grounded metric that
-                    goes beyond traditional heat indices to identify when and where work becomes dangerous
-                    due to the body's inability to thermoregulate.
+                    Standard heat indices treat everyone the same—someone sitting indoors and a construction
+                    worker in direct sun get the same "feels like" temperature. The EHI-350 changes that. Built
+                    on the JPL/NASA physiological model, it accounts for metabolic heat production (100–350 W/m²),
+                    solar radiation, and the body's actual thermoregulatory limits—sweating capacity, vasodilation,
+                    and core temperature thresholds.
                 </p>
+                <p>
+                    The framework classifies conditions into five risk zones from <strong>Safe (&lt;32°C)</strong>
+                    through <strong>Extreme Danger (&gt;42°C)</strong>, where the body can no longer shed heat
+                    fast enough to prevent organ damage. Applied across 700+ Indian districts, it reveals that
+                    heavy outdoor labor pushes workers into danger zones at temperatures traditional indices
+                    still call "moderate."
+                </p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;padding:1rem;background:#f0f7ff;border-radius:8px">
+                    <div>
+                        <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Key finding</div>
+                        <div style="color:#333;margin-top:0.3rem">At 350 W/m² (heavy work), danger threshold drops by ~8°C compared to resting conditions</div>
+                    </div>
+                    <div>
+                        <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Method</div>
+                        <div style="color:#333;margin-top:0.3rem">Solves coupled heat-balance equations across physiological regions (core, skin, environment)</div>
+                    </div>
+                    <div>
+                        <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Impact</div>
+                        <div style="color:#333;margin-top:0.3rem">Real-time district-level heat alerts now operational for Regions 4/5/6 across India</div>
+                    </div>
+                </div>
                 <div class="project-links">
                     <a href="/research/heatindex.html" class="project-link">Interactive Calculator</a>
                     <a href="https://github.com/ekilic-coder/Heat-Alerts-EHI" target="_blank" class="project-link">India Heat Alerts API</a>
                     <a href="https://github.com/ekilic-coder/ehi-350-validation" target="_blank" class="project-link">EHI-350 Validation</a>
+                    <a href="/research/publications.html" class="project-link" style="background:#555">Publications</a>
                 </div>
             </article>
 
             <article class="project" id="future-heat-stress">
-                <h3>Future Heat Stress Projections</h3>
+                <h3>Future Heat Stress Projections (ML Ensemble)</h3>
                 <p class="project-org">India Energy & Climate Center (IECC), UC Berkeley</p>
                 <p>
-                    I'm developing machine learning approaches to project future heat stress scenarios under climate change, using outputs from global climate models. This work is in early development.
+                    Climate models tell us the planet is warming—but what does that mean for the person
+                    working a rice paddy in Bihar at 2 PM? This project bridges that gap using stacked
+                    machine learning ensembles trained on CMIP6 climate model outputs to project
+                    physiological heat stress decades into the future.
                 </p>
+                <p>
+                    The approach targets the upper tail of the distribution—95th and 99.7th percentile
+                    events—because it's the extremes that kill. By combining multiple ML architectures
+                    (gradient boosting, neural nets, quantile regression) into a probabilistic ensemble,
+                    the model captures uncertainty while identifying which districts face the steepest
+                    increases in unworkable days per year.
+                </p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+                    <div style="background:#fff3e0;padding:1.2rem;border-radius:8px;border-left:4px solid #f57c00">
+                        <div style="font-weight:700;color:#e65100;font-size:0.85rem;text-transform:uppercase">Status</div>
+                        <div style="color:#555;margin-top:0.3rem">Active development — ensemble architecture validated, scaling to national coverage</div>
+                    </div>
+                    <div style="background:#e8f5e9;padding:1.2rem;border-radius:8px;border-left:4px solid #388e3c">
+                        <div style="font-weight:700;color:#2e7d32;font-size:0.85rem;text-transform:uppercase">Patent</div>
+                        <div style="color:#555;margin-top:0.3rem">HEAT RADAR — ML system for future heat projections (listing pending)</div>
+                    </div>
+                </div>
+            </article>
 
-                <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; border-left: 4px solid #f57c00;">
-                    <p style="margin: 0; font-weight: 600; color: #e65100;">
-                        <strong>Status:</strong> Early development. Initial results expected in 2025.
-                    </p>
+            <article class="project">
+                <h3>Indoor Thermal Resilience of Cooling Shelters</h3>
+                <p class="project-org">UC Berkeley</p>
+                <p>
+                    Not everyone can escape the heat outdoors. This study investigates how well
+                    designated cooling shelters actually perform during extreme heat events—measuring
+                    indoor thermal conditions, occupancy patterns, and the gap between intended
+                    and actual cooling capacity. The goal is to inform building standards and
+                    emergency preparedness for heat-vulnerable urban populations.
+                </p>
+                <div style="background:#e3f2fd;padding:1rem;border-radius:8px;margin-top:1rem;border-left:4px solid #1976d2">
+                    <p style="margin:0;color:#1565c0;font-weight:600;font-size:0.9rem">Under review — submitted for peer review</p>
                 </div>
             </article>
         </div>

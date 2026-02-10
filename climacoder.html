@@ -478,6 +478,12 @@
                 <p>
                     The places most affected by climate change are also the ones least studied. Too often, research only follows the money, and the Global South gets left behind. I don't want to wait for someone else to decide our struggles are "lucrative" enough to care about—so I'm working to build open, high-quality tools that Latin American communities can actually use to prepare for extreme heat.
                 </p>
+                <p>
+                    ClimaCoder applies the same EHI-350 physiological framework used for India to Central America
+                    and Mexico—regions where outdoor labor in agriculture, construction, and fishing exposes millions
+                    to heat stress that existing indices dramatically undercount. Every dashboard, dataset, and
+                    analysis we produce is open-access by default.
+                </p>
             </div>
 
             <!-- RIGHT: Research Threads -->
@@ -488,34 +494,119 @@
                         <h4>Systematic Review: Heat Stress in Latin America</h4>
                         <p>
                             A comprehensive systematic review synthesizing heat stress research across Latin America.
-                            This project examines heat vulnerability, health impacts, and adaptation strategies in
-                            Central and South American communities. The goal is to identify critical knowledge gaps
-                            and inform future research priorities for climate adaptation in the region.
+                            Preliminary findings reveal a stark disparity: Central American countries account for less
+                            than 3% of published heat-health literature despite bearing some of the highest occupational
+                            heat exposure rates globally. The review covers health impacts, adaptation strategies, and
+                            policy gaps across the region.
                         </p>
                         <span class="status">In Progress</span>
                     </div>
 
                     <div class="thread-card">
-                        <h4>Historical Heat Stress Modeling</h4>
+                        <h4>Historical Heat Stress Modeling (ERA5)</h4>
                         <p>
-                            Developing historical heat stress assessments for each Latin American country using ERA5
-                            climate reanalysis data and the Extended Heat Index framework. These country-specific
-                            dashboards provide interactive visualizations of heat stress patterns, occupational risk
-                            zones, and temporal trends to help communities understand their current heat exposure.
+                            Country-by-country heat stress assessments using ERA5 reanalysis data (1950–present) and
+                            the Extended Heat Index. Each dashboard shows how heat danger zones have expanded over
+                            time—Belize's coastal lowlands, for example, now regularly exceed EHI danger thresholds
+                            during May–September that were rare events 30 years ago. Interactive maps let users explore
+                            by work intensity, month, and region.
                         </p>
-                        <a href="/climacoder/countries/belize.html" class="thread-link">View Belize Dashboard</a>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem">
+                            <a href="/climacoder/countries/belize.html" class="thread-link">Belize</a>
+                            <a href="/climacoder/countries/guatemala.html" class="thread-link">Guatemala</a>
+                            <a href="/climacoder/countries/honduras.html" class="thread-link" style="background:#888">Honduras</a>
+                        </div>
                     </div>
 
                     <div class="thread-card">
-                        <h4>Future Heat Stress Projections (Machine Learning)</h4>
+                        <h4>Future Heat Stress Projections (ML + CMIP6)</h4>
                         <p>
-                            Using machine learning approaches to project future heat stress scenarios under climate
-                            change for Latin American countries. This work combines CMIP6 climate model outputs with
-                            the Extended Heat Index to forecast when and where extreme heat will exceed human
-                            physiological limits, informing long-term adaptation planning.
+                            Combining CMIP6 climate model outputs with stacked ML ensembles to project when and where
+                            outdoor work becomes physiologically impossible across Latin America. Under SSP3-7.0,
+                            preliminary results suggest parts of Guatemala's Pacific lowlands could see 60+ additional
+                            "unworkable" days per year by mid-century for heavy labor.
                         </p>
                         <span class="status">Early Development</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Country Analysis Progress Grid -->
+        <div style="margin-top:3rem">
+            <h3 style="font-size:1.5rem;color:#1a1a1a;margin-bottom:1.5rem;text-align:center">Country Analysis Progress</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+
+                <a href="/climacoder/countries/belize.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #388e3c">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Belize</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Dashboard + Writing + Maps</div>
+                    <span style="display:inline-block;background:#e8f5e9;color:#388e3c;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">Complete</span>
+                </a>
+
+                <a href="/climacoder/countries/guatemala.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #388e3c">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Guatemala</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Dashboard + Writing</div>
+                    <span style="display:inline-block;background:#e8f5e9;color:#388e3c;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">Complete</span>
+                </a>
+
+                <a href="/climacoder/countries/honduras.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #f57c00">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Honduras</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Dashboard in development</div>
+                    <span style="display:inline-block;background:#fff3e0;color:#e65100;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">In Progress</span>
+                </a>
+
+                <a href="/climacoder/countries/el-salvador.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #f57c00">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">El Salvador</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Writing complete, dashboard next</div>
+                    <span style="display:inline-block;background:#fff3e0;color:#e65100;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">In Progress</span>
+                </a>
+
+                <a href="/climacoder/countries/nicaragua.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #f57c00">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Nicaragua</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Writing complete, dashboard next</div>
+                    <span style="display:inline-block;background:#fff3e0;color:#e65100;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">In Progress</span>
+                </a>
+
+                <a href="/climacoder/countries/costa-rica.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #f57c00">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Costa Rica</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Writing complete, dashboard next</div>
+                    <span style="display:inline-block;background:#fff3e0;color:#e65100;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">In Progress</span>
+                </a>
+
+                <a href="/climacoder/countries/panama.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #f57c00">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Panama</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Writing complete, dashboard next</div>
+                    <span style="display:inline-block;background:#fff3e0;color:#e65100;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">In Progress</span>
+                </a>
+
+                <a href="/climacoder/countries/mexico.html" style="text-decoration:none;color:inherit;background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:transform 0.3s;border-left:4px solid #f57c00">
+                    <div style="font-weight:700;font-size:1.1rem;color:#1a1a1a">Mexico</div>
+                    <div style="font-size:0.85rem;color:#666;margin:0.5rem 0">Writing complete, dashboard next</div>
+                    <span style="display:inline-block;background:#fff3e0;color:#e65100;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.8rem;font-weight:600">In Progress</span>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Methodology callout -->
+        <div style="margin-top:2.5rem;background:white;border-radius:12px;padding:2rem;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+            <h3 style="margin-top:0;margin-bottom:1rem;font-size:1.3rem;color:#1a1a1a">Methodology</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem">
+                <div>
+                    <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem">Data Source</div>
+                    <p style="margin:0;color:#555;line-height:1.7">ERA5 hourly reanalysis (ECMWF) — 0.25° resolution, 2m temperature, dewpoint, wind, and solar radiation fields</p>
+                </div>
+                <div>
+                    <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem">Heat Metric</div>
+                    <p style="margin:0;color:#555;line-height:1.7">Extended Heat Index (EHI-350) — physiological model solving coupled heat balance across core, skin, and environment</p>
+                </div>
+                <div>
+                    <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem">Work Scenarios</div>
+                    <p style="margin:0;color:#555;line-height:1.7">Resting (100 W/m²), Light (180 W/m²), Moderate (300 W/m²), and Heavy (350 W/m²) metabolic rates</p>
+                </div>
+                <div>
+                    <div style="font-weight:700;color:#0066cc;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem">Outputs</div>
+                    <p style="margin:0;color:#555;line-height:1.7">Interactive maps, risk zone classifications, monthly time series, and cross-country comparisons — all open-access</p>
                 </div>
             </div>
         </div>
