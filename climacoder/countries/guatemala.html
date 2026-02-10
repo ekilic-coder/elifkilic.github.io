@@ -498,6 +498,17 @@
                 <p>Add your health impact data and charts here</p>
             </div>
         </div>
+        <div class="dashboard-section">
+            <h2>Live Heat Dashboard</h2>
+            <div id="heat-dashboard"></div>
+            <div style="background:white;border-radius:12px;padding:2rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);margin-top:1.5rem">
+                <h3 style="margin-top:0;margin-bottom:0.5rem;font-size:1.1rem;color:#1a1a1a">About This Dashboard</h3>
+                <p style="color:#555;line-height:1.7;margin-bottom:0;font-size:0.95rem">
+                    Temperature and apparent temperature data from ERA5 reanalysis (1960–present) via the Open-Meteo API.
+                    Climate projections use CMIP6 HighResMIP models. Heat index computed client-side (NWS/Steadman).
+                </p>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -513,8 +524,11 @@
         <p class="copyright">&copy; <span id="year"></span> ELİF KILIÇ. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="/assets/js/heat-dashboard.js"></script>
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+        HeatDashboard.init({ lat: 14.6349, lon: -90.5069, name: "Guatemala", containerId: "heat-dashboard" });
     </script>
 </body>
 </html>

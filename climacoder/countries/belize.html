@@ -567,6 +567,16 @@
             </p>
             <iframe src="../maps/web_maps/belize_2023-05_comparison.html" class="chart-container" style="height: 700px;"></iframe>
         </div>
+        <div class="dashboard-section" style="margin-top:3rem">
+            <h2 style="font-size:1.8rem;color:#1a1a1a;margin-bottom:1.5rem">Live Heat Dashboard</h2>
+            <div id="heat-dashboard"></div>
+            <div style="background:white;border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);margin-top:1.5rem">
+                <p style="color:#555;line-height:1.7;margin:0;font-size:0.9rem">
+                    Live data via Open-Meteo (ERA5 reanalysis). Projections from CMIP6 HighResMIP.
+                    Heat index computed client-side using NWS/Steadman equation.
+                </p>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -585,6 +595,19 @@
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
         
+        // Load heat dashboard
+        var s1 = document.createElement("script");
+        s1.src = "https://cdn.plot.ly/plotly-2.35.2.min.js";
+        s1.onload = function() {
+            var s2 = document.createElement("script");
+            s2.src = "/assets/js/heat-dashboard.js";
+            s2.onload = function() {
+                HeatDashboard.init({ lat: 17.2510, lon: -88.7590, name: "Belize", containerId: "heat-dashboard" });
+            };
+            document.head.appendChild(s2);
+        };
+        document.head.appendChild(s1);
+
         function showTab(tabName) {
             // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');

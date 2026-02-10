@@ -308,6 +308,10 @@
             color: #999;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 800px) {
+            #heat-dashboard > div:nth-child(2) { grid-template-columns: 1fr !important; }
+        }
     </style>
 </head>
 <body>
@@ -380,21 +384,16 @@
             <p>Heat Vulnerability Dashboard & Data Analysis</p>
         </div>
 
-        <div class="coming-soon">
-            <h2>Dashboard In Development</h2>
-            <p>
-                The Honduras heat vulnerability dashboard is currently being developed. This page will feature
-                interactive maps showing Extended Heat Index (EHI) values, physiological stress zones, temporal
-                trends, and work intensity comparisons using ERA5 climate reanalysis data.
-            </p>
-            <p>
-                For now, you can read about honduras heat stress and vulnerability on the 
-                <a href="/climacoder/writing.html#honduras" style="color: #0066cc; text-decoration: none; font-weight: 600;">Writing page</a>.
-            </p>
+        <div id="heat-dashboard"></div>
 
-            <div class="status-note">
-                <p>Expected completion: Early 2025</p>
-            </div>
+        <div style="background:white;border-radius:12px;padding:2rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);margin-top:2rem">
+            <h3 style="margin-top:0;margin-bottom:0.5rem;font-size:1.3rem;color:#1a1a1a">About This Dashboard</h3>
+            <p style="color:#555;line-height:1.7;margin-bottom:0">
+                This dashboard shows live and historical heat stress data for Honduras. Temperature and apparent
+                temperature data comes from ERA5 reanalysis (1960–present) via the Open-Meteo API. Climate projections
+                use CMIP6 HighResMIP models. Heat index is computed client-side using the NWS/Steadman equation.
+                All data loads directly in your browser — no server required.
+            </p>
         </div>
     </main>
 
@@ -413,6 +412,11 @@
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="/assets/js/heat-dashboard.js"></script>
+    <script>
+        HeatDashboard.init({ lat: 14.0723, lon: -87.1921, name: "Honduras", containerId: "heat-dashboard" });
     </script>
 </body>
 </html>
