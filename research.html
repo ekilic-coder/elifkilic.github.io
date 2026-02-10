@@ -177,6 +177,21 @@
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('/assets/images/backgrounds/greenmushroom.jpg') center/cover no-repeat;
+            opacity: 0.06;
+            z-index: 0;
+            border-radius: 12px;
+        }
+        .project > * {
+            position: relative;
+            z-index: 1;
         }
         
         .project:hover {
