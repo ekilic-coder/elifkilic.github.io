@@ -9,7 +9,7 @@ title: "Research"
 
 <a class="card" href="/research/measuring_heat_stress/" style="display:block;border:1px solid #eee;border-radius:12px;padding:1rem;text-decoration:none">
   <img src="/assets/img/projects/ehi350.png" alt="Measuring heat stress" style="width:100%;border-radius:8px" loading="lazy">
-  <h3>Measuring Heat Stress (EHI‑350)</h3>
+  <h3>Measuring Heat Stress (EHI‑N*)</h3>
   <p>Extended Heat Index including metabolic and solar loads; solves by physiological region.</p>
 </a>
 
