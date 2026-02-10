@@ -1,14 +1,49 @@
 /**
- * ClimaCoder Heat Dashboard — Open-Meteo powered, client-side
- * Fetches ERA5 historical data, current conditions, and CMIP6 projections
- * Computes heat index and renders Plotly charts
+ * ClimaCoder Heat Dashboard — Open-Meteo + EHI-N* powered, client-side
+ * Uses pre-computed EHI-N* lookup tables (Kilic, UC Berkeley) for physiological
+ * heat stress assessment alongside ERA5 climate data and CMIP6 projections.
  *
  * Usage: HeatDashboard.init({ lat, lon, name, containerId })
  */
 const HeatDashboard = (() => {
-  /* ---- Heat index (Steadman / NWS regression) ---- */
-  function heatIndex(T_c, RH) {
-    const T = T_c * 9 / 5 + 32; // to Fahrenheit
+  /* ---- EHI-N* lookup table (loaded asynchronously) ---- */
+  let ehiTable = null;
+
+  async function loadEHITable() {
+    try {
+      const r = await fetch("/assets/data/ehi_lookup_trimmed.json");
+      if (r.ok) ehiTable = await r.json();
+    } catch (_) { /* silently fall back to NWS */ }
+  }
+
+  /**
+   * Look up EHI-N* from pre-computed table with bilinear interpolation.
+   * level: "light" (180 W/m²), "moderate" (300 W/m²), or "heavy" (350 W/m²)
+   * Returns EHI in °C, or null if out of range.
+   */
+  function ehiLookup(T_c, RH, level) {
+    if (!ehiTable || !ehiTable[level]) return null;
+    const tbl = ehiTable[level];
+    // Clamp to table range
+    const t = Math.max(20, Math.min(55, T_c));
+    const rh = Math.max(10, Math.min(100, Math.round(RH)));
+    // Find bounding integer temps
+    const tLow = Math.floor(t);
+    const tHigh = Math.ceil(t);
+    const rhStr = String(rh);
+    const tLowStr = String(tLow);
+    const tHighStr = String(tHigh);
+    if (!tbl[tLowStr] || !tbl[tLowStr][rhStr]) return null;
+    if (tLow === tHigh) return tbl[tLowStr][rhStr];
+    if (!tbl[tHighStr] || !tbl[tHighStr][rhStr]) return tbl[tLowStr][rhStr];
+    // Linear interpolation between integer temperatures
+    const frac = t - tLow;
+    return tbl[tLowStr][rhStr] * (1 - frac) + tbl[tHighStr][rhStr] * frac;
+  }
+
+  /* ---- NWS Heat Index (Steadman regression) — kept as comparison baseline ---- */
+  function heatIndexNWS(T_c, RH) {
+    const T = T_c * 9 / 5 + 32;
     if (T < 80) return T_c;
     let HI = -42.379 + 2.04901523*T + 10.14333127*RH
       - 0.22475541*T*RH - 0.00683783*T*T - 0.05481717*RH*RH
@@ -17,11 +52,20 @@ const HeatDashboard = (() => {
       HI -= ((13 - RH) / 4) * Math.sqrt((17 - Math.abs(T - 95)) / 17);
     if (RH > 85 && T >= 80 && T <= 87)
       HI += ((RH - 85) / 10) * ((87 - T) / 5);
-    return (HI - 32) * 5 / 9; // back to Celsius
+    return (HI - 32) * 5 / 9;
   }
 
-  /* ---- Risk zone from heat index (C) ---- */
-  function riskZone(hi) {
+  /* ---- EHI-N* risk zones (from heatindex.html zone definitions) ---- */
+  function ehiRiskZone(ehi) {
+    if (ehi < 32) return { label: "Safe", color: "#4caf50" };
+    if (ehi < 35) return { label: "Caution", color: "#ffeb3b" };
+    if (ehi < 39) return { label: "Extreme Caution", color: "#ff9800" };
+    if (ehi < 42) return { label: "Danger", color: "#f44336" };
+    return { label: "Extreme Danger", color: "#b71c1c" };
+  }
+
+  /* ---- NWS risk zones (traditional) ---- */
+  function nwsRiskZone(hi) {
     if (hi < 27) return { label: "Safe", color: "#4caf50" };
     if (hi < 32) return { label: "Caution", color: "#ffeb3b" };
     if (hi < 39) return { label: "Extreme Caution", color: "#ff9800" };
@@ -37,14 +81,14 @@ const HeatDashboard = (() => {
       const r = await fetch(url);
       if (r.ok) return r.json();
       if (r.status === 429 && i < retries - 1) {
-        await delay(3000 * (i + 1)); // back off: 3s, 6s, 9s
+        await delay(3000 * (i + 1));
         continue;
       }
-      if (!r.ok) throw new Error(`API rate limit (${r.status}) — try refreshing in a minute`);
+      if (!r.ok) throw new Error(`API rate limit (${r.status}) \u2014 try refreshing in a minute`);
     }
   }
 
-  /* ---- Current conditions (forecast endpoint — separate rate pool) ---- */
+  /* ---- Current conditions (forecast endpoint) ---- */
   async function fetchCurrent(lat, lon) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
       + `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m`
@@ -52,7 +96,7 @@ const HeatDashboard = (() => {
     return fetchJSON(url);
   }
 
-  /* ---- Historical (last 3 years daily, 2 variables to reduce API weight) ---- */
+  /* ---- Historical (last 3 years daily) ---- */
   async function fetchHistorical(lat, lon) {
     const now = new Date();
     const end = `${now.getFullYear() - 1}-12-31`;
@@ -64,10 +108,10 @@ const HeatDashboard = (() => {
     return fetchJSON(url);
   }
 
-  /* ---- Long-term annual trend — chunked into 15-year segments, 1 variable ---- */
+  /* ---- Long-term annual trend — chunked into 15-year segments ---- */
   async function fetchLongTerm(lat, lon) {
     const endYear = new Date().getFullYear() - 1;
-    const startYear = 1980; // 1980–present gives solid warming signal with fewer API calls
+    const startYear = 1980;
     const chunkSize = 15;
     const allDates = [], allTmax = [];
 
@@ -81,12 +125,12 @@ const HeatDashboard = (() => {
       const chunk = await fetchJSON(url);
       allDates.push(...chunk.daily.time);
       allTmax.push(...chunk.daily.temperature_2m_max);
-      if (y + chunkSize <= endYear) await delay(2500); // generous pause between chunks
+      if (y + chunkSize <= endYear) await delay(2500);
     }
     return { daily: { time: allDates, temperature_2m_max: allTmax } };
   }
 
-  /* ---- CMIP6 climate projections (climate endpoint — separate rate pool) ---- */
+  /* ---- CMIP6 climate projections ---- */
   async function fetchProjections(lat, lon) {
     const url = `https://climate-api.open-meteo.com/v1/climate?latitude=${lat}&longitude=${lon}`
       + `&start_date=1950-01-01&end_date=2050-12-31`
@@ -112,7 +156,7 @@ const HeatDashboard = (() => {
     };
   }
 
-  /* ---- Seasonal heat calendar (month x metric) ---- */
+  /* ---- Seasonal heat calendar ---- */
   function seasonalCalendar(dates, tmax, atmax) {
     const byMonth = Array.from({ length: 12 }, () => ({ t: [], at: [] }));
     dates.forEach((d, i) => {
@@ -141,13 +185,46 @@ const HeatDashboard = (() => {
   };
   const config = { responsive: true, displayModeBar: false };
 
-  /* ---- Render: current conditions card ---- */
+  /* ---- Render: current conditions card with EHI-N* ---- */
   function renderCurrent(container, data, name) {
     const c = data.current;
-    const hi = heatIndex(c.temperature_2m, c.relative_humidity_2m);
-    const zone = riskZone(hi);
+    const nws = heatIndexNWS(c.temperature_2m, c.relative_humidity_2m);
+    const nwsZone = nwsRiskZone(nws);
+
+    // EHI-N* at different work intensities
+    const ehiLight = ehiLookup(c.temperature_2m, c.relative_humidity_2m, "light");
+    const ehiMod = ehiLookup(c.temperature_2m, c.relative_humidity_2m, "moderate");
+    const ehiHeavy = ehiLookup(c.temperature_2m, c.relative_humidity_2m, "heavy");
+
+    const hasEHI = ehiLight !== null;
+    const heavyZone = hasEHI ? ehiRiskZone(ehiHeavy) : nwsZone;
+
+    // Build EHI comparison row if lookup table loaded
+    let ehiRow = "";
+    if (hasEHI) {
+      const lz = ehiRiskZone(ehiLight), mz = ehiRiskZone(ehiMod), hz = ehiRiskZone(ehiHeavy);
+      ehiRow = `
+      <div style="margin-top:0.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem">
+        <div style="background:white;border-radius:10px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-top:3px solid ${lz.color}">
+          <div style="font-size:1.4rem;font-weight:800;color:${lz.color}">${ehiLight.toFixed(1)}\u00b0C</div>
+          <div style="font-size:0.75rem;color:#666">EHI-N* Light (180 W/m\u00b2)</div>
+          <div style="font-size:0.7rem;font-weight:700;color:${lz.color};margin-top:0.2rem">${lz.label}</div>
+        </div>
+        <div style="background:white;border-radius:10px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-top:3px solid ${mz.color}">
+          <div style="font-size:1.4rem;font-weight:800;color:${mz.color}">${ehiMod.toFixed(1)}\u00b0C</div>
+          <div style="font-size:0.75rem;color:#666">EHI-N* Moderate (300 W/m\u00b2)</div>
+          <div style="font-size:0.7rem;font-weight:700;color:${mz.color};margin-top:0.2rem">${mz.label}</div>
+        </div>
+        <div style="background:white;border-radius:10px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-top:3px solid ${hz.color}">
+          <div style="font-size:1.4rem;font-weight:800;color:${hz.color}">${ehiHeavy.toFixed(1)}\u00b0C</div>
+          <div style="font-size:0.75rem;color:#666">EHI-N* Heavy (350 W/m\u00b2)</div>
+          <div style="font-size:0.7rem;font-weight:700;color:${hz.color};margin-top:0.2rem">${hz.label}</div>
+        </div>
+      </div>`;
+    }
+
     container.innerHTML = `
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1.5rem">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:0.5rem">
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
           <div style="font-size:2rem;font-weight:800;color:#e65100">${c.temperature_2m.toFixed(1)}\u00b0C</div>
           <div style="font-size:0.8rem;color:#666">Temperature</div>
@@ -161,15 +238,74 @@ const HeatDashboard = (() => {
           <div style="font-size:0.8rem;color:#666">Feels Like</div>
         </div>
         <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
-          <div style="font-size:2rem;font-weight:800;color:${zone.color}">${hi.toFixed(1)}\u00b0C</div>
-          <div style="font-size:0.8rem;color:#666">Heat Index</div>
-        </div>
-        <div style="background:white;border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
-          <div style="font-size:1.1rem;font-weight:800;color:${zone.color};padding:0.3rem 0">${zone.label}</div>
-          <div style="font-size:0.8rem;color:#666">Risk Level</div>
+          <div style="font-size:2rem;font-weight:800;color:${nwsZone.color}">${nws.toFixed(1)}\u00b0C</div>
+          <div style="font-size:0.8rem;color:#666">NWS Heat Index</div>
         </div>
       </div>
-      <p style="color:#999;font-size:0.8rem;text-align:center">Live data for ${name} via Open-Meteo (ERA5 reanalysis)</p>`;
+      ${ehiRow}
+      <p style="color:#999;font-size:0.8rem;text-align:center;margin-top:1rem">
+        Live data for ${name} via Open-Meteo | EHI-N* from
+        <a href="/research/heatindex.html" style="color:#999">Kili\u00e7 (UC Berkeley)</a>
+      </p>`;
+  }
+
+  /* ---- Render: index comparison chart ---- */
+  function renderIndexComparison(divId, temp, rh) {
+    if (!ehiTable) {
+      showChartError(divId, "EHI-N* lookup table not available.");
+      return;
+    }
+    // Sweep temperature from 20 to 50 at current RH
+    const temps = [];
+    for (let t = 20; t <= 50; t += 1) temps.push(t);
+    const rhClamped = Math.max(10, Math.min(100, Math.round(rh)));
+
+    const nwsVals = temps.map(t => +heatIndexNWS(t, rhClamped).toFixed(1));
+    const ehiLightVals = temps.map(t => { const v = ehiLookup(t, rhClamped, "light"); return v !== null ? +v.toFixed(1) : null; });
+    const ehiModVals = temps.map(t => { const v = ehiLookup(t, rhClamped, "moderate"); return v !== null ? +v.toFixed(1) : null; });
+    const ehiHeavyVals = temps.map(t => { const v = ehiLookup(t, rhClamped, "heavy"); return v !== null ? +v.toFixed(1) : null; });
+
+    const traces = [
+      { x: temps, y: nwsVals, name: "NWS Heat Index", type: "scatter", mode: "lines",
+        line: { color: "#999", width: 2, dash: "dot" } },
+      { x: temps, y: ehiLightVals, name: "EHI-N* Light (180 W/m\u00b2)", type: "scatter", mode: "lines",
+        line: { color: "#4caf50", width: 2 } },
+      { x: temps, y: ehiModVals, name: "EHI-N* Moderate (300 W/m\u00b2)", type: "scatter", mode: "lines",
+        line: { color: "#ff9800", width: 2 } },
+      { x: temps, y: ehiHeavyVals, name: "EHI-N* Heavy (350 W/m\u00b2)", type: "scatter", mode: "lines",
+        line: { color: "#f44336", width: 2 } }
+    ];
+
+    // Add marker for current temperature
+    if (temp >= 20 && temp <= 50) {
+      traces.push({
+        x: [temp], y: [heatIndexNWS(temp, rhClamped).toFixed(1)],
+        name: "Current", type: "scatter", mode: "markers",
+        marker: { size: 12, color: "#333", symbol: "diamond" },
+        showlegend: false
+      });
+    }
+
+    const layout = {
+      ...layoutBase,
+      title: { text: `Index Comparison at ${rhClamped}% RH: NWS vs EHI-N*`, font: { size: 14 } },
+      xaxis: { title: "Air Temperature (\u00b0C)" },
+      yaxis: { title: "Heat Index (\u00b0C)" },
+      legend: { orientation: "h", y: -0.25, font: { size: 10 } },
+      shapes: [
+        { type: "line", x0: 20, x1: 50, y0: 35, y1: 35,
+          line: { color: "#ff9800", width: 1, dash: "dash" } },
+        { type: "line", x0: 20, x1: 50, y0: 42, y1: 42,
+          line: { color: "#f44336", width: 1, dash: "dash" } }
+      ],
+      annotations: [
+        { x: 49, y: 35, text: "EHI Caution", showarrow: false,
+          font: { size: 9, color: "#ff9800" }, yshift: 8 },
+        { x: 49, y: 42, text: "EHI Danger", showarrow: false,
+          font: { size: 9, color: "#f44336" }, yshift: 8 }
+      ]
+    };
+    Plotly.newPlot(divId, traces, layout, config);
   }
 
   /* ---- Render: seasonal heat calendar ---- */
@@ -268,7 +404,7 @@ const HeatDashboard = (() => {
     Plotly.newPlot(divId, traces, layout, config);
   }
 
-  /* ---- Render: monthly heatmap (recent years) ---- */
+  /* ---- Render: monthly heatmap ---- */
   function renderMonthlyHeatmap(divId, data) {
     const dates = data.daily.time;
     const atmax = data.daily.apparent_temperature_max;
@@ -348,6 +484,9 @@ const HeatDashboard = (() => {
     if (!root) return;
     root.innerHTML = `
       <div id="hd-current" style="margin-bottom:1.5rem"></div>
+      <div style="background:white;border-radius:12px;padding:1rem;box-shadow:0 4px 16px rgba(0,0,0,0.08);margin-bottom:1.5rem">
+        <div id="hd-comparison" style="height:340px"></div>
+      </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
         <div style="background:white;border-radius:12px;padding:1rem;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
           <div id="hd-seasonal" style="height:320px"></div>
@@ -367,33 +506,40 @@ const HeatDashboard = (() => {
       </div>
       <p style="color:#999;font-size:0.75rem;text-align:center;margin-top:1rem">
         Data: ERA5 reanalysis via <a href="https://open-meteo.com" target="_blank" style="color:#999">Open-Meteo</a> |
-        Projections: CMIP6 HighResMIP |
-        Heat index: NWS/Steadman equation
+        EHI-N*: <a href="/research/heatindex.html" style="color:#999">Kili\u00e7, UC Berkeley</a> |
+        Projections: CMIP6 HighResMIP
       </p>`;
 
     // Show loading state
     document.getElementById("hd-current").innerHTML =
       '<p style="text-align:center;color:#999;padding:2rem">Loading live data for ' + name + '...</p>';
-    ["hd-seasonal","hd-heatmap","hd-danger","hd-trend","hd-projections"].forEach(id => {
+    ["hd-comparison","hd-seasonal","hd-heatmap","hd-danger","hd-trend","hd-projections"].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = '<p style="text-align:center;color:#ccc;padding:2rem">Loading...</p>';
     });
 
-    // --- Phase 1: Current conditions + projections (different API hosts, safe in parallel) ---
+    // Load EHI-N* lookup table in parallel with first API calls
+    const ehiPromise = loadEHITable();
+
+    // --- Phase 1: Current conditions + projections ---
     try {
       const [current, proj] = await Promise.all([
         fetchCurrent(lat, lon),
-        fetchProjections(lat, lon)
+        fetchProjections(lat, lon),
+        ehiPromise
       ]);
       renderCurrent(document.getElementById("hd-current"), current, name);
+      renderIndexComparison("hd-comparison", current.current.temperature_2m, current.current.relative_humidity_2m);
       renderProjections("hd-projections", proj);
     } catch (err) {
+      await ehiPromise; // ensure EHI table loads even if API fails
       document.getElementById("hd-current").innerHTML =
         '<p style="color:#e65100;text-align:center;padding:1rem">Could not load current conditions.</p>';
+      showChartError("hd-comparison", "Could not load index comparison.");
       showChartError("hd-projections", "Could not load projections.");
     }
 
-    // --- Phase 2: Historical archive (3 years, 2 vars) ---
+    // --- Phase 2: Historical archive ---
     await delay(1000);
     try {
       const hist = await fetchHistorical(lat, lon);
@@ -409,7 +555,7 @@ const HeatDashboard = (() => {
       showChartError("hd-danger", "Could not load danger-days data.");
     }
 
-    // --- Phase 3: Long-term trend (chunked, 1 variable, generous pacing) ---
+    // --- Phase 3: Long-term trend ---
     await delay(2000);
     try {
       const longTerm = await fetchLongTerm(lat, lon);
