@@ -30,10 +30,18 @@ const HeatDashboard = (() => {
   }
 
   /* ---- Fetch helpers ---- */
-  async function fetchJSON(url) {
-    const r = await fetch(url);
-    if (!r.ok) throw new Error(`Fetch failed: ${r.status} ${url}`);
-    return r.json();
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function fetchJSON(url, retries = 3) {
+    for (let i = 0; i < retries; i++) {
+      const r = await fetch(url);
+      if (r.ok) return r.json();
+      if (r.status === 429 && i < retries - 1) {
+        await delay(2000 * (i + 1)); // back off: 2s, 4s
+        continue;
+      }
+      if (!r.ok) throw new Error(`Fetch failed: ${r.status}`);
+    }
   }
 
   /* ---- Current conditions ---- */
@@ -56,14 +64,27 @@ const HeatDashboard = (() => {
     return fetchJSON(url);
   }
 
-  /* ---- Long-term annual trend (1960-present) ---- */
+  /* ---- Long-term annual trend (1960-present) — chunked into decades ---- */
   async function fetchLongTerm(lat, lon) {
-    const end = `${new Date().getFullYear() - 1}-12-31`;
-    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}`
-      + `&start_date=1960-01-01&end_date=${end}`
-      + `&daily=temperature_2m_max,apparent_temperature_max`
-      + `&timezone=auto`;
-    return fetchJSON(url);
+    const endYear = new Date().getFullYear() - 1;
+    const startYear = 1960;
+    const chunkSize = 10;
+    const allDates = [], allTmax = [], allAtmax = [];
+
+    for (let y = startYear; y <= endYear; y += chunkSize) {
+      const s = `${y}-01-01`;
+      const e = `${Math.min(y + chunkSize - 1, endYear)}-12-31`;
+      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}`
+        + `&start_date=${s}&end_date=${e}`
+        + `&daily=temperature_2m_max,apparent_temperature_max`
+        + `&timezone=auto`;
+      const chunk = await fetchJSON(url);
+      allDates.push(...chunk.daily.time);
+      allTmax.push(...chunk.daily.temperature_2m_max);
+      allAtmax.push(...chunk.daily.apparent_temperature_max);
+      if (y + chunkSize <= endYear) await delay(600); // pace requests
+    }
+    return { daily: { time: allDates, temperature_2m_max: allTmax, apparent_temperature_max: allAtmax } };
   }
 
   /* ---- CMIP6 climate projections ---- */
@@ -368,17 +389,24 @@ const HeatDashboard = (() => {
     // Show loading state
     document.getElementById("hd-current").innerHTML =
       '<p style="text-align:center;color:#999;padding:2rem">Loading live data for ' + name + '...</p>';
+    ["hd-seasonal","hd-heatmap","hd-danger","hd-trend","hd-projections"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<p style="text-align:center;color:#ccc;padding:2rem">Loading...</p>';
+    });
 
     try {
-      const [current, hist, longTerm, proj] = await Promise.all([
+      // Fetch current + projections in parallel (different API endpoints, no rate issues)
+      const [current, proj] = await Promise.all([
         fetchCurrent(lat, lon),
-        fetchHistorical(lat, lon),
-        fetchLongTerm(lat, lon),
         fetchProjections(lat, lon)
       ]);
 
+      // Render current conditions immediately
       renderCurrent(document.getElementById("hd-current"), current, name);
+      renderProjections("hd-projections", proj);
 
+      // Fetch archive data sequentially to avoid 429 rate limits
+      const hist = await fetchHistorical(lat, lon);
       const cal = seasonalCalendar(
         hist.daily.time, hist.daily.temperature_2m_max, hist.daily.apparent_temperature_max
       );
@@ -386,15 +414,21 @@ const HeatDashboard = (() => {
       renderMonthlyHeatmap("hd-heatmap", hist);
       renderDangerDays("hd-danger", hist);
 
+      await delay(500); // brief pause before long-term chunked fetches
+
+      const longTerm = await fetchLongTerm(lat, lon);
       const yearly = toYearly(longTerm.daily.time, longTerm.daily.temperature_2m_max);
       renderTrend("hd-trend", yearly);
-
-      renderProjections("hd-projections", proj);
     } catch (err) {
-      root.innerHTML = `<div style="background:#fff3e0;padding:2rem;border-radius:12px;text-align:center">
-        <p style="color:#e65100;font-weight:600">Unable to load dashboard data</p>
-        <p style="color:#888;font-size:0.9rem">${err.message}</p>
-      </div>`;
+      // Show error only in sections that haven't rendered a Plotly chart yet
+      const pending = ["hd-seasonal","hd-heatmap","hd-danger","hd-trend","hd-projections"];
+      pending.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.querySelector(".plotly")) {
+          el.innerHTML = `<p style="color:#e65100;text-align:center;padding:1rem">
+            Could not load this chart. ${err.message}</p>`;
+        }
+      });
     }
   }
 
